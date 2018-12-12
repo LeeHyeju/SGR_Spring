@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.project.mapper.MemberMapper">
+
+<!-- dto  -->
+<!-- mb_no,mb_id,mb_pw,mb_name,mb_sex,mb_bday,mb_phone,mb_email, -->
+<!-- 	mb_zipcode,mb_address,mb_grade,mb_joinDate,mb_leaveDate -->
+
+<!-- 로그인 -->
+<select id="login" resultType="MemberDto">
+SELECT
+	mb_id, mb_name,mb_grade
+FROM member
+WHERE mb_id = #{mb_id} and mb_pw = #{mb_pw} 
+</select>
+
+<!-- 회원가입 -->
+<insert id="join">
+INSERT INTO member (mb_id,mb_pw,mb_name,mb_sex,mb_bday,
+mb_phone,mb_email,mb_zipcode,mb_address)
+VALUES (#{mb_id},#{mb_pw},#{mb_name},#{mb_sex},#{mb_bday},
+#{mb_phone},#{mb_email},#{mb_zipcode},#{mb_address})
+</insert>
+
+<!-- 비밀번호 변경 -->
+
+
+<!-- 아이디 찾기 -->
+
+<!-- 비밀번호 찾기 -->
+
+<!-- 회원탈퇴 -->
+
+<!-- 내정보보기 -->
+
+<!--  -->
+
+</mapper>	
