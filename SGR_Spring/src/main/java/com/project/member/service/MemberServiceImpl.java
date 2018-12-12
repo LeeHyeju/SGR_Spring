@@ -1,13 +1,22 @@
 package com.project.member.service;
 
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.project.member.dao.MemberDao;
 import com.project.member.dto.MemberDto;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 
+	@Inject
+	private MemberDao memberDao;
+	
 	@Override
 	public MemberDto login(String mb_id, String mb_pw) throws Exception {
 		// 로그인
-		return null;
+		return memberDao.login(mb_id, mb_pw);
 	}
 
 	@Override
@@ -31,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void join(MemberDto memberDto) throws Exception {
 		// 회원가입
-
+		memberDao.join(memberDto);
 	}
 
 	@Override
