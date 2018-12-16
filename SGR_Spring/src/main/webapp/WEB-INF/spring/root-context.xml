@@ -15,7 +15,7 @@
 		<property name="username" value="hyeju"></property>
 		<property name="password" value="1234"></property>
 	</bean>
-	
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
@@ -27,6 +27,32 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
-	<context:component-scan base-package="org.zerock.persistence"></context:component-scan>
-	<context:component-scan base-package="org.zerock.service"></context:component-scan>
+
+	<!-- gmail 보내기 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="username" value="hyeju2v@gmail.com" />
+		<property name="password" value="project1!" />
+
+		<!-- STMP -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="email" class="com.project.email.Email"></bean>
+	<bean id="emailSender" class="com.project.email.EmailSender"></bean>
+
+
+
+
+	<!-- <context:component-scan base-package="com.project.member.dao"></context:component-scan> -->
+	<!-- <context:component-scan base-package="com.project.member.service"></context:component-scan> -->
 </beans>

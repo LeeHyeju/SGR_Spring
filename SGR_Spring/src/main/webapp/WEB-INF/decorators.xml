@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+<!-- 작성자 : 이영환 -->
+<!-- 작성일 : 2017-09-05 -->
+<!-- 꾸미기(레이아웃)에 대한 선언 -->
+<decorators defaultdir="/WEB-INF/views/decorator">
+	<!-- hello에 대한 요청이 들어오면 적용시키는 레이아웃 선언 -->
+	<decorator name="main" page="default_decorator.jsp">
+		<pattern>/member/*</pattern>
+		<pattern>/login/*</pattern>
+		<pattern>/admin/*</pattern>
+		<pattern>/main/*</pattern>
+		<pattern>/notice/*</pattern>
+		<pattern>/goods/*</pattern>
+		<pattern>/error/*</pattern>
+		<pattern>/review/*</pattern>
+	</decorator>
+	<!-- 게시판의 대한 요청 레이아웃 선언 -->
+
+	<!-- 데코레이션에서 제외되는 요청을 선언 -->
+	<!-- 데코레이션에서 제외되는 요청을 선언 -->
+	<excludes>
+<!-- 		<pattern>/member/memberPasswordCheck.me</pattern> -->
+<!-- 		<pattern>/member/memberChangePw.me</pattern> -->
+		<pattern>/reserve/resRead*</pattern>
+		<pattern>/reserve/resOp*</pattern>
+	</excludes>
+
+
+</decorators>

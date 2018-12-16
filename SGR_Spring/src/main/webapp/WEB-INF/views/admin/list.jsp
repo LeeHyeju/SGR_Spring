@@ -7,6 +7,6 @@
 <title>회원리스트</title>
 </head>
 <body>
-
+회원리스트임빈다
 </body>
 </html>
