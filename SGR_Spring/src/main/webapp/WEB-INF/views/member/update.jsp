@@ -59,13 +59,29 @@ div.button
 	}
 </script>
 <script type="text/javascript">
-var SexValue = $('input:radio[name="mb_sex"]:checked').val();
+
+//console.log($("#mb_id").val()+"$(function(){} 선언 밖에다 콘솔)");
+// 페이지를 다 불러온뒤 Jquery 실행
+$(function() { //$(document).ready(function(){} <<--- 같은 거 임
+	//console.log($("#mb_id").val()+"$(function(){} 선언 안에다 콘솔)");	
+	//console.log("${member.mb_sex}");
+	if($("#mb_sex").val() == "남자"){ //#mb_sex(id명) 의 값이 남자일떄
+		$("#M").attr('checked',true);				//class는 # 대신에 . ex)  .M
+	}else{//남자가 아닐때 
+		$("#W").attr('checked',true);				//class는 # 대신에 . ex)  .M
+	}
+	
+});
+
 
 </script>
 </head>
 <body>
 <h1>내 정보 수정</h1>
 	<form action="./update.do" id="updateForm" method="post">
+		<!-- 히든으로 보낼 값 -->
+		<input type="hidden" name="mb_id" value="${member.mb_id }" id="mb_id"/>
+		<input type="hidden" value="${member.mb_sex }" id="mb_sex"/>
 		<fieldset>
 			<legend></legend>
 			<table width="940" style="padding: 5px 0 5px 0;">
@@ -86,8 +102,8 @@ var SexValue = $('input:radio[name="mb_sex"]:checked').val();
 
 				<tr>
 					<th>성별</th>	
-					<td>남<input type="radio" name="mb_sex" value="남자" required >
-						여<input type="radio" name="mb_sex" value="여자" required>
+					<td>남<input type="radio" name="mb_sex" id="M" value="남자" required>
+						여<input type="radio" name="mb_sex" id="W" value="여자" required>
 					</td>				
 
 				</tr>

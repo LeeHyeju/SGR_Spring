@@ -1,4 +1,4 @@
-package com.project.member.dao;
+package com.project.mapper;
 
 import java.util.Map;
 
@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.member.dto.MemberDto;
 
-
-public interface MemberDao {
+@Mapper
+public interface MemberMapper {
 
 	// 회원가입
 	public void join(MemberDto memberDto) throws Exception;

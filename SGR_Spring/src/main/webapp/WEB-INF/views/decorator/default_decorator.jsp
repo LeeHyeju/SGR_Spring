@@ -19,7 +19,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><!-- 선언은 사이트매쉬를 쓰기때문에 여기한군데만 쓰면 나머지 jsp에 안써두댐 방금처럼 중복으로 들어감 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -71,7 +71,7 @@ article {
 	margin: 0 auto;
 }
 </style>
-<script type="text/javascript" src="../js/jquery.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 	});

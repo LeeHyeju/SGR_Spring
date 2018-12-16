@@ -133,7 +133,7 @@ public class MemberController {
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
 	public String updateProcess(MemberDto memberDto) throws Exception {
 		System.out.println("회원 정보 수정 창 update.do-post");
-		System.out.println("memberController.updateProcess().memberDto:" + memberDto);
+		System.out.println("memberController.updateProcess().memberDto:" + memberDto.toString());
 		memberService.updateProcess(memberDto);
 		return "redirect:../member/view.do";
 	}
@@ -165,7 +165,7 @@ public class MemberController {
 		rttr.addFlashAttribute("message", "success");
 		System.out.println("비밀번호가 일치합니다. 변경으로 넘어갑니다.");
 
-		return "redirect:../member/update.do";
+		return "../member/update.do";
 	}
 
 	// 비밀번호 변경

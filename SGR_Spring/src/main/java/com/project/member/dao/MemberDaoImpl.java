@@ -5,9 +5,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.mapper.MemberMapper;
 import com.project.member.dto.MemberDto;
 
 @Repository
@@ -15,6 +17,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Inject
 	private SqlSession session;
+	
+	
 	// nameSpace
 	private final String NAMESPACE = "com.project.mapper.MemberMapper";
 
@@ -50,7 +54,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void updateProcess(MemberDto memberDto) throws Exception {
 		// 내 정보수정 처리
-		session.update(NAMESPACE + ".update", memberDto);
+		session.update(NAMESPACE + ".updateProcess", memberDto);
 	}
 
 	@Override

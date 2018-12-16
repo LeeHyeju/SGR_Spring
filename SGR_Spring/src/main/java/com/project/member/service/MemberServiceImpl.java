@@ -1,11 +1,10 @@
 package com.project.member.service;
 
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.project.mapper.MemberMapper;
 import com.project.member.dao.MemberDao;
 import com.project.member.dto.MemberDto;
 
@@ -14,6 +13,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Inject
 	private MemberDao memberDao;
+	//@Inject
+	//private MemberMapper memberMapper;
 
 	@Override
 	public void join(MemberDto memberDto) throws Exception {
@@ -43,6 +44,7 @@ public class MemberServiceImpl implements MemberService {
 	public void updateProcess(MemberDto memberDto) throws Exception {
 		// 내 정보수정
 		System.out.println("업데이트 프로세스 서비스");
+		//memberMapper.updateProcess(memberDto);
 		memberDao.updateProcess(memberDto);
 	}
 

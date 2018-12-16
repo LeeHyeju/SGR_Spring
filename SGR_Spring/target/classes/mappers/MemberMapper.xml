@@ -42,7 +42,7 @@ WHERE mb_id = #{mb_id}
 </select>
 
 <!-- 내정보수정 처리 -->
-<update id="update">
+<update id="updateProcess" >
 UPDATE member  
 SET  mb_name = #{mb_name}, mb_sex= #{mb_sex}, mb_bday= #{mb_bday}, 
 mb_phone= #{mb_phone}, mb_email= #{mb_email}, mb_zipcode=#{mb_zipcode}, 
