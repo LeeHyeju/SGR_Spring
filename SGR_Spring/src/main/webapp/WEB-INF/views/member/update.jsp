@@ -5,8 +5,140 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>내 정보 수정</title>
+<style type="text/css">
+div.button
+{
+   margin: auto;
+   width: 50%;
+}
+</style>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
+	function execPostCode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+					extraRoadAddr += data.bname;
+				}
+				// 건물명이 있고, 공동주택일 경우 추가한다.
+				if (data.buildingName !== '' && data.apartment === 'Y') {
+					extraRoadAddr += (extraRoadAddr !== '' ? ', '
+							+ data.buildingName : data.buildingName);
+				}
+				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+				if (extraRoadAddr !== '') {
+					extraRoadAddr = ' (' + extraRoadAddr + ')';
+				}
+				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+				if (fullRoadAddr !== '') {
+					fullRoadAddr += extraRoadAddr;
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				console.log(data.zonecode);
+				console.log(fullRoadAddr);
+
+				$("[name=mb_zipcode]").val(data.zonecode);
+				$("[name=mb_address]").val(fullRoadAddr);
+
+				/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
+				document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
+				document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
+			}
+		}).open();
+	}
+</script>
+<script type="text/javascript">
+var SexValue = $('input:radio[name="mb_sex"]:checked').val();
+
+</script>
 </head>
 <body>
+<h1>내 정보 수정</h1>
+	<form action="./update.do" id="updateForm" method="post">
+		<fieldset>
+			<legend></legend>
+			<table width="940" style="padding: 5px 0 5px 0;">
+				<tr>
+					<th>이름</th>
+					<td><input type="text"
+						style="height: 30px; text-align: center;" id="mb_name"
+						name="mb_name" size="7" required placeholder="이름"
+						pattern="^[가-힣]{2,6}$" value="${member.mb_name }"></td>
+				</tr>
 
+				<tr>
+					<th>아이디</th>
+					<td>${member.mb_id }
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>성별</th>	
+					<td>남<input type="radio" name="mb_sex" value="남자" required >
+						여<input type="radio" name="mb_sex" value="여자" required>
+					</td>				
+
+				</tr>
+
+				<tr>
+					</td>
+					<th>생년 월일</th>
+					<td><input type="text" id="mb_bday" name="mb_bday" required
+						placeholder="ex)010101" style="height: 30px; text-align: center;"
+						size="7" maxlength="6" pattern="^[0-9]{6}$" value="${member.mb_bday }"></td>
+				</tr>
+
+				<tr>
+					<th>주소</th>
+					<td><input type="text"
+						style="height: 30px; text-align: center;" name="mb_zipcode"
+						class="box" id="mb_zipcode" placeholder="우편번호" required size="5"
+						value="${member.mb_zipcode }" readonly="readonly"> 
+						<input type="button" class="btn_blk" onclick="execPostCode()" value="우편번호 찾기"><br/>
+						<input
+						type="text" style="height: 30px; text-align: center;"
+						name="mb_address" class="box" id="mb_address" placeholder="주소"
+						size="30" required readonly value="${member.mb_address }"> 
+						<input type="text"
+						style="height: 30px; text-align: center;" name="mb_addressDetail"
+						class="box" id="mb_addressDetail" value="${member.mb_addressDetail}"
+						 placeholder="상세주소" size="30"
+						required></td>
+				</tr>
+
+				<tr>
+					<th>핸드폰 번호</th>
+					<td><input type="tel" id="mb_phone"
+						style="height: 30px; text-align: center;" name="mb_phone" required
+						placeholder=" '-' 없이 쓰세요" size="15" maxlength="11" value="${member.mb_phone }"></td>
+				</tr>
+
+				<tr>
+					<th>이메일</th>
+					<td><input type="text" id="mb_email"
+						style="height: 30px; text-align: center;" name="mb_email"
+						size="30" required value="${member.mb_email}"></td>
+				</tr>
+
+			</table>
+			<br>
+			<div class="button" >
+				<button type="submit" class="btn_blk">수정</button>
+				<button type="button" class="btn_blk" onclick="history.back();">취소</button>
+			</div>
+		</fieldset>
+	</form>
 </body>
 </html>
