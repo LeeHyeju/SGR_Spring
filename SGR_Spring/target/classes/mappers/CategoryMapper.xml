@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mapper.CategoryMapper">
+
+	<insert id="create">
+		INSERT INTO
+		category (category_no,
+		categorySub_no,category_name)
+		VALUES (#{category_no},#{categorySub_no},
+		#{category_name})
+	</insert>
+
+	<!-- 회원리스트 -->
+	<select id="list" resultType="CategoryDto">
+		SELECT
+		category_no, categorySub_no,
+		category_name
+		FROM category
+		WHERE category_no > 0
+	</select>
+
+	<!-- 리스트맵 형식 -->
+	<select id="readListMap" resultType="java.util.HashMap">
+		SELECT
+		category_no,
+		categorySub_no, category_name
+		FROM category
+		WHERE category_no > 0
+	</select>
+
+	<!-- 회원리스트 상세보기 -->
+	<select id="read" resultType="CategoryDto">
+		SELECT 
+		category_no,
+		categorySub_no, category_name
+		FROM category
+		WHERE  category_no = #{category_no} AND categorySub_no = #{categorySub_no}
+	</select>
+
+
+	<update id="update">
+		UPDATE category
+		SET category_no =#{category_no},
+		categorySub_no =#{categorySub_no} ,
+		category_name =#{category_name}
+		WHERE category_no = #{category_no} AND categorySub_no =
+		#{categorySub_no}
+	</update>
+
+	<delete id="delete">
+		DELETE
+		FROM category
+		WHERE category_no = #{category_no}
+		AND categorySub_no = #{categorySub_no}
+	</delete>
+
+</mapper>

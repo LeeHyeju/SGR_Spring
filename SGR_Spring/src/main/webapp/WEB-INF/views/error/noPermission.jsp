@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>아이디찾기 결과</title>
+<title>권한 오류</title>
 </head>
 <body>
-
+<h3>권한 오류 페이지</h3>
+<p>요청하신 자원을 사용할 권한이 없습니다.</p>
 </body>
 </html>
