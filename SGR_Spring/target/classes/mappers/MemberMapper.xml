@@ -35,7 +35,7 @@ VALUES (#{mb_id},#{mb_pw},#{mb_name},#{mb_sex},#{mb_bday},
 
 <!-- 내정보 보기-->
 <select id="view" resultType="MemberDto">
-SELECT mb_id,mb_name,mb_sex,mb_bday,mb_phone,mb_email,
+SELECT mb_id,mb_name,mb_sex,mb_bday,mb_phone,mb_email,mb_pw,
 mb_zipcode,mb_address,mb_addressDetail,mb_grade,mb_joinDate
 FROM member
 WHERE mb_id = #{mb_id}
@@ -52,8 +52,8 @@ WHERE mb_id = #{mb_id}
 
 
 <!-- 정보 수정 시 비밀번호 확인 -->
-<select id="pwCheck" resultType="MemberDto">
-select mb_pw 
+<select id="pwCheck" resultType="int">
+select count(*) 
 from member
 where mb_id =#{mb_id} and mb_pw = #{mb_pw}
 </select>
@@ -85,7 +85,4 @@ UPDATE member
 SET mb_grade = 9, mb_leaveDate = current_date()
 WHERE mb_id = #{mb_id}
 </update>
-
-
-
 </mapper>	

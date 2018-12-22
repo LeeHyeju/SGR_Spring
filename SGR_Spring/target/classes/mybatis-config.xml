@@ -5,9 +5,10 @@
 <configuration>
 
   <typeAliases>
-    <package name="com.project.member.dto"/>    
+  	<typeAlias type="com.project.member.dto.MemberDto" alias="MemberDto"/>
+  	<typeAlias type="com.project.category.dto.CategoryDto" alias="CategoryDto"/>
+<!--   	<typeAlias type="com.project.goods.dto.GoodsDto" alias="GoodsDto"/> -->
   </typeAliases>
-
 
 </configuration>
 

@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.project.mapper.MemberMapper;
 import com.project.member.dao.MemberDao;
 import com.project.member.dto.MemberDto;
 
@@ -49,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto pwCheck(String mb_id, String mb_pw) throws Exception {
+	public boolean pwCheck(String mb_id, String mb_pw) throws Exception {
 		// 정보 수정 시 비밀번호 확인
 		return memberDao.pwCheck(mb_id, mb_pw);
 	}

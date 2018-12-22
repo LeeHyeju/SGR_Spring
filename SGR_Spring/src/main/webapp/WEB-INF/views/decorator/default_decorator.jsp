@@ -1,7 +1,6 @@
 <!-- sitemesh 사용을 위한 설정 파일 -->
 <!-- 작성자 : 이영환 -->
 <!-- 작성일 : 2018-11-14 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="decorator"
@@ -19,7 +18,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><!-- 선언은 사이트매쉬를 쓰기때문에 여기한군데만 쓰면 나머지 jsp에 안써두댐 방금처럼 중복으로 들어감 -->
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -41,6 +40,24 @@ pre {
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
+}
+
+#nav {
+	border: 1px solid #ccc;
+	border-width: 1px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#nav li {
+	display: inline;
+}
+
+#nav a {
+	display: inline-block;
+	padding: 10px;
 }
 
 /* Add a gray background color and some padding to the footer */
@@ -114,23 +131,24 @@ article {
 										style="margin-right: 100px; margin-top: 20px">
 										<ul class="nav navbar-nav">
 											<li>${login.mb_id}님환영합니다.</li>
-											<li><a href="../member/view.do">마이페이지</a></li>
-											<li class="dropdown"> 
-													<a class="dropdown-toggle" data-toggle="dropdown" href="#">관리자페이지 <span class="caret"></span>
-													</a>
-													<ul class="dropdown-menu" role="menu"
-														aria-labelledby="menu1">
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">회원 리스트</a></li>
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">상품 리스트</a></li>
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">이벤트 등록</a></li>
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">결제 리스트</a></li>
-													</ul>
-
-											</li>
+											<li><a href="../member/view.do">MyPage</a></li>
+											<li class="dropdown"><a class="dropdown-toggle"
+												data-toggle="dropdown" href="#">AdminPage <span
+													class="caret"></span>
+											</a>
+												<ul class="dropdown-menu" role="menu"
+													aria-labelledby="menu1">
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="../admin/listPage.ad">회원 리스트</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="../category/read.ad">카테고리 리스트</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="#">상품 리스트</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="#">이벤트 등록</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="#">결제 리스트</a></li>
+												</ul></li>
 											<li><a href="../member/logout.do"
 												class="glyphicon glyphicon-log-in">Logout</a></li>
 										</ul>
@@ -141,20 +159,19 @@ article {
 										style="margin-right: 100px; margin-top: 20px">
 										<ul class="nav navbar-nav">
 											<li>${login.mb_id}님환영합니다.</li>
-											<li class="dropdown"> 
-													<a class="dropdown-toggle" data-toggle="dropdown" href="#">MyPage <span class="caret"></span>
-													</a>
-													<ul class="dropdown-menu" role="menu"
-														aria-labelledby="menu1">
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="../member/view.do">내 정보 보기</a></li>
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">주문/결제 리스트</a></li>
-														<li role="presentation"><a role="menuitem"
-															tabindex="-1" href="#">장바구니</a></li>
-													</ul>
-
-											</li>
+											<li class="dropdown"><a class="dropdown-toggle"
+												data-toggle="dropdown" href="#">MyPage <span
+													class="caret"></span>
+											</a>
+												<ul class="dropdown-menu" role="menu"
+													aria-labelledby="menu1">
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="../member/view.do">내 정보 보기</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="#">주문/결제 리스트</a></li>
+													<li role="presentation"><a role="menuitem"
+														tabindex="-1" href="#">장바구니</a></li>
+												</ul></li>
 											<li><a href="../member/logout.do"> <span
 													class="glyphicon glyphicon-log-in"></span> Logout
 											</a></li>
@@ -168,16 +185,14 @@ article {
 			</div>
 		</nav>
 	</header>
-	<div class="container">
-		<article>
-			<decorator:body />
-		</article>
-	</div>
+	<article>
+		<decorator:body />
+	</article>
 	<footer class="container-fluid text-center">
 		<p>COMPANY : (주)SGR OWNER : 이혜주 BUSINESS LICENSE : 123-45-67890
 			MALL-ORDER LICENSE : 제2018-서울구로-00123호 ADDRESS : 12345 서울특별시 구로구 구로동
 			123-45 1층 TEL : 1234-5789 COPYRIGHT © (주)SGR ALL RIGHTS RESERVED.
-			HOSTING By CAFE24 | DESIGNED By DFLOOR</p>
+			HOSTING By CAFE24 | DESIGNED By SGRCo.</p>
 	</footer>
 </body>
 </html>

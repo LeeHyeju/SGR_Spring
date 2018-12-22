@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.project.mapper.MemberMapper;
 import com.project.member.dto.MemberDto;
 
 @Repository
@@ -58,12 +57,15 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberDto pwCheck(String mb_id, String mb_pw) throws Exception {
+	public boolean pwCheck(String mb_id, String mb_pw) throws Exception {
 		// 정보 수정 시 비밀번호 확인
+		boolean result = false;
 		Map<String, Object> map = new HashMap<>();
 		map.put("mb_id", mb_id);
 		map.put("mb_pw", mb_pw);
-		return session.selectOne(NAMESPACE+".pwCheck", map);
+		int count = session.selectOne(NAMESPACE+".pwCheck", map);
+		if(count == 1) result = true;
+		return result;
 	}
 
 	@Override
@@ -97,7 +99,6 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void leave(String mb_id) throws Exception {
 		// 회원탈퇴
-		System.out.println(mb_id);
 		session.update(NAMESPACE+".leave", mb_id);
 	}
 

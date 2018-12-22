@@ -64,11 +64,7 @@
 	    <groupId>org.lazyluke</groupId>
 	    <artifactId>log4jdbc-remix</artifactId>
 	    <version>0.2.7</version>
-	</dependency>
-
-
-
-		
+	</dependency>		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -101,7 +97,7 @@
 			<version>1</version>
 		</dependency>
 
-		<!-- Loyout : sitemesh -->
+		<!-- Layout : sitemesh -->
 		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>

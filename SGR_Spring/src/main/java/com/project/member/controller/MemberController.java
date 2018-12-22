@@ -3,7 +3,9 @@ package com.project.member.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,17 +21,17 @@ import com.project.member.service.MemberService;
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
-	Logger log = Logger.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Inject
 	private MemberService memberService;
 
-	@Inject
+	@Autowired
 	private Email email;
 
-	@Inject
-	private EmailSender emailSender;
-	
+	@Autowired
+	private EmailSender mailSender;
+
 
 	// 회원가입 창
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
@@ -42,11 +44,9 @@ public class MemberController {
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
 	public String joinProcess(MemberDto memberDto, RedirectAttributes rttr) throws Exception {
 		System.out.println("회원가입 처리 join.do-post");
-		System.out.println("memberController.joinProcess().memberDto:" + memberDto);
+		System.out.println("memberController.joinProcess().memberDto:" + memberDto.toString());
 		memberService.join(memberDto);
-
-		rttr.addFlashAttribute("message", "check");
-
+		rttr.addFlashAttribute("message", "joinOk");
 		return "redirect:../main/main.do";
 	}
 
@@ -70,6 +70,7 @@ public class MemberController {
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public String loginForm() throws Exception {
 		System.out.println("로그인 창 login.do-get");
+		logger.info("로그인창 두겟");
 		return "member/login";
 	}
 
@@ -90,7 +91,6 @@ public class MemberController {
 			System.out.println("성공");
 			System.out.println("아이디는?" + mbDto.getMb_id());
 			return "redirect:../main/main.do";
-			// 메인 화면 만들면 그때 !!
 
 		} else {
 			System.out.println("실패");
@@ -114,7 +114,8 @@ public class MemberController {
 		System.out.println("내 정보 보기 ");
 		MemberDto memberDto = (MemberDto) session.getAttribute("login");
 		model.addAttribute("member", memberService.update(memberDto.getMb_id()));
-		System.out.println("MemberController.update().mb_id:" + memberDto.getMb_id());
+		System.out.println("내정보보기 비번"+memberDto);
+		System.out.println("MemberController.view().mb_id:" + memberDto.getMb_id());
 		return "member/view";
 	}
 
@@ -138,35 +139,36 @@ public class MemberController {
 		return "redirect:../member/view.do";
 	}
 
-	// 회원 정보 수정 시 비밀번호 확인
-	@RequestMapping(value = "/pwCheck.do", method = RequestMethod.GET)
-	public String pwdCheck() throws Exception {
-		System.out.println("현재 비밀번호 입력 확인창 pwCheck.do ");
-		return "member/pwCheck";
-	}
-
-	// 회원 정보 수정 시 비밀번호 확인 처리
-	@RequestMapping(value = "/pwCheck.do", method = RequestMethod.POST)
-	public String pwCheckProcess(HttpSession session, String mb_id, String mb_pw, RedirectAttributes rttr)
-			throws Exception {
-		System.out.println("회원 정보 수정 시 비밀번호 확인 처리  pwCheck.do-post");
-		MemberDto memberDto = (MemberDto) session.getAttribute("login");
-		MemberDto mem_pw = memberService.pwCheck(memberDto.getMb_id(), mb_pw);
-		;
-		System.out.println("내 아이디 :" + memberDto.getMb_id());
-		System.out.println("입력받은 비밀번호 :" + mem_pw);
-		if (mem_pw == null) {
-			System.out.println("비밀번호 오류");
-			rttr.addFlashAttribute("message", "fail");
-			return "redirect:../member/pwCheck.do";
-		}
-		System.out.println("입력받은 비밀번호 :" + mem_pw.getMb_pw());
-		System.out.println("DB상의 비밀번호 :" + mb_pw);
-		rttr.addFlashAttribute("message", "success");
-		System.out.println("비밀번호가 일치합니다. 변경으로 넘어갑니다.");
-
-		return "../member/update.do";
-	}
+	// // 회원 정보 수정 시 비밀번호 확인
+	// @RequestMapping(value = "/pwCheck.do", method = RequestMethod.GET)
+	// public String pwdCheck() throws Exception {
+	// System.out.println("현재 비밀번호 입력 확인창 pwCheck.do ");
+	// return "member/pwCheck";
+	// }
+	//
+	// // 회원 정보 수정 시 비밀번호 확인 처리
+	// @RequestMapping(value = "/pwCheck.do", method = RequestMethod.POST)
+	// public String pwCheckProcess(HttpSession session, String mb_id, String
+	// mb_pw, RedirectAttributes rttr)
+	// throws Exception {
+	// System.out.println("회원 정보 수정 시 비밀번호 확인 처리 pwCheck.do-post");
+	// MemberDto memberDto = (MemberDto) session.getAttribute("login");
+	// MemberDto mem_pw = memberService.pwCheck(memberDto.getMb_id(), mb_pw);
+	// ;
+	// System.out.println("내 아이디 :" + memberDto.getMb_id());
+	// System.out.println("입력받은 비밀번호 :" + mem_pw);
+	// if (mem_pw == null) {
+	// System.out.println("비밀번호 오류");
+	// rttr.addFlashAttribute("message", "fail");
+	// return "redirect:../member/pwCheck.do";
+	// }
+	// System.out.println("입력받은 비밀번호 :" + mem_pw.getMb_pw());
+	// System.out.println("DB상의 비밀번호 :" + mb_pw);
+	// rttr.addFlashAttribute("message", "success");
+	// System.out.println("비밀번호가 일치합니다. 변경으로 넘어갑니다.");
+	//
+	// return "../member/update.do";
+	// }
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/changePw.do", method = RequestMethod.GET)
@@ -228,35 +230,51 @@ public class MemberController {
 
 	// 비밀번호 찾기 이메일
 	@RequestMapping("/searchPwResult.do")
-	 public String sendEmailAction (String mb_id, String mb_name, String mb_email, Model model, MemberDto memberDto,RedirectAttributes rttr)
-	    		throws Exception {
-	    		    	
-	    	System.out.println("id : " + mb_id + " mb_name "+mb_name+" email : "+mb_email);
-	    	System.out.println(memberService.searchPw(mb_id, mb_name, mb_email));
-	    	memberDto = memberService.searchPw(mb_id, mb_name, mb_email);
-	    	if(memberDto != null){
-	    		System.out.println("비번 : "+memberDto.getMb_pw());
-	    		email.setContent("비밀번호는 "+memberDto.getMb_pw()+" 입니다.");
-	            email.setReceiver(mb_email);
-	            email.setSubject(mb_id+"님의  비밀번호 찾기 메일입니다.");
-	            emailSender.SendEmail(email);
-	            rttr.addFlashAttribute("message", "checkpw");
-	    		return "redirect:../member/login.do";
-	    	}
-	    	rttr.addFlashAttribute("message", "failpw");
-	    	System.out.println("아이디,비번,이메일이 맞지 않는다.");
-	    	return "redirect:../member/searchPw.do";
-	    }
-	
+	public String sendEmailAction(String mb_id, String mb_name, String mb_email, Model model, MemberDto memberDto,
+			RedirectAttributes rttr) throws Exception {
+
+		System.out.println("id : " + mb_id + " mb_name " + mb_name + " email : " + mb_email);
+		System.out.println(memberService.searchPw(mb_id, mb_name, mb_email));
+		
+		memberDto = memberService.searchPw(mb_id, mb_name, mb_email);
+		if (memberDto != null) {
+			System.out.println("비번 : " + memberDto.getMb_pw());
+			email.setContent("비밀번호는 " + memberDto.getMb_pw() + " 입니다.");
+			email.setReceiver(mb_email);
+			email.setSubject(mb_id + "님의  비밀번호 찾기 메일입니다.");
+			mailSender.SendEmail(email);
+			rttr.addFlashAttribute("message", "checkpw");
+			return "redirect:../member/login.do";
+		}
+		rttr.addFlashAttribute("message", "failpw");
+		System.out.println("아이디,비번,이메일이 맞지 않는다.");
+		return "redirect:../member/searchPw.do";
+	}
 
 	// 회원 탈퇴 여부 확인(탈퇴회원 등급 9로 변경)
-	@RequestMapping(value = "/member/leave.do", method = RequestMethod.POST)
-	public String leaveForm(HttpSession session) throws Exception {
+	@RequestMapping("/member/leave.do")
+	public String leaveForm(Model model, HttpSession session) throws Exception {
+		System.out.println("회원 탈퇴 페이지로 이동");
+		MemberDto memberDto = (MemberDto) session.getAttribute("login");
+		model.addAttribute("member", memberService.view(memberDto.getMb_id()));
+		System.out.println("아이디:"+memberService.view(memberDto.getMb_id())); //null
+		System.out.println("비번"+memberService.view(memberDto.getMb_pw()));
+		return "member/leave";
+	}
+
+	// 회원 탈퇴 여부 확인(탈퇴회원 등급 9로 변경)
+	@RequestMapping("/member/leaveProcess.do")
+	public String leaveProcessForm(Model model, HttpSession session, RedirectAttributes rttr) throws Exception {
 		System.out.println("회원 탈퇴하시겠습니까?");
 		MemberDto memberDto = (MemberDto) session.getAttribute("login");
-		System.out.println("탈퇴 아이디 있나? : " + memberDto.getMb_id());
-		memberService.leave(memberDto.getMb_id());
-		session.invalidate();
-		return "redirect:../main/main.do";
-	}
+		System.out.println(memberDto.toString());
+		if (memberDto != null) {
+		rttr.addFlashAttribute("message", "deleteOk");
+		System.out.println("회원탈퇴함");
+			return "main/main.do";
+		}
+		rttr.addFlashAttribute("message", "deleteNOT");
+		System.out.println("회원 탈퇴 못함");
+		return "redirect:../member/leave.do";
+		}
 }

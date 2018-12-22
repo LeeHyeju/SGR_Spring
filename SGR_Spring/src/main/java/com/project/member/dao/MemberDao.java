@@ -9,6 +9,7 @@ import com.project.member.dto.MemberDto;
 
 public interface MemberDao {
 
+	
 	// 회원가입
 	public void join(MemberDto memberDto) throws Exception;
 
@@ -29,7 +30,7 @@ public interface MemberDao {
 	public void updateProcess(MemberDto memberDto) throws Exception;
 
 	// 정보 수정 시 비밀번호 확인 
-	public MemberDto pwCheck(String mb_id, String mb_pw) throws Exception;
+	public boolean pwCheck(String mb_id, String mb_pw) throws Exception;
 	
 	// 비밀번호 변경
 	public void changePw(String mb_id, String mb_pw) throws Exception;

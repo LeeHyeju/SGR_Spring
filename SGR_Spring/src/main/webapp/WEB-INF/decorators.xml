@@ -11,6 +11,7 @@
 		<pattern>/admin/*</pattern>
 		<pattern>/main/*</pattern>
 		<pattern>/notice/*</pattern>
+		<pattern>/category/*</pattern>
 		<pattern>/goods/*</pattern>
 		<pattern>/error/*</pattern>
 		<pattern>/review/*</pattern>
