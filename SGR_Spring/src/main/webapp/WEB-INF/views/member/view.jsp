@@ -8,6 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>내 정보 보기</title>
 <script type="text/javascript">
+function button_event(){
+if (confirm("정말 탈퇴하시겠습니까?")){ 
+	alert ("탈퇴되셨습니다.");//확인
+    document.form.submit();
+    return true;
+}else{   //취소
+	alert("탈퇴가 취소되셨습니다.");
+	alert("좋은 하루 되세요! ");
+	return false;
+}
+}
+</script>
+<script type="text/javascript">
 	$(document).ready(function() {
 
 		var formObj = $("form[role='form']");
@@ -26,11 +39,12 @@
 		});
 		$(".btn-danger").on("click", function() {
 			formObj.attr("action", "../member/leave.do");
-			formObj.attr("method", "get");
+			formObj.attr("method", "post");
 			formObj.submit();
 		});
 	});
 </script>
+
 </head>
 <body>
 	<h1>MyPage</h1>
@@ -57,7 +71,7 @@
 			</tr>
 			<tr>
 				<th>핸드폰번호</th>
-				<td>${member.mb_phone }</td>
+				<td >${member.mb_phone }</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
@@ -82,8 +96,7 @@
 	<br>
 	<button type="submit" class="btn btn-primary">내정보수정</button>
 	<button type="submit" class="btn btn-warning">비밀번호수정</button>
-	<button type="submit" class="btn btn-danger">회원탈퇴</button>
-
+	<button type="button"  onclick="button_event();" class="btn btn-danger">회원탈퇴</button>
 
 </body>
 </html>

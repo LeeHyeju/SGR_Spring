@@ -54,8 +54,7 @@ select {
 	<br>
 	<form id="jobForm">
 		<input type="hidden" name="page" value=${pageMaker.cri.page }>
-		<input type="hidden" name="perPageNum"
-			value=${pageMaker.cri.perPageNum }>
+		<input type="hidden" name="perPageNum" 	value=${pageMaker.cri.perPageNum }>
 		<div class="box-body" align="right">
 			<select name="searchType">
 				<option value="x"
@@ -80,7 +79,7 @@ select {
 		<div class="box-body">
 			<table class="table table-bordered">
 				<tr>
-					<th style="width: 10px">No.</th>
+<!-- 					<th style="width: 10px">No.</th> -->
 					<th>회원 ID</th>
 					<th>회원 이름</th>
 					<th>등급</th>
@@ -89,9 +88,8 @@ select {
 				</tr>
 				<c:forEach items="${list }" var="member">
 					<tr>
-						<td>${member.mb_no }</td>
 						<td><a
-							href='/admin/listDetail.ad${pageMaker.makeSearch (pageMaker.cri.page)}&mb_no=${member.mb_no }'>${member.mb_id }</a></td>
+							href='/admin/listDetail.ad${pageMaker.makeSearch (pageMaker.cri.page)}&mb_id=${member.mb_id }'>${member.mb_id }</a></td>
 						<td>${member.mb_name }</td>
 						<c:choose>
 							<c:when test="${member.mb_grade == 6 }">

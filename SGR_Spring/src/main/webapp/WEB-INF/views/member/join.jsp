@@ -140,7 +140,7 @@
 
 		}
 	}
-	// --> 
+ 
 	$(function() {
 		// 비밀번호확인 체크 이벤트 처리
 		$("#joinForm").on("submit", function() {
@@ -258,11 +258,14 @@ $(function(){
 					<td><input type="text"
 						style="height: 30px; text-align: center;" name="mb_zipcode"
 						class="box" id="mb_zipcode" placeholder="우편번호" required size="5"
-						readonly> <input type="button" class="btn_blk"
-						onclick="execPostCode()" value="우편번호 찾기"> </br> <input
+						readonly> 
+						<input type="button" class="btn_blk"
+						onclick="execPostCode()" value="우편번호 찾기"> </br> 
+						<input
 						type="text" style="height: 30px; text-align: center;"
 						name="mb_address" class="box" id="mb_address" placeholder="주소"
-						size="30" required readonly> <input type="text"
+						size="30" required readonly> 
+						<input type="text"
 						style="height: 30px; text-align: center;" name="mb_addressDetail"
 						class="box" id="mb_addressDetail" placeholder="상세주소" size="30"
 						required></td>
@@ -270,7 +273,7 @@ $(function(){
 
 				<tr>
 					<th>핸드폰 번호</th>
-					<td><input type="tel" id="mb_phone"
+					<td><input type="tel" name="usrtel" id="mb_phone"
 						style="height: 30px; text-align: center;" name="mb_phone" required
 						placeholder=" '-' 없이 쓰세요" size="15" maxlength="11"></td>
 				</tr>

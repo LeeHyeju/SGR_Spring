@@ -6,44 +6,61 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function popupOpen() {
+
+		var popUrl = "../category/cateList.ad"; //팝업창에 출력될 페이지 URL
+		var popOption = "width=800, height=400, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+		window.open(popUrl, "", popOption);
+	}
+</script>
 </head>
 <body>
 	<h2>카테고리 등록</h2>
 	<br>
-
 	<form action="./create.ad" id="createForm" method="post">
 		<fieldset>
 			<legend></legend>
-			<table width="940" style="padding: 5px 0 5px 0;">		
+
+			<a href="javascript:popupOpen();">[ 카테고리 보기 ]</a>
+			<table width="940" style="padding: 5px 0 5px 0;">
 				<tr>
-					<th>카테고리명</th>
+					<th>대분류코드</th>
 					<td><input type="text"
-						style="height: 30px; text-align: center;" id="category_name"
-						name="category_name" size="7" required placeholder="카테고리명">
-						<label id="checkPwd"></label></td>
+						style="height: 30px; text-align: center;" id="cate_cd"
+						name="cate_cd" size="7" required placeholder="대분류코드"> <label
+						for="cate_cd"></label> (ex) A01, B01 ...</td>
 				</tr>
 				<tr>
-					<th>대분류</th>
+					<th>대분류명</th>
 					<td><input type="text"
-						style="height: 30px; text-align: center;" id="category_no"
-						name="category_no" size="7" required placeholder="대분류명"> <label
-						for="category_no"></label>1: TOP, 2:OUTER, 3:BOTTOM,4:ACC,5:SHOES</td>
+						style="height: 30px; text-align: center;" id="cate_nm"
+						name="cate_nm" size="7" required placeholder="대분류명"> <label
+						for="cate_nm"></label></td>
 				</tr>
 				<tr>
-					<th>카테고리명</th>
+					<th>소분류코드</th>
 					<td><input type="text"
-						style="height: 30px; text-align: center;" id="categorySub_no"
-						name="categorySub_no" size="7" required placeholder="소분류명">
-						<label id="categorySub_no"></label>00은 대분류명입니다.01부터 입력해주세요 </td>
+						style="height: 30px; text-align: center;" id="catsub_cd"
+						name="catesub_cd" size="7" required placeholder="소분류코드">
+						<label id="catesub_cd"></label>(ex) A011, B011 ...중복값 입력x</td>
+				</tr>
+				<tr>
+					<th>소분류명</th>
+					<td><input type="text"
+						style="height: 30px; text-align: center;" id="catesub_nm"
+						name="catesub_nm" size="7" required placeholder="소분류명"> <label
+						for="catesub_nm"></label></td>
 				</tr>
 			</table>
 		</fieldset>
-
-		<br>
-		<br>
 		<button type="submit">등록</button>
 		<button type="reset" onclick="history.back()">취소</button>
 		<button onclick="location='../category/read.ad'">목록</button>
 	</form>
+	<br>
+	<br>
+
+
 </body>
 </html>

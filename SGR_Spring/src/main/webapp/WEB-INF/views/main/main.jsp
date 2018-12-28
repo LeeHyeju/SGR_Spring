@@ -54,7 +54,7 @@ border : 0; height : 2px
 <!--          <li><a href="#">PHOTO</a></li> -->
 <!--       </ul> -->
 <ul id="nav"  >
-  <li><a href="/">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/about/">OUTER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/work/">BOTTOM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/clients/">ACC</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>

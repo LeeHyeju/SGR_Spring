@@ -5,46 +5,54 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title> 
 <script type="text/javascript">
-	var result = "${msg}";
-	if (result == "createOK") {
-		alert("상품 등록이 완료되었습니다.");
-	} else if (result == "deleteOk") {
-		alert("탈퇴되셨습니다..");
-	}
+	$(document).ready(function() {
+
+		var formObj = $("form[role='readForm']");
+
+		console.log(formObj);
+
+		$(".btn-warning").on("click", function() {
+			formObj.attr("action", "../category/update.ad");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+		$(".btn-danger").on("click", function() {
+			formObj.attr("action", "../category/delete.ad");
+			formObj.submit();
+		});
+	});
 </script>
 </head>
 <body>
 	<h2>카테고리 보기</h2>
+<form role="readForm" method="post">
+<input type="hidden" name="catesub_cd" value="${list.catesub_cd}">
 <fieldset>
 <legend></legend>
 <table>
-
 <tr>
-<td><input  style="background-color:transparent;border:0 solid black;text-align:center;" value="카테고리명"></td>
-<td><input  style="background-color:transparent;border:0 solid black;text-align:center;" value="대분류"></td>
-<td><input  style="background-color:transparent;border:0 solid black;text-align:center;" value="소분류"></td>
+<td><label>대분류코드</label>
+<input  id="cate_cd" style="height: 30px; text-align: center;  background-color: #e2e2e2;" value="${list.cate_cd}" readonly="readonly"></td>
+<td><label>대분류명</label>
+<input  id="cate_nm" style="height: 30px; text-align: center; background-color: #e2e2e2;" value="${list.cate_nm}" readonly="readonly"></td>
+<td><label>소분류코드</label>
+<input id="catesub_cd" style="height: 30px; text-align: center;  background-color: #e2e2e2;" value="${list.catesub_cd}"  readonly="readonly"></td>
+<td><label>소분류명</label>
+<input id="catesub_nm" style="height: 30px; text-align: center;  background-color: #e2e2e2;"value="${list.catesub_nm}"  readonly="readonly"></td>
 </tr>
-
-<c:forEach items="${read }" var="ca">
-<tr>
-<td>
-<input  id="cate_name" style="height: 30px; text-align: center;" value="${ca.category_name}" readonly="readonly"></td>
-<td><input id="cate_name" style="height: 30px; text-align: center;" value="${ca.category_no}"  readonly="readonly"></td>
-<td><input id="cate_name" style="height: 30px; text-align: center;"value="${ca.categorySub_no}"  readonly="readonly"></td>
-</tr>
-</c:forEach>
 </table>
 </fieldset>
 	<br>
 	<br>
 	<ul>
 		<li>
-		<button onclick="location='../category/create.ad'">카테고리 등록</button>
-		<button onclick="location='../../category/update.ad'">카테고리 수정</button>
-		<button onclick="location='../category/delete.ad'">카테고리 삭제</button>
+		<button class="btn btn-primary" onclick="history.back();">목록보기</button>
+		<button type="submit" class="btn btn-warning" >수정</button>
+		<button type="submit" class="btn btn-danger" >카테고리 삭제</button>
 		</li>
 	</ul>
+	</form>
 </body>
 </html>

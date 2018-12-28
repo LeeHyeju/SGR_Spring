@@ -5,56 +5,50 @@
 
 <mapper namespace="com.project.mapper.CategoryMapper">
 
-	<insert id="create">
-		INSERT INTO
-		category (category_no,
-		categorySub_no,category_name)
-		VALUES (#{category_no},#{categorySub_no},
-		#{category_name})
-	</insert>
-
 	<!-- 회원리스트 -->
 	<select id="list" resultType="CategoryDto">
 		SELECT
-		category_no, categorySub_no,
-		category_name
+		cate_cd, cate_nm,
+		catesub_cd,catesub_nm
 		FROM category
-		WHERE category_no > 0
 	</select>
+
+	<insert id="create">
+		INSERT INTO
+		category (cate_cd, cate_nm,catesub_cd, catesub_nm)
+		VALUES (#{cate_cd},#{cate_nm},#{catesub_cd},#{catesub_nm})
+	</insert>
 
 	<!-- 리스트맵 형식 -->
 	<select id="readListMap" resultType="java.util.HashMap">
 		SELECT
-		category_no,
-		categorySub_no, category_name
+		cate_cd, cate_nm,
+		catesub_cd,catesub_nm
 		FROM category
-		WHERE category_no > 0
 	</select>
 
 	<!-- 회원리스트 상세보기 -->
 	<select id="read" resultType="CategoryDto">
 		SELECT 
-		category_no,
-		categorySub_no, category_name
+		cate_cd, cate_nm,
+		catesub_cd,catesub_nm
 		FROM category
-		WHERE  category_no = #{category_no} AND categorySub_no = #{categorySub_no}
+		WHERE  catesub_cd = #{catesub_cd}
 	</select>
 
 
 	<update id="update">
 		UPDATE category
-		SET category_no =#{category_no},
-		categorySub_no =#{categorySub_no} ,
-		category_name =#{category_name}
-		WHERE category_no = #{category_no} AND categorySub_no =
-		#{categorySub_no}
+		SET cate_cd =#{cate_cd},
+		cate_nm =#{cate_nm},
+		catesub_nm =#{catesub_nm}
+		WHERE catesub_cd = #{catesub_cd} 
 	</update>
 
 	<delete id="delete">
 		DELETE
 		FROM category
-		WHERE category_no = #{category_no}
-		AND categorySub_no = #{categorySub_no}
+		WHERE catesub_cd = #{catesub_cd} 
 	</delete>
 
 </mapper>

@@ -30,7 +30,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<!-- 알지?ㅇㅋㅇㅋ -->
 	<context:component-scan base-package="com.project" />
 	
 	<!-- 마이바티스 맵퍼 스캔 (@mapper로 경로지정가능 -->

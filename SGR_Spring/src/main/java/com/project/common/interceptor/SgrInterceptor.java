@@ -9,12 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.project.member.dto.MemberDto;
+import com.project.dto.MemberDto;
 
 
 public class SgrInterceptor extends HandlerInterceptorAdapter {
 	// Map<URI, 페이지 권한>
-	// 페이지 권한 : 0-관리자 6-로그인 9--탈퇴회원
+	// 페이지 권한 : 1-관리자 6-로그인 9--탈퇴회원
 	static private Map<String, Integer> admin = new HashMap<>();
 
 	// 초기화 블록 - 바로 실행됨.
@@ -29,16 +29,16 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 		admin.put("/member/view.do", 6);
 
 		// admin - 1(관리자 권한이 있어야 한다.)
-		admin.put("/admin/list.ad", 0);
-		admin.put("/admin/listDetail.ad", 0);
-		admin.put("/admin/drop.ad", 0);
+		admin.put("/admin/list.ad", 1);
+		admin.put("/admin/listDetail.ad", 1);
+		admin.put("/admin/memberDrop.ad", 1);
 
 
 		// goods - admin
-		admin.put("/goods/adminList.go", 0);
-		admin.put("/goods/adminWrite.go", 0);
-		admin.put("/goods/adminUpdate.go", 0);
-		admin.put("/goods/adminDelete.go", 0);
+		admin.put("/goods/adminList.go", 1);
+		admin.put("/goods/adminWrite.go", 1);
+		admin.put("/goods/adminUpdate.go", 1);
+		admin.put("/goods/adminDelete.go", 1);
 
 
 	}
@@ -84,7 +84,7 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		// 요청한 URI을 실행하게 한다.
-		System.out.println("하이패스");
+		System.out.println("URI 경로가 실행되었습니다.");
 		return true;
 	}
 }

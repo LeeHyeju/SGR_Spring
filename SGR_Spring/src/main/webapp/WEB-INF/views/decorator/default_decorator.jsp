@@ -141,9 +141,9 @@ article {
 													<li role="presentation"><a role="menuitem"
 														tabindex="-1" href="../admin/listPage.ad">회원 리스트</a></li>
 													<li role="presentation"><a role="menuitem"
-														tabindex="-1" href="../category/read.ad">카테고리 리스트</a></li>
+														tabindex="-1" href="../category/cateList.ad">카테고리 리스트</a></li>
 													<li role="presentation"><a role="menuitem"
-														tabindex="-1" href="#">상품 리스트</a></li>
+														tabindex="-1" href="../goods/adminList.ad">상품 관리 리스트</a></li>
 													<li role="presentation"><a role="menuitem"
 														tabindex="-1" href="#">이벤트 등록</a></li>
 													<li role="presentation"><a role="menuitem"

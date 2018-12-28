@@ -6,7 +6,7 @@
 <mapper namespace="com.project.mapper.MemberMapper">
 
 <!-- dto  -->
-<!-- mb_no,mb_id,mb_pw,mb_name,mb_sex,mb_bday,mb_phone,mb_email, -->
+<!-- mb_id,mb_pw,mb_name,mb_sex,mb_bday,mb_phone,mb_email, -->
 <!-- 	mb_zipcode,mb_address,mb_grade,mb_joinDate,mb_leaveDate -->
 
 <!-- 로그인 -->
@@ -14,7 +14,7 @@
 SELECT
 	mb_id, mb_name,mb_grade
 FROM member
-WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw} 
+WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw}  AND mb_grade !=9
 </select>
 
 <!--아이디 중복확인  -->
@@ -26,7 +26,8 @@ WHERE mb_id = #{mb_id}
 
 <!-- 회원가입 -->
 <insert id="join">
-INSERT INTO member (mb_id,mb_pw,mb_name,mb_sex,mb_bday,
+INSERT INTO member 
+(mb_id,mb_pw,mb_name,mb_sex,mb_bday,
 mb_phone,mb_email,mb_zipcode,mb_address,mb_addressDetail)
 VALUES (#{mb_id},#{mb_pw},#{mb_name},#{mb_sex},#{mb_bday},
 #{mb_phone},#{mb_email},#{mb_zipcode},#{mb_address},#{mb_addressDetail})

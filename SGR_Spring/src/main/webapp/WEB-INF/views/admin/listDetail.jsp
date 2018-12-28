@@ -30,7 +30,7 @@
 		<legend></legend>
 		<form id = "viewForm" >
 			<!-- 히든으로 넘긴다 -->
-			<input name="mb_no" type="hidden" value="${member.mb_no }" />
+			<input name="mb_id" type="hidden" value="${member.mb_id }" />
 			<input name ="mb_grade" type="hidden" value="${member.mb_grade }">
 			<input type="hidden" name="page" value=${cri.page }>
 			<input type="hidden" name="perPageNum" value=${cri.perPageNum }>

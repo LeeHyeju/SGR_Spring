@@ -5,44 +5,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var formObj = $("form[role='update.ad']");
+
+		console.log(formObj);
+
+		$(".btn-warning").on("click", function() {
+			formObj.submit();
+		});
+		$(".btn-primary").on("click", function() {
+			self.location ="/category/cateList.ad";
+			formObj.submit();
+		});
+	});
+</script>
+
 </head>
 <body>
-	<h2>카테고리 등록</h2>
+	<h2>카테고리 수정</h2>
 	<br>
-
-	<form action="./create.ad" id="createForm" method="post">
-		<fieldset>
-			<legend></legend>
-			<table width="940" style="padding: 5px 0 5px 0;">		
-				<tr>
-					<th>카테고리명</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="category_name"
-						name="category_name" size="7" required placeholder="카테고리명">
-						<label id="checkPwd"></label></td>
-				</tr>
-				<tr>
-					<th>대분류</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="category_no"
-						name="category_no" size="7" required placeholder="대분류명"> <label
-						for="category_no"></label>1: TOP, 2:OUTER, 3:BOTTOM,4:ACC,5:SHOES</td>
-				</tr>
-				<tr>
-					<th>카테고리명</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="categorySub_no"
-						name="categorySub_no" size="7" required placeholder="소분류명">
-						<label id="categorySub_no"></label>00은 대분류명입니다.01부터 입력해주세요 </td>
-				</tr>
-			</table>
-		</fieldset>
-
-		<br>
-		<br>
-		<button type="submit">등록</button>
-		<button type="reset" onclick="history.back()">취소</button>
-		<button onclick="location='../category/read.ad'">목록</button>
-	</form>
+	<form role ="./update.ad"  id="updateForm" method="post">
+<table>
+<tr>
+<td><label for="cate_cd">대분류코드</label>
+<input type="text" id="cate_cd" style="height: 30px; text-align: center;" value="${list.cate_cd}" ></td>
+<td><label for="cate_nm">대분류명</label>
+<input type="text"  id="cate_nm" style="height: 30px; text-align: center;" value="${list.cate_nm}" ></td>
+<td><label for="catesub_cd">소분류코드</label>
+<input type="text" id="catesub_cd" style="height: 30px; text-align: center; background-color: #e2e2e2;" value="${list.catesub_cd}"  readonly="readonly" ></td>
+<td><label for="catesub_nm">소분류명</label>
+<input  type="text" id="catesub_nm" style="height: 30px; text-align: center;" value="${list.catesub_nm}" ></td>
+</tr>
+</table>
+<br><br>
+<button class="btn btn-warning"  type="submit">수정</button>
+<button class="btn btn-primary" onclick="history.back();">목록보기</button>
+</form>
 </body>
 </html>

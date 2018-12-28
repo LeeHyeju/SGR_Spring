@@ -10,7 +10,7 @@
 <script type="text/javascript">
 		var result = "${msg}";
 		var deleter = "${delete}"
-		var no = deleter.mb_no;
+		var id = deleter.mb_id;
 		if(result=="SUCCESS"){
 			alert(deleter);
 		}
@@ -32,8 +32,8 @@
 
 			<c:forEach var="member" items="${list }" >
 			 <tr>
-				<td>${member.mb_no }</td>
-		<td><a href="listDetail.ad?mb_no=${member.mb_no }">${member.mb_id }</a></td>
+<%-- 				<td>${member.mb_no }</td> --%>
+		<td><a href="listDetail.ad?mb_id=${member.mb_id}">${member.mb_id }</a></td>
 		<td>${member.mb_name }</td>
 		<c:choose>
 			<c:when test="${member.mb_grade == 6 }">
