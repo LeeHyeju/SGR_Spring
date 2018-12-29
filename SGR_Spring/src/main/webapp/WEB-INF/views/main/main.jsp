@@ -17,6 +17,15 @@ hr {
 border : 0; height : 2px
 }
 </style>
+<!-- 이미지 전체 너비의 70% 정도, 가운데 정렬 -->
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+    margin: auto; 
+	min-height: 400px;
+  }
+  </style>
 <script type="text/javascript">
 	var result = "${message}";
 	if (result == "joinOk") {
@@ -32,7 +41,7 @@ border : 0; height : 2px
     <br>
     <h1>S a G a R a </h1>      
     <p>- Women's Shopping Mall - </p>
-  <p>------------------------------</p>
+  <p></p>
   </div>
 </div>
   <div>
@@ -44,15 +53,6 @@ border : 0; height : 2px
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar" >
-<!--       <ul class="nav navbar-nav" id="nav navbar-nav1" > -->
-<!--        <li ><a class="navbar-brand"  href="#">TOP</a></li> -->
-<!--        <li class="active"><a href="#">OUTER</a></li> -->
-<!--         <li><a href="#">OUTER</a></li> -->
-<!--         <li><a href="#">BOTTOM</a></li> -->
-<!--         <li><a href="#">ACC</a></li>  -->
-<!--         <li><a href="#">SHOES</a></li>  -->
-<!--          <li><a href="#">PHOTO</a></li> -->
-<!--       </ul> -->
 <ul id="nav"  >
   <li><a href="/goods/goodsList.do">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/about/">OUTER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
@@ -67,58 +67,41 @@ border : 0; height : 2px
 </ul>
     </div>
   </div>
+<div class="container">
+<br/>
+<!-- 컨베이어 -->
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators : 지시자 - 이미지 위에 클릭할 수 있는 동그라미 표시 -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides : 컨베이어에서 사용할 이미지 선언 -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="../resources/main/main01.jpg" alt="테스트" width="300" height="345">
+      </div>
+      <div class="item">
+        <img src="../resources/main/main02.jpg" alt="테스트2" width="300" height="345">
+      </div>
+      <div class="item">
+        <img src="../resources/main/main03.jpg" alt="테스트3" width="300" height="345">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 <br><br>
-<div class="container">    
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-danger">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-success">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br>
-
-<div class="container">    
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-    <div class="col-sm-4"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-      </div>
-    </div>
-  </div>
-</div><br><br>
-
+</div>
 </body>
 </html>

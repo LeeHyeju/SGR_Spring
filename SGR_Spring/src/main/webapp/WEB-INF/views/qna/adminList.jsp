@@ -1,92 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function gogo(index) {
-		if ($('#insertDiv_go' + index).css("display") != "none") {
-			//			//화면이 논값이 아닐시에
-			$('#insertDiv_go' + index).hide();
-			//			//가린다
-		} else {
-			$('#insertDiv_go' + index).show();
-			//보인다
-		}
+<script>
+	var result = '${msg}';
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
 	}
+</script>
+<script>
+	$(document).ready(
+			function() {
+
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+
+							str = "adminList"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword="
+									+ encodeURIComponent($('#keywordInput')
+											.val());
+
+							console.log(str);
+
+							self.location = str;
+
+						});
+
+				$('#newBtn').on("click", function(evt) {
+
+					self.location = "/qna/adminWrite.ad";
+
+				});
+
+			});
 </script>
 </head>
 <body>
 	<h2>관리자: 고객 문의 내역</h2>
 	<hr>
-	<c:choose>
-		<c:when test="${fn:length(adminList) > 0}">
-			<c:forEach items="${adminList}" var="adminList" varStatus="status">
-				<tr>
-					<td>
-						<p style="font-size: large;">문의 번호 = ${adminList.qna_no}</p>
-					</td>
-					<td>
-						<p style="font-size: large;">고객 ID = ${adminList.mb_id}님</p>
-					</td>
-					<td>
-					<p style="font-size: large;">
-							문의날짜 =<fmt:formatDate value="${adminList.reg_date}" pattern="yyyy-MM-dd" />
-						</p></td>
-					<td>
-						<h1>제목 = ${adminList.qna_title}</h1>
-					</td>
-					<td><h1>내용 = ${adminList.qna_content}</h1></td>
-					</br>
-<%-- 					<td>${adminList.inq_img}</td> --%>
-					<c:if test="${adminList.inq_parent == null}">
-						<td><input type="button" name="bt_insertgo" id="bt_insertgo"
-							onclick="gogo('${status.index}');" value="문의 답변"></td>
-					</c:if>
-					<c:if test="${adminList.parent != null}">
-                       	       답변내역    =  <td>${adminList.parent}</td>
-					</c:if>
-					-------------------------------------------------------------------------------------
-				</tr>
-				<form 	action="<%=request.getContextPath()%>/qna/adminList.ad" method="POST" id="">
-					<div style="display: none;" id="insertDiv_go${status.index}">
-			
-								<label class="sr-only" for="exampleInputEmail3"></label>
-								<input type="text" class="form-control" name="mb_id"
-									id="mb_id" value="${adminList.qna_no}" readonly="readonly"
-									placeholder="등록번호">
-								<br>
-								<input type="text" class="form-control" name="mb_id"
-									id="mb_id" value="${login.mb_id}" readonly="readonly"
-									placeholder="회원아이디">
-								<br>
-								<label class="sr-only" for="exampleInputEmail3"></label>
-						
-								<textarea class="form-control" rows="3"
-									placeholder="사용자의 문의에 답변해주세요" value="" >
-									</textarea>
-									<input type="text"
-									class="form-control" name="inq_parent" id="inq_parent">
-											
-						<input type="hidden" name="inq_no" id="inq_no"  value="${adminList.qna_no}"> 
-							<input type="hidden" 	name="inq_no" id="inq_no" value="${adminList.parent}"> 
-							<input 	type="submit" name="bt_insertgo" id="bt_insertgo" value="제 출">
-						<!-- 														<input type="hidden" name="st_hit" value="0"> -->
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12">
+				<!-- general form elements -->
+				<div class='box'>
+					<div class="box-header with-border">
+						<h3 class="box-title">Q&A List</h3>
 					</div>
-				</form>
-			</c:forEach>
-		</c:when>
 
-		<c:otherwise>
-			<tr>
-				<td colspan="4">문의 내역이 없습니다.</td>
-			</tr>
-		</c:otherwise>
-	</c:choose>
+					<div class='box-body'>
 
+						<select name="searchType">
+							<option value="x"
+								<c:out value="${cri.searchType == null?'selected':''}"/>>
+								---</option>
+							<option value="i"
+								<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
+								Writer</option>
+							<option value="t"
+								<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+								Title</option>
+							<option value="c"
+								<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+								Content</option>
+							<option value="itc"
+								<c:out value="${cri.searchType eq 'itc'?'selected':''}"/>>
+								Writer OR Title OR Content</option>
+						</select> <input type="text" name='keyword' id="keywordInput"
+							value='${cri.keyword }'>
+						<button id='searchBtn'>Search</button>
+						<button id='newBtn'>New Q&A</button>
+
+					</div>
+				</div>
+				
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">공지사항</h3>
+					</div>
+	<div>
+		<label>※</label>
+		<input>
+	</div>
+
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Q&A 내역</h3>
+					</div>
+					<div class="box-body">
+						<table class="table table-bordered">
+							<tr>
+								<th style="width: 10px">NO</th>
+								<th>TITLE</th>
+								<th>WRITER</th>
+								<th>DATE</th>
+								<th style="width: 40px">HIT</th>
+							</tr>
+
+							<c:forEach items="${adminList}" var="adminList">
+
+								<tr>
+									<td>${adminList.qna_no}</td>
+									<td><a
+										href='/qna/view${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${adminList.qna_no}'>
+											${adminList.qna_title} </a></td>
+									<td>${adminList.mb_id}</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+											value="${adminList.reg_date}" /></td>
+									<td><span class="badge bg-red">${adminList.qna_hit }</span></td>
+								</tr>
+
+							</c:forEach>
+
+						</table>
+					</div>
+					<!-- /.box-body -->
+
+
+					<div class="box-footer">
+
+						<div class="text-center">
+							<ul class="pagination">
+
+								<c:if test="${pageMaker.prev}">
+									<li><a
+										href="adminList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+								</c:if>
+
+								<c:forEach begin="${pageMaker.startPage }"
+									end="${pageMaker.endPage }" var="idx">
+									<li
+										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+										<a href="adminList${pageMaker.makeSearch(idx)}">${idx}</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a
+										href="adminList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+								</c:if>
+
+							</ul>
+						</div>
+
+					</div>
+					<!-- /.box-footer-->
+				</div>
+			</div>
+			<!--/.col (left) -->
+
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
 </body>
 </html>

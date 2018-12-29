@@ -1,120 +1,156 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function qnaInsert() {
-		if ($('#insertDiv_go').css("display") != "none") {
-			//			//화면이 논값이 아닐시에
-			$('#insertDiv_go').hide();
-			//			//가린다
-		} else {
-
-			$('#insertDiv_go').show();
-			//보인다
-		}
+<script>
+	var result = '${msg}';
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
 	}
-
-	function goodsCheck() {
-
-		str = $("#goodsgo").val();
-		if (str != "상품선택") {
-
-			$("#goods_no").val(str);
-
-		}
-	}
+</script>
+<script>
+	$(document).ready(
+			function() {
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+							str = "list"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword="
+									+ encodeURIComponent($('#keywordInput')
+											.val());
+							console.log(str);
+							self.location = str;
+						});
+				$('#newBtn').on("click", function(evt) {
+					self.location = "/qna/write.do";
+				});
+			});
 </script>
 </head>
 <body>
 	<h2>MY Q&A</h2>
-<hr>
-	<c:choose>
-		<c:when test="${fn:length(list) > 0}">
+	<hr>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<!-- left column -->
 
-			<c:forEach items="${list}" var="list">
-				<tr>
-					<td>
-						<h1>
-							문의 번호 = ${list.qna_no}, </br> 상품 번호 = ${list.goods_no}, 문의날짜 =
-							${list.reg_date},
-						</h1>
-					</td>
-					<td>
-						<h1>제목 = ${list.qna_title}</h1>
-					</td>
-					<td><h1>내용 = ${list.qna_content}</h1></td>
-					</br>
-					<%-- 	                    <td>${rowgo.inq_img}</td>                  --%>
-					<c:if test="${list.parent == null}">
-						<td><input type="button" name="bt_insertgo" id="bt_insertgo"
-							onclick="gogo('${status.index}');" value="문의 답변"></td>
-					</c:if>
-					<c:if test="${list.parent != null}">
-					답변내역    =  <td>${list.parent}</td>
-					</c:if></c:forEach>
-		</c:when>
+			<div class="col-md-12">
+				<!-- general form elements -->
+				<div class='box'>
+					<div class="box-header with-border">
+						<h3 class="box-title">Q&A List</h3>
+					</div>
 
-		<c:otherwise>
-			<tr>
-				<td colspan="4">나의 문의 내역이 없습니다.</td>
-			</tr>
-		</c:otherwise>
-	</c:choose>
+					<div class='box-body'>
 
-	<input type="button" name="bt_insertgo" id="bt_insertgo"
-		onclick="qnaInsert();" value="문의 등록">
-	<form action="<%=request.getContextPath()%>/qna/write.do" method="POST" id="gogosing">
-		<div style="display: none;" id="insertDiv_go">
+						<select name="searchType">
+							<option value="x"
+								<c:out value="${cri.searchType == null?'selected':''}"/>>
+								---</option>
+							<option value="i"
+								<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
+								Writer</option>
+							<option value="t"
+								<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+								Title</option>
+							<option value="c"
+								<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+								Content</option>
+							<option value="itc"
+								<c:out value="${cri.searchType eq 'itc'?'selected':''}"/>>
+								Writer OR Title OR Content</option>
+						</select> <input type="text" name='keyword' id="keywordInput"
+							value='${cri.keyword }'>
+						<button id='searchBtn'>Search</button>
+						<button id='newBtn'>New Q&A</button>
 
-			<select name="goodsgo" id="goodsgo" onchange="goodsCheck()">
-				<option>상품선택</option>
-				<c:forEach items="${list}" var="list">
-					<option value="${list.goods_no}">${list.goods_name}</option>
-				</c:forEach>
-			</select>
-			-------------------------------------------------------------------------------------
-			<br>
+					</div>
+				</div>
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">공지사항</h3>
+					</div>
+					<div>
+						<label>※</label> <input>
+					</div>
+					<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title">Q&A 내역</h3>
+						</div>
+						<div class="box-body">
+							<table class="table table-bordered">
+								<tr>
+									<th style="width: 10px">NO</th>
+									<th>TITLE</th>
+									<th>WRITER</th>
+									<th>DATE</th>
+									<th style="width: 40px">HIT</th>
+								</tr>
+
+								<c:forEach items="${list}" var="list">
+
+									<tr>
+										<td>${list.qna_no}</td>
+										<td><a
+											href='/qna/view${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${list.qna_no}'>
+												${list.title} </a></td>
+										<td>${list.writer}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+												value="${list.reg_date}" /></td>
+										<td><span class="badge bg-red">${list.hit }</span></td>
+									</tr>
+
+								</c:forEach>
+
+							</table>
+						</div>
+						<!-- /.box-body -->
 
 
-			<div>
-				<!-- 						<label class="sr-only" for="exampleInputEmail3"></label>  -->
-				<!-- 						<input 	type="text" class="form-control" name="go_title" id="go_title" -->
-				<%-- 							value="${goods_no}" readonly="readonly" placeholder="상품이름">${list.goods_name}<br> --%>
+						<div class="box-footer">
 
-				<!-- 						<input type="hidden" class="form-control" name="goods_no" -->
-				<%-- 							id="goods_no" value="${goods_no }" readonly="readonly" 	placeholder=""> <br>  --%>
-				<input type="text" class="form-control" name="mb_id" id="mb_id"
-					value="${login.mb_id}" readonly="readonly" placeholder="회원아이디">
-				<br> <label class="sr-only" for="exampleInputEmail3">회원아이디</label>
+							<div class="text-center">
+								<ul class="pagination">
+
+									<c:if test="${pageMaker.prev}">
+										<li><a
+											href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+									</c:if>
+
+									<c:forEach begin="${pageMaker.startPage }"
+										end="${pageMaker.endPage }" var="idx">
+										<li
+											<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+											<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+										</li>
+									</c:forEach>
+
+									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+										<li><a
+											href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+									</c:if>
+
+								</ul>
+							</div>
+
+						</div>
+						<!-- /.box-footer-->
+					</div>
+				</div>
+				<!--/.col (left) -->
+
 			</div>
-
-
-			<textarea class="form-control" rows="3" placeholder="제목을 입력해주세요"
-				value="" input type="text" class="form-control" name="inq_title"
-				id=""></textarea>
-			<textarea class="form-control" rows="3" placeholder="문의 내용을 등록해주세요"
-				value="" input type="text" class="form-control" name="inq_content"
-				id=""></textarea>
-
-
-			<%-- 												<option value="${result.st_num}"><c:out value="${result.st_name}" /></option> --%>
-
-
-			<!-- 			<input type="hidden" name="inq_content" id="inq_content" -->
-			<%-- 				value="${list.qna_content}"> <input type="hidden" --%>
-			<%-- 				name="inq_parent" id="inq_parent" value="${list.parent}"> --%>
-			<%-- 			<input type="hidden" name="inq_no" id="inq_no" value="${list.goods_no}"> --%>
-			<input type="submit" name="bt_insertgo" id="bt_insertgo" value="제 출">
-
-
-		</div>
-	</form>
-
+			<!-- /.row -->
+	</section>
+	<!-- /.content -->
 </body>
 </html>

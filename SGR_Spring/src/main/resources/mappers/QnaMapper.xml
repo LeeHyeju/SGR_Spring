@@ -7,8 +7,7 @@
 
 	<!-- 검색하는 쿼리 -->
 	<sql id="search">
-		<if
-			test="searchType != 'x'.toString() and searchType != null and searchType != ''.toString()">
+		<if test="searchType != 'x'.toString() and searchType != null and searchType != ''.toString()">
 
 			<!-- 아이디: i , 제목: t , 내용:: c -->
 			<if test="searchType == 'i'.toString()">
@@ -48,7 +47,7 @@
 		INSERT INTO
 		qna( mb_id, qna_title,
 		qna_content, parent,
-		goods_no)
+		goods_no, catesub_no)
 		values
 		(#{mb_id},#{qna_title},#{qna_content},#{parent},#{goods_no})
 	</insert>
