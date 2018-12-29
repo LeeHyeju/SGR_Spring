@@ -19,7 +19,6 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 
 	// 초기화 블록 - 바로 실행됨.
 	static {
-
 		// 회원 정보 수정, 탈퇴 
 		admin.put("/member/update.do", 6);
 		admin.put("/member/pwCheck.do", 6);
@@ -33,14 +32,16 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 		admin.put("/admin/listDetail.ad", 1);
 		admin.put("/admin/memberDrop.ad", 1);
 
-
 		// goods - admin
-		admin.put("/goods/adminList.go", 1);
-		admin.put("/goods/adminWrite.go", 1);
-		admin.put("/goods/adminUpdate.go", 1);
-		admin.put("/goods/adminDelete.go", 1);
+		admin.put("/goods/adminList.ad", 1);
+		admin.put("/goods/adminWrite.ad", 1);
+		admin.put("/goods/adminUpdate.ad", 1);
+		admin.put("/goods/adminDelete.ad", 1);
 
-
+		//qna-admin
+		admin.put("/qna/adminList.ad", 1);
+		//qna-user
+		admin.put("/qna/qnaList", 6);
 	}
 
 	@Override

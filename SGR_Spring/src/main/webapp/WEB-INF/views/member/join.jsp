@@ -140,7 +140,7 @@
 
 		}
 	}
- 
+
 	$(function() {
 		// 비밀번호확인 체크 이벤트 처리
 		$("#joinForm").on("submit", function() {
@@ -186,18 +186,18 @@
 	} // 아이디 중복 체크 끝
 </script>
 <script type="text/javascript">
-function selectAll(){
-	for(var i=0; i <joinForm.check.length; i++){
-		joinForm.check[i].checked=true;
+	function selectAll() {
+		for (var i = 0; i < joinForm.check.length; i++) {
+			joinForm.check[i].checked = true;
+		}
 	}
-}
 
-$(function(){
-	$("#unCheck").on("click", function(){
-		alert("동의하지 않으면 가입하실 수 없습니다");
-		location.href = "../main/main.do";
+	$(function() {
+		$("#unCheck").on("click", function() {
+			alert("동의하지 않으면 가입하실 수 없습니다");
+			location.href = "../main/main.do";
+		});
 	});
-});
 </script>
 </head>
 <body>
@@ -206,6 +206,8 @@ $(function(){
 		<fieldset>
 			<legend></legend>
 			<table width="940" style="padding: 5px 0 5px 0;">
+
+				
 				<tr>
 					<th>이름</th>
 					<td><input type="text"
@@ -213,7 +215,7 @@ $(function(){
 						name="mb_name" size="7" required placeholder="이름"
 						pattern="^[가-힣]{2,6}$"></td>
 				</tr>
-
+				
 				<tr>
 					<th>아이디</th>
 					<td><input type="text"
@@ -258,14 +260,11 @@ $(function(){
 					<td><input type="text"
 						style="height: 30px; text-align: center;" name="mb_zipcode"
 						class="box" id="mb_zipcode" placeholder="우편번호" required size="5"
-						readonly> 
-						<input type="button" class="btn_blk"
-						onclick="execPostCode()" value="우편번호 찾기"> </br> 
-						<input
+						readonly> <input type="button" class="btn_blk"
+						onclick="execPostCode()" value="우편번호 찾기"> </br> <input
 						type="text" style="height: 30px; text-align: center;"
 						name="mb_address" class="box" id="mb_address" placeholder="주소"
-						size="30" required readonly> 
-						<input type="text"
+						size="30" required readonly> <input type="text"
 						style="height: 30px; text-align: center;" name="mb_addressDetail"
 						class="box" id="mb_addressDetail" placeholder="상세주소" size="30"
 						required></td>
@@ -286,11 +285,12 @@ $(function(){
 				</tr>
 			</table>
 			<hr>
-			
+
 			<table>
-			<div>
-				<h4 class="scheme-g">[필수]회원약관</h4>
-				<textarea style="font-size: 1em;" cols="90" rows="5" readonly="readonly">
+				<div>
+					<h4 class="scheme-g">[필수]회원약관</h4>
+					<textarea style="font-size: 1em;" cols="90" rows="5"
+						readonly="readonly">
 				제1조(목적)
 
  
@@ -731,11 +731,13 @@ $(function(){
 
 부 칙(시행일) 이 약관은 년 월 일부터 시행합니다.
             </textarea>
-				<p>
-					<input type="checkbox" id="check_1" name="check" required /> 위의 약관에 동의 합니다.<br />
-				</p>
-				<h4 class="scheme-g">[필수]개인정보 수집 및 이용 동의</h4>
-				<textarea style="font-size: 1em;"cols="90" rows="5" readonly="readonly" >
+					<p>
+						<input type="checkbox" id="check_1" name="check" required /> 위의
+						약관에 동의 합니다.<br />
+					</p>
+					<h4 class="scheme-g">[필수]개인정보 수집 및 이용 동의</h4>
+					<textarea style="font-size: 1em;" cols="90" rows="5"
+						readonly="readonly">
 			'SGR'은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 회사는 개인정보취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.
@@ -760,37 +762,44 @@ $(function(){
 
 회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 없이 해당 정보를 지체 없이 파기합니
             </textarea>
-				<p>
-					<input type="checkbox" id="check_2" name="check"  required/> 위의 약관에 동의 합니다.<br />
-				</p>
-				<h4 class="scheme-g">[선택]마케팅/홍보 수집 및 이용 동의</h4>
-				<textarea style="font-size: 1em;" cols="90" rows="5" readonly="readonly" >
+					<p>
+						<input type="checkbox" id="check_2" name="check" required /> 위의
+						약관에 동의 합니다.<br />
+					</p>
+					<h4 class="scheme-g">[선택]마케팅/홍보 수집 및 이용 동의</h4>
+					<textarea style="font-size: 1em;" cols="90" rows="5"
+						readonly="readonly">
 				할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS와 이메일로 받아보실 수 있습니다.
 
 단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
 
 선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
             </textarea>
-				<p>
-					<input type="checkbox" id="check_3" name="check" required /> 위의 약관에 동의 합니다.(선택)<br />
-				</p>
-				<br><br>
-				<input type="button" value="모두 동의"  onclick="selectAll()">
-				<input type="button" value="동의 안함"  id="unCheck" >
-		<hr><hr>
-			</div>
-			
-			
+					<p>
+						<input type="checkbox" id="check_3" name="check" required /> 위의
+						약관에 동의 합니다.(선택)<br />
+					</p>
+					<br>
+					<br> <input type="button" value="모두 동의" onclick="selectAll()">
+					<input type="button" value="동의 안함" id="unCheck">
+					<hr>
+					<hr>
+				</div>
+
+
 			</table>
-			
-			
+
+
 			<br> <br>
 			<div class="btnJoinArea">
 				<button type="submit" class="btn btn-primary" onclick="ok()">회원가입</button>
-				<button type="button" class="btn btn-danger" onclick="history.back();">취소</button>
+				<button type="button" class="btn btn-danger"
+					onclick="history.back();">취소</button>
 			</div>
 		</fieldset>
-<br><br><br>
+		<br>
+		<br>
+		<br>
 	</form>
 </body>
 </html>

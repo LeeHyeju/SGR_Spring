@@ -15,6 +15,7 @@
 		<pattern>/goods/*</pattern>
 		<pattern>/error/*</pattern>
 		<pattern>/review/*</pattern>
+		<pattern>/qna/*</pattern>
 	</decorator>
 	<!-- 게시판의 대한 요청 레이아웃 선언 -->
 

@@ -110,9 +110,18 @@ article {
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li><a class="navbar-brand" href="#">Q&A</a></li>
+						<c:if test="${!empty login }">
+							<c:choose>
+								<c:when test="${login.mb_id == 'admin'}">
+						<li><a class="navbar-brand" href="../qna/adminList.ad">Q&A</a></li>
 						<li><a class="navbar-brand" href="#">Review</a></li>
-						<li><a href="/image/list.do"></a></li>
+							</c:when>
+							<c:otherwise>
+							<li><a class="navbar-brand" href="../qna/qnaList.do">Q&A</a></li>
+						<li><a class="navbar-brand" href="#">Review</a></li>
+							</c:otherwise>
+							</c:choose>
+							</c:if>
 					</ul>
 					<!-- 오른쪽에 위치하는 메뉴바 -->
 					<ul class="nav navbar-nav navbar-right">

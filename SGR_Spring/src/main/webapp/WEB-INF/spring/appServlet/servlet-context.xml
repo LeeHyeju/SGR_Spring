@@ -42,6 +42,7 @@
 			<mapping path="/admin/**" />
 			<mapping path="/goods/**" />
 			<mapping path="/category/**" />
+			<mapping path="/qna/**" />
 			<beans:bean class="com.project.common.interceptor.SgrInterceptor" />
 		</interceptor>
 	</interceptors>
