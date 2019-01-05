@@ -10,8 +10,6 @@
 	var result = "${msg}";
 	if (result == "createOK") {
 		alert("카테고리 등록이 완료되었습니다.");
-	} else if (result == "deleteOk") {
-		alert("탈퇴되셨습니다..");
 	}
 </script>
 </head>

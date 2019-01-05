@@ -6,6 +6,8 @@
 <%@taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -197,7 +199,8 @@ article {
 	<article>
 		<decorator:body />
 	</article>
-	<footer class="container-fluid text-center">
+	
+	<footer class="container-fluid text-center" style="float:left;">
 		<p>COMPANY : (주)SGR OWNER : 이혜주 BUSINESS LICENSE : 123-45-67890
 			MALL-ORDER LICENSE : 제2018-서울구로-00123호 ADDRESS : 12345 서울특별시 구로구 구로동
 			123-45 1층 TEL : 1234-5789 COPYRIGHT © (주)SGR ALL RIGHTS RESERVED.

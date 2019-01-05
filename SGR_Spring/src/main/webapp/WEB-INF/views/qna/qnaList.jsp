@@ -75,13 +75,17 @@
 
 					</div>
 				</div>
+						
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">공지사항</h3>
 					</div>
-					<div>
-						<label>※</label> <input>
-					</div>
+					
+	<div class="form-group">
+				<div class="col-md-5">
+				<input type="text" 	name='title' class="form-control input-md" value="">
+				</div>
+				</div>
 					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">Q&A 내역</h3>
@@ -101,12 +105,12 @@
 									<tr>
 										<td>${list.qna_no}</td>
 										<td><a
-											href='/qna/view${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${list.qna_no}'>
-												${list.title} </a></td>
-										<td>${list.writer}</td>
+											href='/qna/view.do${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${list.qna_no}'>
+												${list.qna_title} </a></td>
+										<td>${list.mb_id}</td>
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 												value="${list.reg_date}" /></td>
-										<td><span class="badge bg-red">${list.hit }</span></td>
+										<td><span class="badge bg-red">${list.qna_hit }</span></td>
 									</tr>
 
 								</c:forEach>
@@ -123,20 +127,20 @@
 
 									<c:if test="${pageMaker.prev}">
 										<li><a
-											href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+											href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 									</c:if>
 
 									<c:forEach begin="${pageMaker.startPage }"
 										end="${pageMaker.endPage }" var="idx">
 										<li
 											<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-											<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+											<a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a>
 										</li>
 									</c:forEach>
 
 									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 										<li><a
-											href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+											href="list.do${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 									</c:if>
 
 								</ul>

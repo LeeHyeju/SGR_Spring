@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.common.model.AdminCriteria;
 import com.project.common.model.PageMaker;
 import com.project.common.model.SearchCriteria;
+import com.project.dto.CategoryDto;
 import com.project.service.AdminService;
 
 @Controller
@@ -78,6 +79,23 @@ public class AdminController {
 		model.addAttribute("member", adminService.listDetail(mb_id));
 	}
 
+//	// 등급 수정 
+//			@RequestMapping(value = "/admin/update.ad", method = RequestMethod.GET)
+//			public void update(String mb_id, Model model) throws Exception {
+//				System.out.println("회원 등급 수정 - Get");
+//				System.out.println(mb_id);
+//				model.addAttribute("member", adminService.listDetail(mb_id));
+//			}
+//		
+//			// 등급 수정 처리
+//			@RequestMapping(value = "/admin/update.ad", method = RequestMethod.POST)
+//			public String updateProcess(String mb_id,RedirectAttributes rttr) throws Exception {
+//				System.out.println("회원 등급 - Post");
+//				adminService.update(mb_id);
+//				rttr.addFlashAttribute("msg", "updateOK");
+//				return "redirect: ../category/cateList.ad";
+//			}
+	
 	// 회원 강제 탈퇴 처리
 	@RequestMapping(value = "/admin/memberDrop.ad")
 	public String memberDropProcess(@RequestParam("mb_id") String mb_id, SearchCriteria cri, RedirectAttributes rttr)

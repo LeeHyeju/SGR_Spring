@@ -29,14 +29,14 @@
 	<form role ="./update.ad"  id="updateForm" method="post">
 <table>
 <tr>
-<td><label for="cate_cd">대분류코드</label>
-<input type="text" id="cate_cd" style="height: 30px; text-align: center;" value="${list.cate_cd}" ></td>
+<td><label for="cate_cd">대분류코드</label> 
+<input type="text"  id="cate_cd" name="cate_cd" style="height: 30px; text-align: center;" value="${list.cate_cd}" ></td>
 <td><label for="cate_nm">대분류명</label>
-<input type="text"  id="cate_nm" style="height: 30px; text-align: center;" value="${list.cate_nm}" ></td>
+<input type="text"  id="cate_nm" name="cate_nm" style="height: 30px; text-align: center;" value="${list.cate_nm}" ></td>
 <td><label for="catesub_cd">소분류코드</label>
-<input type="text" id="catesub_cd" style="height: 30px; text-align: center; background-color: #e2e2e2;" value="${list.catesub_cd}"  readonly="readonly" ></td>
+<input type="text" id="catesub_cd"  style="height: 30px; text-align: center; background-color: #e2e2e2;" value="${list.catesub_cd}"  readonly="readonly" ></td>
 <td><label for="catesub_nm">소분류명</label>
-<input  type="text" id="catesub_nm" style="height: 30px; text-align: center;" value="${list.catesub_nm}" ></td>
+<input  type="text" id="catesub_nm" name="catesub_nm" style="height: 30px; text-align: center;" value="${list.catesub_nm}" ></td>
 </tr>
 </table>
 <br><br>

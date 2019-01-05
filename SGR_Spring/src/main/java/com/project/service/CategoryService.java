@@ -27,6 +27,11 @@ public class  CategoryService {
 		return categoryDao.list();
 	}
 
+	public List<Map<String, Object>> listString() throws Exception {
+		// 카테고리 리스트
+		return categoryDao.listString();
+	}
+	
 	public CategoryDto read(String catesub_cd) throws Exception {
 		// 카테고리 보기
 		return categoryDao.read(catesub_cd);
@@ -52,5 +57,15 @@ public class  CategoryService {
 	public Map<String, Object> readListType() {
 		// List
 		return null;
+	}
+
+	public List<Map<String,Object>> depthOne() {
+		
+		return categoryDao.depthOne();
+	}
+
+	public List<Map<String,Object>> depthTwo(String cate_nm) {
+		return categoryDao.depthTwo(cate_nm);
+		
 	}
 }

@@ -1,7 +1,6 @@
 package com.project.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.dto.CategoryDto;
@@ -73,20 +71,16 @@ public class CategoryController {
 			System.out.println("카테고리 수정 - Post");
 			System.out.println("CategoryController.dto:"+ categoryDto.toString());
 			categoryService.update(categoryDto);
-			rttr.addFlashAttribute("msg", "update");
-		
+			rttr.addFlashAttribute("msg", "updateOK");
 			return "redirect: ../category/cateList.ad";
 		}
 		
 		// 카테고리 삭제
-		@RequestMapping(value = "/category/delete.ad", method = RequestMethod.GET)
+		@RequestMapping(value = "/category/delete.ad", method = RequestMethod.POST)
 		public String delete(String catesub_cd, RedirectAttributes rttr) throws Exception {
-			System.out.println("카테고리 삭제 - Get");
+			System.out.println("카테고리 삭제 - Post");
 			categoryService.delete(catesub_cd);
-			rttr.addFlashAttribute("msg", "remove");
-			
-			return "redirect: ../category/read.ad";
-			
+			rttr.addFlashAttribute("msg", "deleteOK");
+			return "redirect: ../category/cateList.ad";
 		}
-	
 }

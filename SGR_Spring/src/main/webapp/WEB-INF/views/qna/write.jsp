@@ -7,44 +7,56 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table summary="글쓰기 전체 테이블">
-		<form name="BoardWriteForm" method="post" id="writeForm" 	action="write.do">
-			<colgroup>
-				<col width="20%">
-				<col width="80%">
-			</colgroup>
-<table summary="테이블 구성">
-				<caption>게시판 글쓰기</caption>
-				<tr>
-					<td>작성자</td>
-					<td>
-					ADMIN
-<!-- 					<form action="id"> -->
-<!-- 					</a><input type=text name= size=10 maxlength=8 > -->
-<!-- 					</form> -->
-					</td>
-				</tr>
-				<tr>
-					<td>제 목</td>
-					<td><input type=text name=not_title></td>
-				</tr>
-				<tr>
-					<td>내 용</td>
-					<td><textarea name=not_content rows="10" cols="100"></textarea></td>
-				</tr>
-				<tr>
-					<td colspan=2><hr size=1></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-					<div align="center">
-							<input type="submit" id="insert" value="등록">&nbsp;&nbsp; 
-<!-- 							//제이쿼리 펑션 사용할려면 타입 버튼으로 해야댐 -->
-								<input type="button" value="뒤로" onclick="move('<%=request.getContextPath() %>/list.no');" />
-						</div></td>
-				</tr>
-			</table>
-		</form>
-	</table>
+	<form action="write.do" method="post">
+		<h1 style="text-align: center; color: silver;">문의 작성하기</h1>
+			<fieldset>
+			<legend></legend>
+				
+				<div class="form-group">
+				<label class="col-md-4 control-label" >상품번호</label> 
+				<div class="col-md-4">
+				<input type="text" 	name='title' class="form-control input-md" >
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<label class="col-md-4 control-label" >소분류코드</label> 
+				<div class="col-md-4">
+				<input type="text" 	name='title' class="form-control input-md" >
+				</div>
+				</div>
+				
+				<div class="form-group">
+				<label class="col-md-4 control-label" >Title</label> 
+				<div class="col-md-4">
+				<input type="text" 	name='title' class="form-control input-md"  placeholder="문의하실 제목을 적어주세요.">
+				</div>
+				</div>
+						<br/>
+				<div class="form-group">
+				<label class="col-md-4 control-label">Content</label>
+				<div class="col-md-4">
+				<textarea class="form-control" name="content" rows="5"  style=" resize: none;" placeholder="문의하실 내용을 적어주세요."></textarea>
+				</div>
+				</div>
+					<br/><br/><br/><br/>
+				<div class="form-group">
+				<br/><label class="col-md-4 control-label">Writer</label> 
+				<div class="col-md-4">
+				<input type="text" 	name="writer" class="form-control input-md" value="${list.mb_id }">
+				</div>
+				</div>
+								
+			<br><br><br><br><br>
+				<div class="box-footer" >
+				<label class="col-md-4 control-label" for=""></label>
+				<div class="btnJoinArea" ><center>
+						<button type="submit" class="btn btn-default">작성</button>
+						<button type="submit" class="btn btn-white">목록</button>
+					</center>
+					</div>
+					</div>
+				</fieldset>
+					</form>
 </body>
 </html>

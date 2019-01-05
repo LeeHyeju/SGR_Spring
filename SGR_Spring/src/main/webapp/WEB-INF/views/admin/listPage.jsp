@@ -95,11 +95,11 @@ select {
 							<c:when test="${member.mb_grade == 6 }">
 								<td>일반회원</td>
 							</c:when>
-							<c:when test="${member.mb_grade == 0 }">
+							<c:when test="${member.mb_grade == 1 }">
 								<td>관리자</td>
 							</c:when>
 							<c:otherwise>
-								<td>탈퇴회원</td>
+								<td style="color: red;">탈퇴회원</td>
 							</c:otherwise>
 						</c:choose>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"

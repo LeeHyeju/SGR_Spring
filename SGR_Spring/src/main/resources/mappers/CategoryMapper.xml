@@ -5,12 +5,13 @@
 
 <mapper namespace="com.project.mapper.CategoryMapper">
 
-	<!-- 회원리스트 -->
+	<!-- 카테고리리스트 -->
 	<select id="list" resultType="CategoryDto">
 		SELECT
 		cate_cd, cate_nm,
 		catesub_cd,catesub_nm
 		FROM category
+		ORDER BY cate_cd ASC, catesub_cd ASC
 	</select>
 
 	<insert id="create">
@@ -51,4 +52,18 @@
 		WHERE catesub_cd = #{catesub_cd} 
 	</delete>
 
+	<!-- 카테고리 대분류 -->
+	<select id="depthOne" resultType="java.util.HashMap">
+		select CATE_NM 
+		from category 
+		group by CATE_NM 
+		ORDER BY CATE_NM DESC;
+	</select>
+
+	<!-- 카테고리 대분류 -->
+	<select id="depthTwo" resultType="java.util.HashMap">
+		SELECT CATESUB_NM 
+		FROM CATEGORY
+		WHERE CATE_NM = #{cate_nm};
+	</select>
 </mapper>

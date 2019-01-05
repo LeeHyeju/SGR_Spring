@@ -2,24 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="true"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>내 정보 보기</title>
-<script type="text/javascript">
-function button_event(){
-if (confirm("정말 탈퇴하시겠습니까?")){ 
-	alert ("탈퇴되셨습니다.");//확인
-    document.form.submit();
-    return true;
-}else{   //취소
-	alert("탈퇴가 취소되셨습니다.");
-	alert("좋은 하루 되세요! ");
-	return false;
-}
-}
-</script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -38,65 +25,101 @@ if (confirm("정말 탈퇴하시겠습니까?")){
 			formObj.submit();
 		});
 		$(".btn-danger").on("click", function() {
-			formObj.attr("action", "../member/leave.do");
-			formObj.attr("method", "post");
-			formObj.submit();
+			if(confirm("정말 탈퇴하시겠습니까?")){
+					  formObj.attr("action", "../member/leave.do");
+				      formObj.attr("method", "post");
+				      formObj.submit();
+					alert ("탈퇴되셨습니다.");//확인
+				    document.form.submit();
+			}else{
+				alert("탈퇴가 취소되셨습니다.");
+				 formObj.attr("action", "../main/main.do") ;
+				   formObj.submit();
+				}				
 		});
 	});
+	
 </script>
 
 </head>
 <body>
-	<h1>MyPage</h1>
+	<h1 style="text-align: center; color: silver;">MyPage</h1>
 	<fieldset>
 		<legend></legend>
-		<form role="form" method="post">
+		<form role="form" method="post" class="form-horizontal" >
 			<!-- 히든으로 보낼 값 -->
 			<input type="hidden" name="mb_id" value="${member.mb_id }" id="mb_id" />
 			<input type="hidden" name="mb_pw" value="${member.mb_pw }" id="mb_pw" />
-		</form>
-
-		<table width="940" style="padding: 5px 0 5px 0;">
-			<tr>
-				<th>내 이름</th>
-				<td>${member.mb_name }</td>
-			</tr>
-			<tr>
-				<th>성별</th>
-				<td>${member.mb_sex}</td>
-			</tr>
-			<tr>
-				<th>생년월일</th>
-				<td>${member.mb_bday }</td>
-			</tr>
-			<tr>
-				<th>핸드폰번호</th>
-				<td >${member.mb_phone }</td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>${member.mb_email }</td>
-			</tr>
-			<tr>
-				<th>우편번호</th>
-				<td>${member.mb_zipcode}</td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td>${member.mb_address}${member.mb_addressDetail}</td>
-			</tr>
-			<tr>
-				<th>가입일자</th>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${member.mb_joinDate}" /></td>
-			</tr>
-		</table>
-	</fieldset>
+<!-- 		</form> -->
+		
+<!-- 		<form class="form-horizontal" > -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_name">이름</label>
+			<div class="col-md-4">
+			<input type="text" id="mb_name"  class="form-control input-md"  value="${member.mb_name }" readonly="readonly" >
+			</div>
+			</div>
+					
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_sex">성별</label>
+			<div class="col-md-4">
+			<input type="text" id="mb_sex"  class="form-control input-md"  value="${member.mb_sex }" readonly="readonly" >
+			</div>
+			</div>
+	
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_bday">생년월일</label>
+			<div class="col-md-4">
+			<input type="text" id="mb_bday"  class="form-control input-md"  value="${member.mb_bday }" readonly="readonly" >
+			</div>
+			</div>
+		
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_phone">핸드폰번호</label>
+			<div class="col-md-4">
+			<input type="tel" id="mb_phone"  class="form-control input-md"  value="${member.mb_phone }" readonly="readonly" >
+			</div>
+			</div>
+	
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">이메일</label>
+			<div class="col-md-4">
+			<input type="text" id="mb_email"  class="form-control input-md"  value="${member.mb_email }" readonly="readonly" >
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">우편번호</label>
+			<div class="col-md-1">
+			<input type="text" id="mb_zipcode"  class="form-control input-md"  value="${member.mb_zipcode }" readonly="readonly" >
+			</div>
+			</div>
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">주소</label>
+			<div class="col-md-4">
+			<input type="text" id="mb_address"  class="form-control input-md"  value="${member.mb_address }" readonly="readonly" >
+			<input type="text" id="mb_addressDetail"  class="form-control input-md"  value="${member.mb_addressDetail }" readonly="readonly" >
+			</div>
+			</div>
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_joinDate">가입일자</label>
+			<div class="col-md-4">
+			<input type="text" value="<fmt:formatDate pattern="yyyy-MM-dd"	value="${member.mb_joinDate}" />" class="form-control input-md"   readonly="readonly" >
+			</div>
+			</div>
+			<br/>
+	</form>
+		</fieldset>
 	<br>
 	<br>
-	<button type="submit" class="btn btn-primary">내정보수정</button>
-	<button type="submit" class="btn btn-warning">비밀번호수정</button>
-	<button type="button"  onclick="button_event();" class="btn btn-danger">회원탈퇴</button>
-
+		<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+				<button type="submit" class="btn btn-primary">내정보수정</button>
+				<button type="submit" class="btn btn-warning">비밀번호수정</button>
+				<button type="button"  class="btn btn-danger">회원탈퇴</button>
+			</div>
+			</div>
+		
 </body>
 </html>

@@ -201,96 +201,102 @@
 </script>
 </head>
 <body>
-	<h1>회원가입</h1>
-	<form action="./join.do" id="joinForm" method="post">
+	<h1 style="text-align: center; color: silver;">회원가입</h1>
+	<form action="./join.do" id="joinForm" class="form-horizontal" method="post">
 		<fieldset>
 			<legend></legend>
-			<table width="940" style="padding: 5px 0 5px 0;">
+<!-- 			<table width="940" style="padding: 5px 0 5px 0;"> -->
 
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_name">이름</label>
+			<div class="col-md-3">
+			<input type="text", id="mb_name" name="mb_name" placeholder="이름" class="form-control input-md" 
+						size="7" required 	pattern="^[가-힣]{2,6}$">			
+		</div>
+		</div>
+
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_id">아이디</label>
+			<div class="col-md-3">
+				<input type="text" 	 id="mb_id" name="mb_id"  placeholder="아이디" pattern="^[A-Za-z0-9]{2,10}$"
+						class="form-control input-md" required size="10" >
+						</div>
+					<div>	
+						<input type="button" value="중복확인" id="idcheck" class="btn_blk">			
+						<label id="idCheckRes"> 2~10자</label>
+			</div>
+			
+			</div>
 				
-				<tr>
-					<th>이름</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="mb_name"
-						name="mb_name" size="7" required placeholder="이름"
-						pattern="^[가-힣]{2,6}$"></td>
-				</tr>
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_pw">비밀번호</label>
+			<div class="col-md-4">
+					<input type="password"	name="mb_pw" size="10" class="form-control input-md" required  placeholder="3~10자">
+					</div>
+			</div>	
+
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="pwd_check">비밀번호 확인</label>
+			<div class="col-md-4">
+					<input type="password"  name="pwd_check" class="form-control input-md"   placeholder="비밀번호 확인"
+						size="10" onkeyup="checkPwd()"> 
+						<label id="checkPwd">동일한	비밀번호를 입력하세요.</label>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_sex">성별</label>
+			<div class="col-md-2">
+				남</lable>	<input type="radio" name="mb_sex" value="남자" required >
+				여</lable>	<input type="radio" name="mb_sex" value="여자" required >
+			</div>
+			</div>
+
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_bday">생년월일</label>
+			<div class="col-md-3">
+				<input type="text" id="mb_bday" name="mb_bday" required 	placeholder="010101 형식으로 입력"  class="form-control input-md" 
+						size="7" maxlength="6" pattern="^[0-9]{6}$">
+				</div>
+				</div>
 				
-				<tr>
-					<th>아이디</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="mb_id" name="mb_id"
-						required size="10" placeholder="아이디" pattern="^[A-Za-z0-9]{2,10}$">
-						<input type="button" value="ID중복확인" id="idcheck" class="btn_blk"><label
-						id="idCheckRes">(영문/숫자 2~10자)</label></td>
-				</tr>
+					<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_zipcode">주소</label>
+			<input type="button" 	onclick="execPostCode()" value="우편번호 찾기" >		
+			<div class="col-md-1">
+			<input type="text" 	 name="mb_zipcode" 	class="form-control input-md"  id="mb_zipcode" placeholder="우편번호" required size="5"
+						readonly>
+				</div>
+						<div class="col-md-3">
+						<input 	type="text" name="mb_address"  id="mb_address" placeholder="주소" class="form-control input-md"
+						size="30" required readonly> 
+			<input type="text"	 name="mb_addressDetail"	class="form-control input-md" id="mb_addressDetail" placeholder="상세주소" size="30"
+						required>
+						</div>
+<!-- 						</div> -->
+						</div>
+		
+		
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_phone">핸드폰번호</label>
+			<div class="col-md-4">
+			<input type="text" name="usrtel" id="mb_phone" name="mb_phone" required	class="form-control input-md" placeholder=" '-' 없이 쓰세요" size="15" maxlength="11">
+			</div>
+			</div>
 
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password"
-						style="height: 30px; text-align: center;" name="mb_pw" size="10"
-						required>3~10자</td>
-				</tr>
-
-				<tr>
-					<th>비밀번호 확인</th>
-					<td><input type="password"
-						style="height: 30px; text-align: center;" name="pwd_check"
-						size="10" onkeyup="checkPwd()"> <label id="checkPwd">동일한
-							비밀번호를 입력하세요.</label></td>
-				</tr>
-
-				<tr>
-					<th>성별</th>
-					<td>남<input type="radio" name="mb_sex" value="남자" required>
-						여<input type="radio" name="mb_sex" value="여자" required>
-					</td>
-				</tr>
-
-				<tr>
-					</td>
-					<th>생년 월일</th>
-					<td><input type="text" id="mb_bday" name="mb_bday" required
-						placeholder="ex)010101" style="height: 30px; text-align: center;"
-						size="7" maxlength="6" pattern="^[0-9]{6}$"></td>
-				</tr>
-
-				<tr>
-					<th>주소</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" name="mb_zipcode"
-						class="box" id="mb_zipcode" placeholder="우편번호" required size="5"
-						readonly> <input type="button" class="btn_blk"
-						onclick="execPostCode()" value="우편번호 찾기"> </br> <input
-						type="text" style="height: 30px; text-align: center;"
-						name="mb_address" class="box" id="mb_address" placeholder="주소"
-						size="30" required readonly> <input type="text"
-						style="height: 30px; text-align: center;" name="mb_addressDetail"
-						class="box" id="mb_addressDetail" placeholder="상세주소" size="30"
-						required></td>
-				</tr>
-
-				<tr>
-					<th>핸드폰 번호</th>
-					<td><input type="tel" name="usrtel" id="mb_phone"
-						style="height: 30px; text-align: center;" name="mb_phone" required
-						placeholder=" '-' 없이 쓰세요" size="15" maxlength="11"></td>
-				</tr>
-
-				<tr>
-					<th>이메일</th>
-					<td><input type="text" id="mb_email"
-						style="height: 30px; text-align: center;" name="mb_email"
-						size="30" required placeholder="abc213@naver.com"></td>
-				</tr>
-			</table>
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">이메일</label>
+			<div class="col-md-4">
+					<input type="text" id="mb_email"	 name="mb_email"	size="30" class="form-control input-md" required placeholder="abc213@naver.com">
+			</div>
+			</div>
 			<hr>
 
-			<table>
-				<div>
-					<h4 class="scheme-g">[필수]회원약관</h4>
-					<textarea style="font-size: 1em;" cols="90" rows="5"
-						readonly="readonly">
+		
+					<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_explain">[필수]회원약관</label>
+				 <div class="col-md-5">                     
+    <textarea class="form-control" id="mb_explain" name="mb_explain" rows="5" style=" resize: none;" readonly="readonly">
 				제1조(목적)
 
  
@@ -735,9 +741,14 @@
 						<input type="checkbox" id="check_1" name="check" required /> 위의
 						약관에 동의 합니다.<br />
 					</p>
-					<h4 class="scheme-g">[필수]개인정보 수집 및 이용 동의</h4>
-					<textarea style="font-size: 1em;" cols="90" rows="5"
-						readonly="readonly">
+				 </div>
+		</div>
+		
+		
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="Privacy_explain">[필수]개인정보<br> 수집 및 이용 동의</label>
+				 <div class="col-md-5">                     
+    <textarea class="form-control" id="Privacy_explain" name="Privacy_explain" rows="5" style=" resize: none;" readonly="readonly">
 			'SGR'은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을 준수하고 있습니다.
 회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 회사는 개인정보취급방침을 개정하는 경우 웹사이트 공지사항(또는 개별공지)을 통하여 공지할 것입니다.
@@ -763,12 +774,16 @@
 회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 없이 해당 정보를 지체 없이 파기합니
             </textarea>
 					<p>
-						<input type="checkbox" id="check_2" name="check" required /> 위의
-						약관에 동의 합니다.<br />
+						<input type="checkbox" id="check_2" name="check" required /> 위의 	약관에 동의 합니다.<br />
 					</p>
-					<h4 class="scheme-g">[선택]마케팅/홍보 수집 및 이용 동의</h4>
-					<textarea style="font-size: 1em;" cols="90" rows="5"
-						readonly="readonly">
+				</div>
+				</div>	
+				
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="Marketing_explain">[선택]마케팅/홍보<br> 수집 및 이용 동의</label>
+				 <div class="col-md-5">                     
+    <textarea class="form-control" id="Marketing_explain" name="Marketing_explain" rows="5" style=" resize: none;" readonly="readonly">
+				
 				할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 쇼핑몰에서 제공하는 유익한 쇼핑정보를 SMS와 이메일로 받아보실 수 있습니다.
 
 단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
@@ -779,22 +794,27 @@
 						<input type="checkbox" id="check_3" name="check" required /> 위의
 						약관에 동의 합니다.(선택)<br />
 					</p>
-					<br>
-					<br> <input type="button" value="모두 동의" onclick="selectAll()">
-					<input type="button" value="동의 안함" id="unCheck">
-					<hr>
-					<hr>
 				</div>
-
-
-			</table>
+				</div>	
+					<br>
+					<div class="form-group">
+  			<label class="col-md-4 control-label" for=""></label>
+  				<div class="col-md-4">
+					<input type="button" value="모두 동의" onclick="selectAll()">
+					<input type="button" value="동의 안함" id="unCheck">
+				</div>
+	</div>
+<hr>
+<!-- 			</table> -->
 
 
 			<br> <br>
-			<div class="btnJoinArea">
-				<button type="submit" class="btn btn-primary" onclick="ok()">회원가입</button>
-				<button type="button" class="btn btn-danger"
-					onclick="history.back();">취소</button>
+				<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+			<center>	<button type="submit" class="btn btn-info" onclick="ok()">회원가입</button>
+				<button type="button" class="btn btn-danger"	onclick="history.back();">취소</button></center>
+			</div>
 			</div>
 		</fieldset>
 		<br>

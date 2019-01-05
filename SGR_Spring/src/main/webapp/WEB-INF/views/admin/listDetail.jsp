@@ -10,6 +10,11 @@
 	<script type="text/javascript">
 		$(function(){
 			// 회원 강제 탈퇴, 회원 목록 버튼 처리
+			$("#updateBtn").on("click",function(){
+				$("#viewForm").attr("action","/admin/update.ad");
+				$("#viewForm").submit();
+			});
+			
 			$("#deleteBtn").on("click",function(){
 // 				location="delete.do?no="+no; // get 방식으로 이동
 				// form tag의 submit을 이용해서 넘긴다. 넘어갈 uri를 action 속성으로 셋팅한다.
@@ -104,6 +109,7 @@
 				</c:otherwise>
 			</c:choose>
 			<tr>
+			<td><button id="updateBtn" class="btn_blk">수정</button></td>
 			<td><button id="deleteBtn" class="btn_blk">삭제</button></td>
 			<td>	<button id="listBtn" class="btn_blk">목록</button></td>
 			</tr>

@@ -34,22 +34,40 @@
 	<!-- 회원 화면 -->
 	<select id="qnaList" resultType="QnaDto">
 		SELECT
-		qna_no, qna_title,qna_content,
-		reg_date, qna_hit, qna_notice,
-		parent
-		FROM qna
+					qna_no, 
+					qna_title,
+					qna_content,
+					reg_date, 
+					qna_hit, 
+					qna_notice,
+					parent
+		FROM 
+					qna
+		where 
+					qna_no > 0
 		<include refid="search"></include>
-		ORDER BY qna_no DESC, reg_date DESC
+		ORDER BY 
+					qna_no DESC,
+					reg_date DESC
 		limit #{pageStart}, #{perPageNum}
 	</select>
 
 	<insert id="write">
 		INSERT INTO
-		qna( mb_id, qna_title,
-		qna_content, parent,
-		goods_no, catesub_no)
-		values
-		(#{mb_id},#{qna_title},#{qna_content},#{parent},#{goods_no})
+						qna( 
+						mb_id, 
+						qna_title,
+						qna_content, 
+						parent,
+						goods_no, 
+						catesub_cd)
+		VALUES
+						(#{mb_id},
+						#{qna_title},
+						#{qna_content},
+						0,
+						#{goods_no},
+						#{catesub_cd})
 	</insert>
 
 
@@ -60,31 +78,41 @@
 		qna_title,qna_content,reg_date,
 		qna_hit, qna_notice, parent
 		FROM qna
+		where qna_no > 0
 		<include refid="search"></include>
 		ORDER BY qna_no DESC, reg_date DESC
 		limit #{pageStart}, #{perPageNum}
 	</select>
 
 	<insert id="adminWrite">
-		INSERT INTO
-		qna( mb_id, qna_title,
-		qna_content, parent,
-		goods_no)
-		values
-		(
-		'admin',#{qna_title},#{qna_content},#{parent},#{goods_no})
+			INSERT INTO
+						qna( 
+						mb_id, 
+						qna_title,
+						qna_content, 
+						parent,
+						goods_no, 
+						catesub_cd)
+		VALUES
+						(#{mb_id},
+						#{qna_title},
+						#{qna_content},
+						0,
+						#{goods_no},
+						#{catesub_cd})
 	</insert>
 
 	<!-- 공통 -->
 	<select id="qnaListCount" resultType="Integer">
 		SELECT COUNT(qna_no)
 		FROM qna
+		where qna_no > 0
 		<include refid="search"></include>
 	</select>
 
 	<select id="view" resultType="QnaDto">
 		SELECT 
-		qna_no, mb_id, qna_title, qna_content, qna_date, 
+		 qna_no, mb_id, qna_title, qna_content, reg_date 
 		FROM qna
 		where qna_no=#{qna_no}
 	</select>

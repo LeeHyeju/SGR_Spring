@@ -36,6 +36,7 @@
 		SELECT goods_no, goods_name, goods_price, goods_dc,
 		goods_maker, goods_origin,goods_pcs, goods_hit, goods_charge, catesub_cd
 		FROM goods
+		WHERE goods_no >0
 		<include refid="search"></include>
 		ORDER BY goods_no DESC
 		limit #{pageStart}, #{perPageNum}
@@ -47,6 +48,7 @@
 		SELECT goods_no, goods_name, goods_price, goods_dc,
 		goods_maker, goods_origin,goods_pcs, goods_hit, goods_charge, catesub_cd
 		FROM goods
+		WHERE goods_no >0
 		<include refid="search"></include>
 		ORDER BY goods_no DESC
 		limit #{pageStart}, #{perPageNum}
@@ -55,6 +57,7 @@
 	<select id="listCount" resultType="Integer">
 		SELECT COUNT(goods_no)
 		FROM goods
+		WHERE goods_no >0
 		<include refid="search"></include>
 	</select>
 

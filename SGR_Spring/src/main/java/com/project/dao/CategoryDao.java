@@ -50,4 +50,18 @@ public class CategoryDao {
 		session.delete(NAMESPACE + ".delete", catesub_cd);
 	}
 
+	public List<Map<String, Object>> listString() {
+		// TODO Auto-generated method stub
+		return session.selectList(NAMESPACE + ".listString");
+	}
+
+	public List<Map<String, Object>> depthOne() {
+		
+		return session.selectList(NAMESPACE + ".depthOne");
+	}
+
+	public List<Map<String, Object>> depthTwo(String cate_nm) {
+		return session.selectList(NAMESPACE + ".depthTwo",cate_nm);
+	}
+
 }

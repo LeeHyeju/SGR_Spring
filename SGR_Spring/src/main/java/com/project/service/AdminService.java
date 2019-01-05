@@ -52,7 +52,11 @@ public class AdminService {
 		return adminDao.listDetail(mb_id);
 	}
 
-
+	public void update(String mb_id) throws Exception {
+		// 회원 등급 수정 처리
+		adminDao.update(mb_id);
+	}	
+	
 	public void memberDrop(String mb_id) throws Exception {
 		// 회원 강제 탈퇴(등급 변경)
 		adminDao.memberDrop(mb_id);

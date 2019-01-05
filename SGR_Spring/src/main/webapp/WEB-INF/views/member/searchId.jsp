@@ -32,22 +32,35 @@
 </script>
 </head>
 <body>
-<h1>아이디 찾기</h1>
-<form action="./searchIdResult.do" id="searchId" method="Get">
+<h1 style="text-align: center; color: silver;">아이디 찾기</h1>
+<form action="./searchIdResult.do" id="searchId" method="Get" class="form-horizontal" >
 		<fieldset>
 			<legend> </legend>
-			<p>
-				<label for="id_mb_name">이름</label> 
-				<input type="text" id="id_mb_name" name="mb_name" placeholder="UserName">
-			</p>
-			<p>
-				<label for="id_mb_email">이메일</label> 
-				<input type="email" id="id_mb_email" name="mb_email" placeholder="UserEmail">
-			</p>
-			<p>
-				<button id="submitBtn">찾기</button>
-				<button type="button" onclick="history.back()">취소</button>
-			</p>
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="id_mb_name">이름</label>
+			<div class="col-md-3">
+				<input type="text" id="id_mb_name" name="mb_name" class="form-control input-md"  placeholder="UserName">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="id_mb_email">이메일</label>
+			<div class="col-md-3">
+				<input type="email" id="id_mb_email" name="mb_email" class="form-control input-md"  placeholder="UserEmail">
+			</div>
+			</div>
+			<br>	
+			<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+		<center>	
+			<button id="submitBtn" class="btn btn-default">찾기</button>
+				<button type="button" onclick="history.back()" class="btn btn-white">취소</button>
+					</center>
+		</div>
+	
+		</div>
+		
 		</fieldset>
 	</form>
 <!-- 		<a href="../member/searchPw.do">비밀번호 찾기</a> -->

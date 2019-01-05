@@ -21,10 +21,16 @@ border : 0; height : 2px
   <style>
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
-      width: 100%;
-    margin: auto; 
-	min-height: 400px;
-  }
+      width: 80%;
+    margin: 0 auto; 
+	max-height: 500px;
+	}
+	.item > img{
+	margin-left: 0px;
+	margin-right: 0px;
+	}
+	
+
   </style>
 <script type="text/javascript">
 	var result = "${message}";
@@ -39,8 +45,8 @@ border : 0; height : 2px
 <div>
   <div class="container text-center" >
     <br>
-    <h1>S a G a R a </h1>      
-    <p>- Women's Shopping Mall - </p>
+    <h1 style="color: navy; font-weight: 900; font-family:fantasy;">S a G a R a </h1>      
+    <p style="color: teal; font">- Women's Shopping Mall - </p>
   <p></p>
   </div>
 </div>
@@ -54,7 +60,8 @@ border : 0; height : 2px
     </div>
     <div class="collapse navbar-collapse" id="myNavbar" >
 <ul id="nav"  >
-  <li><a href="/goods/goodsList.do">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do">SGR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/about/">OUTER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/work/">BOTTOM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/clients/">ACC</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
@@ -70,7 +77,7 @@ border : 0; height : 2px
 <div class="container">
 <br/>
 <!-- 컨베이어 -->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" > 
     <!-- Indicators : 지시자 - 이미지 위에 클릭할 수 있는 동그라미 표시 -->
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -80,15 +87,15 @@ border : 0; height : 2px
 
     <!-- Wrapper for slides : 컨베이어에서 사용할 이미지 선언 -->
     <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="../resources/main/main01.jpg" alt="테스트" width="300" height="345">
+      <div class="item active" >
+        <img src="../resources/main/main01.jpg" alt="테스트" width=100% height=400px;>
       </div>
-      <div class="item">
-        <img src="../resources/main/main02.jpg" alt="테스트2" width="300" height="345">
-      </div>
-      <div class="item">
-        <img src="../resources/main/main03.jpg" alt="테스트3" width="300" height="345">
-      </div>
+      <div class="item" style="width:100%; height:100%">
+    <img src="../resources/main/main02.jpg" alt="테스트2" width=100% height=400px> 
+    </div> 
+     <div class="item" style="width:100%; height:100%"> 
+         <img src="../resources/main/main03.jpg" alt="테스트3" width=100% height=400px> 
+       </div> 
     </div>
 
     <!-- Left and right controls -->

@@ -37,30 +37,39 @@
 </script>
 </head>
 <body>
-	<h1>비밀번호 수정</h1>
-	<form action="./changePw.do" id="changePw" method="post">
+	<h1 style="text-align: center; color: silver;">비밀번호 수정</h1>
+	<form action="./changePw.do" id="changePw" method="post" class="form-horizontal" >
 		<fieldset>
 		<legend></legend>
-		<table width="940" style="padding:5px 0 5px 0;">
-<!-- 		<tr> -->
-<!-- 			<th>현재 비밀번호 : </th> -->
-<!-- 			<td> -->
-<!-- 			<input type="hidden" > -->
-<!-- 			<input type="password"id="mb_pw" name="mb_pw" required placeholder="비밀번호"></td> -->
-<!-- 		</tr> -->
-		<tr>
-		<th>새 비밀번호 :</th>
-			<td><input type="password" id="mb_pw" name="mb_pw" required placeholder="새로운 비밀번호"></td>
-		</tr>
-		<tr>
-		<th>새 비밀번호 확인 :</th>
-			<td><input type="password" id="pwd_check" name="pwd_check" onkeyup="checkPwd()"
-				placeholder="새 비밀번호확인">
-		<div id="checkPwd">동일한 비밀번호를 입력하세요</div>
-		</td>
-		</tr>
-			</table>
-			<button type="submit" class="btn_blk">확인</button>
+
+	<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_pw">새 비밀번호</label>
+			<div class="col-md-4">
+					<input type="password"	id="mb_pw" name="mb_pw" size="10" class="form-control input-md" required  placeholder="새로운 비밀번호">
+					</div>
+			</div>	
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="pwd_check">새 비밀번호 확인</label>
+			<div class="col-md-4">
+					<input type="password" id="pwd_check"  name="pwd_check" class="form-control input-md"   onkeyup="checkPwd()" placeholder="새 비밀번호 확인"
+						size="10" onkeyup="checkPwd()"> 
+						<label id="checkPwd">동일한	비밀번호를 입력하세요.</label>
+			</div>
+			</div>
+	
+	<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+			<center>
+			<button type="submit" class="btn btn-default">확인</button>
+			<button type="submit" class="btn btn-white" onclick="history.back();">취소</button>
+			
+			</center>
+			</div>
+			</div>
+	
+			
 		</fieldset>	
 	</form>
 </body>

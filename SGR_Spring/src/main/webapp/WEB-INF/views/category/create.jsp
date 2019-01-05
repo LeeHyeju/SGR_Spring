@@ -55,8 +55,8 @@
 			</table>
 		</fieldset>
 		<button type="submit">등록</button>
-		<button type="reset" onclick="history.back()">취소</button>
-		<button onclick="location='../category/read.ad'">목록</button>
+		<button type="reset" onclick="location='../category/cateList.ad'">취소</button>
+		<button onclick="location='../category/cateList.ad'">목록</button>
 	</form>
 	<br>
 	<br>

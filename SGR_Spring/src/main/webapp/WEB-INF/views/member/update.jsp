@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     	<%@ page session="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -73,87 +74,91 @@ $(function() { //$(document).ready(function(){} <<--- 같은 거 임
 	}
 	
 });
-
-
 </script>
 </head>
 <body>
-<h1>내 정보 수정</h1>
-	<form action="./update.do" id="updateForm" method="post">
+<h1 style="text-align: center; color: silver;">내 정보 수정</h1>
+	<form action="./update.do" id="updateForm" method="post"  class="form-horizontal">
 		<!-- 히든으로 보낼 값 -->
-		<input type="hidden" name="mb_id" value="${member.mb_id }" id="mb_id"/>
+<%-- 		<input type="hidden" name="mb_id" value="${member.mb_id }" id="mb_id"/> --%>
 		<input type="hidden" value="${member.mb_sex }" id="mb_sex"/>
 		<fieldset>
 			<legend></legend>
-			<table width="940" style="padding: 5px 0 5px 0;">
-				<tr>
-					<th>이름</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" id="mb_name"
-						name="mb_name" size="7" required placeholder="이름"
-						pattern="^[가-힣]{2,6}$" value="${member.mb_name }"></td>
-				</tr>
 
-				<tr>
-					<th>아이디</th>
-					<td>${member.mb_id }
-					</td>
-				</tr>
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_id">아이디</label>
+			<div class="col-md-4">
+			<input  type="text"  id="mb_id" name="mb_id"  value="${member.mb_id }"  class="form-control input-md" readonly="readonly">
+			</div>
+			</div>
 
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="id_mb_name">이름</label>
+			<div class="col-md-4">
+			<input type="text" 	id="mb_name" name="mb_name" size="7" required placeholder="이름" class="form-control input-md" 
+						pattern="^[가-힣]{2,6}$" value="${member.mb_name }">
+			</div>
+			</div>
+						
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_sex">성별</label>
+			<div class="col-md-2">
+			<label>	남</label>	<input type="radio" name="mb_sex" id="M" value="남자" required>
+			<label>	여</label>	<input type="radio" name="mb_sex" id="W" value="여자" required>
+			</div>
+			</div>
+				
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_bday">생년월일</label>
+			<div class="col-md-4">
+				<input type="text" id="mb_bday" name="mb_bday" required 	  class="form-control input-md" 
+						size="7" maxlength="6" pattern="^[0-9]{6}$"  value="${member.mb_bday }">
+				</div>
+				</div>
+				
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_phone">핸드폰번호</label>
+			<div class="col-md-4">
+			<input type="tel" id="mb_phone" name="mb_phone" required	class="form-control input-md" value="${member.mb_phone }" size="15" maxlength="11">
+			</div>
+			</div>
+				
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">이메일</label>
+			<div class="col-md-4">
+				<input type="text" id="mb_email"	 name="mb_email"	size="30" class="form-control input-md" required value="${member.mb_email}">
+			</div>
+			</div>
+			
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_zipcode">주소</label>
+			<input type="button" 	onclick="execPostCode()" value="우편번호 찾기" >		
+			<div class="col-md-1">
+			<input type="text" 	 name="mb_zipcode" 	class="form-control input-md"  id="mb_zipcode" placeholder="우편번호" required size="5"
+						readonly="readonly"  value="${member.mb_zipcode }">
+			</div>
+			<div class="col-md-3">
+			<input 	type="text" name="mb_address"  id="mb_address" placeholder="주소" class="form-control input-md"	size="30" required readonly="readonly" value="${member.mb_address }"> 
+			<input type="text"	 name="mb_addressDetail"	class="form-control input-md" id="mb_addressDetail" placeholder="상세주소" size="30"	required value="${member.mb_addressDetail}">
+			</div>
+			</div>
 
-				<tr>
-					<th>성별</th>	
-					<td>남<input type="radio" name="mb_sex" id="M" value="남자" required>
-						여<input type="radio" name="mb_sex" id="W" value="여자" required>
-					</td>				
+				<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_joinDate">가입일자</label>
+			<div class="col-md-4">
+				<input type="text" value="<fmt:formatDate pattern="yyyy-MM-dd"	value="${member.mb_joinDate}" />" class="form-control input-md"   readonly="readonly" >
+				</div>
+				</div>
 
-				</tr>
-
-				<tr>
-					</td>
-					<th>생년 월일</th>
-					<td><input type="text" id="mb_bday" name="mb_bday" required
-						placeholder="ex)010101" style="height: 30px; text-align: center;"
-						size="7" maxlength="6" pattern="^[0-9]{6}$" value="${member.mb_bday }"></td>
-				</tr>
-
-				<tr>
-					<th>주소</th>
-					<td><input type="text"
-						style="height: 30px; text-align: center;" name="mb_zipcode"
-						class="box" id="mb_zipcode" placeholder="우편번호" required size="5"
-						value="${member.mb_zipcode }" readonly="readonly"> 
-						<input type="button" class="btn_blk" onclick="execPostCode()" value="우편번호 찾기"><br/>
-						<input
-						type="text" style="height: 30px; text-align: center;"
-						name="mb_address" class="box" id="mb_address" placeholder="주소"
-						size="30" required readonly value="${member.mb_address }"> 
-						<input type="text"
-						style="height: 30px; text-align: center;" name="mb_addressDetail"
-						class="box" id="mb_addressDetail" value="${member.mb_addressDetail}"
-						 placeholder="상세주소" size="30"
-						required></td>
-				</tr>
-
-				<tr>
-					<th>핸드폰 번호</th>
-					<td><input type="tel" id="mb_phone"
-						style="height: 30px; text-align: center;" name="mb_phone" required
-						placeholder=" '-' 없이 쓰세요" size="15" maxlength="11" value="${member.mb_phone }"></td>
-				</tr>
-
-				<tr>
-					<th>이메일</th>
-					<td><input type="text" id="mb_email"
-						style="height: 30px; text-align: center;" name="mb_email"
-						size="30" required value="${member.mb_email}"></td>
-				</tr>
-
-			</table>
-			<br>
-			<div class="button" >
-				<button type="submit" class="btn_blk">수정</button>
-				<button type="button" class="btn_blk" onclick="history.back();">취소</button>
+	
+			<br> <br>
+				<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+			<center>	<button type="submit" class="btn btn-default">수정</button>
+				<button type="button" class="btn btn-white" onclick="history.back();">취소</button></center>
+			</div>
 			</div>
 		</fieldset>
 	</form>

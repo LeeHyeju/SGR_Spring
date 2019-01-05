@@ -61,21 +61,23 @@ public class QnaController {
 	 @RequestMapping(value = "/qna/adminWrite.ad", method = RequestMethod.GET)
 	  public void adminWrite(QnaDto qnaDto, Model model) throws Exception {
 		 System.out.println("qna- admin 글쓰기 - get");
+		 
 	 }
 	 //관리자 글쓰기 처리
 	 @RequestMapping(value = "/qna/adminWrite.ad", method = RequestMethod.POST)
-	  public String adminWrite(QnaDto qnaDto, RedirectAttributes rttr) throws Exception {
+	  public String adminWrite(QnaDto qnaDto, RedirectAttributes rttr,  Model model) throws Exception {
 		 System.out.println("qna- admin 글쓰기- post");
-		 qnaService.adminWrite(qnaDto);
+		 System.out.println("qnadto"+qnaDto.toString());
+		 qnaService.write(qnaDto);
 	    rttr.addFlashAttribute("msg", "success");
 	    return "redirect:/qna/adminList.ad";
 	  }
 	 
 	 //상세보기
-	  @RequestMapping(value = "/qna/read.do", method = RequestMethod.GET)
+	  @RequestMapping(value = "/qna/view.do", method = RequestMethod.GET)
 	  public void read(@RequestParam("qna_no") int qna_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
 	      throws Exception {
-	    model.addAttribute(qnaService.view(qna_no));
+	    model.addAttribute( "list" , qnaService.view(qna_no));
 	  }
 	 
 	  

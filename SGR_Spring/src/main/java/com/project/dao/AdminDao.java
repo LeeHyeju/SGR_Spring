@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.common.model.AdminCriteria;
 import com.project.common.model.SearchCriteria;
+import com.project.dto.CategoryDto;
 import com.project.dto.MemberDto;
 
 @Repository
@@ -66,7 +67,12 @@ public class AdminDao {
 		// 회원리스트 상세보기
 		return session.selectOne(NAMESPACE+".listDetail", mb_id);
 	}
-
+	
+	public void update(String mb_id) throws Exception {
+		// 회원 등급 수정 처리
+		session.update(NAMESPACE + ".update", mb_id);
+	}	
+	
 
 	public void memberDrop(String mb_id) throws Exception {
 		// 회원 강제 탈퇴(등급 변경)

@@ -56,7 +56,7 @@
 				<!-- general form elements -->
 				<div class='box'>
 					<div class="box-header with-border">
-						<h3 class="box-title">Q&A List</h3>
+						<h3 class="box-title">Q&A Search</h3>
 					</div>
 
 					<div class='box-body'>
@@ -84,16 +84,16 @@
 
 					</div>
 				</div>
-				
-				<div class="box">
+<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">공지사항</h3>
 					</div>
-	<div>
-		<label>※</label>
-		<input>
-	</div>
-
+					
+	<div class="form-group">
+				<div class="col-md-5">
+				<input type="text" 	name='title' class="form-control input-md" value="">
+				</div>
+				</div><br>
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">Q&A 내역</h3>
@@ -113,7 +113,7 @@
 								<tr>
 									<td>${adminList.qna_no}</td>
 									<td><a
-										href='/qna/view${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${adminList.qna_no}'>
+										href='/qna/view.do${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${adminList.qna_no}'>
 											${adminList.qna_title} </a></td>
 									<td>${adminList.mb_id}</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -135,20 +135,20 @@
 
 								<c:if test="${pageMaker.prev}">
 									<li><a
-										href="adminList${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+										href="adminList.ad${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="idx">
 									<li
 										<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-										<a href="adminList${pageMaker.makeSearch(idx)}">${idx}</a>
+										<a href="adminList.ad${pageMaker.makeSearch(idx)}">${idx}</a>
 									</li>
 								</c:forEach>
 
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 									<li><a
-										href="adminList${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+										href="adminList.ad${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 								</c:if>
 
 							</ul>

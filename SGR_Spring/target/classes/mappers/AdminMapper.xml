@@ -7,15 +7,22 @@
 
 <!-- 회원 리스트 보기 : 페이징처리 X -->
 <select id="listAll" resultType="MemberDto">
-SELECT  mb_id, mb_name, mb_grade, mb_joinDate, mb_leaveDate
+SELECT  mb_id, 
+			mb_name, 
+			mb_grade, 
+			mb_joinDate,
+			mb_leaveDate
 FROM member
 ORDER BY mb_joinDate desc
 </select>
 
-
 <!-- 페이지 보기 -->
 <select id="listPage" resultType="MemberDto">
-SELECT mb_id, mb_name, mb_grade, mb_joinDate, mb_leaveDate
+SELECT mb_id,
+		 mb_name, 
+		 mb_grade, 
+		 mb_joinDate,
+		 mb_leaveDate
 FROM member
 ORDER BY mb_id DESC, mb_joinDate DESC
 LIMIT #{page}, 10
@@ -23,7 +30,11 @@ LIMIT #{page}, 10
 
 <!-- 페이지 보기 (Criteria)-->
 <select id="listCriteria" resultType="MemberDto">
-SELECT mb_id, mb_name, mb_grade, mb_joinDate, mb_leaveDate
+SELECT mb_id, 
+mb_name, 
+mb_grade, 
+mb_joinDate,
+mb_leaveDate
 FROM member
 ORDER BY mb_id DESC, mb_joinDate DESC
 LIMIT #{pageStart}, #{perPageNum}
@@ -68,18 +79,21 @@ FROM member
    </if>              
  </if>  
 </sql>
- 
+
 <select id="listSearch" resultType="MemberDto">
   SELECT  mb_id, mb_name, mb_grade, mb_joinDate, mb_leaveDate 
-  FROM member
-  <include refid="search"></include> 
- ORDER BY mb_joinDate  DESC 
+  FROM member 
+  where 1=1
+ <include refid="search"></include>
+    ORDER BY mb_joinDate  DESC 
   limit #{pageStart}, #{perPageNum} 
 </select>
-  
+
+
 <select id="listSearchCount" resultType="int">
   SELECT COUNT(mb_id) 
   FROM member
+ 
   <include refid="search"></include>
 </select> 
 
@@ -90,6 +104,16 @@ mb_zipcode,mb_address,mb_addressDetail,mb_grade,mb_joinDate,mb_leaveDate
 FROM member
 WHERE mb_id= #{mb_id}
 </select>
+
+<!-- 회원 등급 변경 -->
+<update id="update">
+UPDATE 
+			member 
+SET 
+			mb_leaveDate  = null,
+			mb_grade = 6 
+WHERE mb_id = #{mb_id}
+</update>
 
 <!-- 회원 강제 탈퇴 -->
 <update id="memberDrop">

@@ -13,7 +13,6 @@ select {
 	padding: .1em .1em; /* 여백으로 높이 설정 */
 	font-family: inherit; /* 폰트 상속 */
 	/*     background: url('이미지 경로') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
-	*/
 	border: 1px solid #999;
 	border-radius: 0px; /* iOS 둥근모서리 제거 */
 	-webkit-appearance: none; /* 네이티브 외형 감추기 */
@@ -21,6 +20,7 @@ select {
 	appearance: none;
 }
 </style>
+<!-- 검색 스크립트 -->
 <script>
 	$(document).ready(
 			function() {
@@ -38,6 +38,44 @@ select {
 							self.location = str;
 						});
 			});
+</script>
+<script type="text/javascript">
+
+function itemChange(){
+	 
+	var top = ["TEE","BLOUSE","SHIRT","KNIT"];
+	var outer = ["JACKET","CARDIGAN","COAT","JUMPER"];
+	var bottom = ["PANTS","OPS","SKIRT"];
+	var acc = ["EARRING","HAT","LEGGINGS","BAG"];
+	var shoes = ["WARKER","BOOTS","SNEAKERS","FLAT"];
+	 
+	var selectItem = $("#exampleFormControlSelect1").val();
+	 
+	var changeItem;
+	  
+	if(selectItem == "TOP"){
+	  changeItem = top;
+	}
+	else if(selectItem == "OUTER"){
+	  changeItem = outer;
+	}
+	else if(selectItem == "BOTTOM"){
+	  changeItem =  bottom;
+	}
+	else if(selectItem == "ACC"){
+		  changeItem =  acc;
+		}
+	else if(selectItem == "SHOES"){
+		  changeItem =  shoes;
+		}	
+	
+	$('#select2').empty();
+	 
+	for(var count = 0; count < changeItem.length; count++){                
+	                var option = $("<option>"+changeItem[count]+"</option>");
+	                $('#select2').append(option);
+	            }
+	}
 </script>
 </head>
 <body>
@@ -61,7 +99,7 @@ select {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	</form>
-	<h1>:: 상품 리스트::</h1>
+	<h1 style="text-align: center; color: silver;">:: 상품 리스트::</h1>
 	<fieldset>
 		<legend></legend>
 	</fieldset>
@@ -70,6 +108,28 @@ select {
 			id="page" type="hidden" value=${cri.page }> <input
 			id="perPageNum" type="hidden" value=${cri.perPageNum }>
 	</form>
+	
+	<div  style='display:inline; min-width:1200px;'>
+	<div align="center" style='display:inline;float:left;width:600px'>
+	<label for="exampleFormControlSelect1" >1차분류</label>
+		<select  id="exampleFormControlSelect1" onchange="itemChange()" class="form-control">
+		<option>TOP</option>
+		<option>OUTER</option>
+		<option>BOTTOM</option>
+		<option>ACC</option>
+		<option>SHOES</option>
+		</select>
+		</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<div style='display:inline;float:left;width:600px' align="center">
+
+		<label >2차분류</label>
+		<select id="select2" class="form-control">
+		</select>
+		</div>
+	</div>
+	<hr>
+	<br>
 <!-- 상품 이미지 반복 -->
 <br>
 	<c:forEach var="goods" items="${list }">
@@ -94,7 +154,7 @@ select {
 								<!-- 조회수가 0보다 크면 hit 발생 수정하자 -->
 							</div>
 							<span class="converse"> HIT : ${goods.goods_hit } </span> 
-							<div class="go-maker">Made in ${goods.goods_maker}</div>
+<%-- 							<div class="go-maker">Made in ${goods.goods_maker}</div> --%>
 							<div class="price">
 								<span class="Ori-price" 	style="font-size: 13px; font-weight: bold; color: #303030;">
 									판매가 : <fmt:formatNumber value="${goods.goods_price }"
@@ -112,7 +172,6 @@ select {
 		</div>
 		</div>
 	</c:forEach>
-
 
 	<table class="table">
 		<tbody>

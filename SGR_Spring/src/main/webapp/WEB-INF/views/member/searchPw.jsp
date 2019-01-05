@@ -39,28 +39,40 @@ $(function() {
 </head>
 <body>
 <div>
-	<form action="./searchPwResult.do" id="searchPw" method="GET">
+<h1 style="text-align: center; color: silver;">비밀번호 찾기</h1>
+	<form action="./searchPwResult.do" id="searchPw" method="GET" class="form-horizontal">
 		<fieldset>
-			<legend>비밀번호 찾기 </legend>
+			<legend></legend>
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_id">아이디</label>
+			<div class="col-md-3">
+			<input type="text" id="pw_mb_id" name="mb_id" placeholder="UserId" class="form-control input-md">
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_name">이름</label>
+			<div class="col-md-3">
+			<input type="text" id="pw_mb_name" 	name="mb_name" placeholder="UserName" class="form-control input-md">
+			</div>
+			</div>
+			
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="mb_email">이메일</label>
+			<div class="col-md-3">
+			<input type="text" id="pw_mb_email" name="mb_email" placeholder="UserEmail" class="form-control input-md">
+			</div>
+			</div>
+			<div class="form-group" >
+				<label class="col-md-4 control-label" for=""></label>
+			<div class="btnJoinArea" >
+		<center>	
 			<p>
-				<label for="mb_id">아이디</label> <input type="text" id="pw_mb_id"
-					name="mb_id" placeholder="UserId">
-			</p>
-
-			<p>
-				<label for="mb_name">이름</label> <input type="text" id="pw_mb_name"
-					name="mb_name" placeholder="UserName">
-			</p>
-
-			<p>
-				<label for="mb_email">이메일</label> <input type="text" id="pw_mb_email"
-					name="mb_email" placeholder="UserEmail">
-			</p>
-
-			<p>
-				<button id="submitBtn">찾기</button>
-				<button type="button" onclick="history.back();">취소</button>
-			</p>
+				<button id="submitBtn" class="btn btn-default">찾기</button>
+				<button type="button" onclick="history.back();" class="btn btn-white">취소</button>
+		</center>
+		</div>
+		</div>
 		</fieldset>
 	</form>
 	</div>

@@ -22,7 +22,7 @@ public class QnaDto {
 	private String reply;//답글 
 	private String comment; //댓글
 	private String comment_reply; //답댓글
-	
+	private int replycnt;
 	
 	public int getQna_no() {
 		return qna_no;
@@ -102,13 +102,19 @@ public class QnaDto {
 	public void setComment_reply(String comment_reply) {
 		this.comment_reply = comment_reply;
 	}
-	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
 	@Override
 	public String toString() {
 		return "QnaDto [qna_no=" + qna_no + ", goods_no=" + goods_no + ", catesub_cd=" + catesub_cd + ", mb_id=" + mb_id
 				+ ", qna_title=" + qna_title + ", qna_content=" + qna_content + ", reg_date=" + reg_date + ", qna_hit="
 				+ qna_hit + ", qna_notice=" + qna_notice + ", parent=" + parent + ", reply=" + reply + ", comment="
-				+ comment + ", comment_reply=" + comment_reply + "]";
+				+ comment + ", comment_reply=" + comment_reply + ", replycnt=" + replycnt + "]";
 	}
+	
 	
 }

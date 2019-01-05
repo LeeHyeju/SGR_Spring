@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mapper.QnaReplyMapper">
+
+<select id="list" resultType="QnaReplyDto">
+	SELECT
+		*
+	FROM
+	qna_reply
+	WHERE	
+	qna_no = #{qna_no}
+	ORDER BY rno desc
+</select>
+
+<insert id="create">
+	INSERT INTO 
+	qna_reply
+	(qna_no,
+	replytext,
+	replyer
+	)
+	VALUES
+	(#{qna_no},
+	#{replytext},
+	#{replyer}
+	)	
+</insert>
+
+<update id="update">
+	UPDATE
+	qna_reply
+	SET
+	replytext = #{replytext}, updatedate = now()
+	WHERE
+	rno = #{rno}
+</update>
+
+<delete id="delete">
+	DELETE
+	FROM
+	qna_reply
+	WHERE
+	rno = #{rno}
+</delete>
+
+<!-- 페이징처리 -->
+<select id="listPage" resultType="QnaReplyDto">
+	SELECT
+		*
+	FROM
+	qna_reply
+	WHERE	
+	qna_no = #{qna_no}
+	ORDER BY rno desc
+	limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="count" resultType="int">
+	SELECT 
+	COUNT(qna_no)
+	FROM
+	qna_reply
+	WHERE
+	qna_no = #{qna_no}
+</select>
+</mapper>

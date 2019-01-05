@@ -6,11 +6,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품 상세보기</title>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var formObj = $("form[role='goodsForm']");
+
+		console.log(formObj);
+
+		$(".btn-white").on("click", function() {
+			formObj.attr("action", "../qna/adminWrite.ad");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+	
+		$(".btn-warning").on("click", function() {
+			formObj.attr("action", "../goods/adminUpdate.ad");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+		$(".btn-danger").on("click", function() {
+			formObj.attr("action", "../category/adminDelete.ad");
+			formObj.submit();
+		});
+	});
+</script>
 </head>
 <body>
-<form action="../pay" method="get">
+<form  method="get" role="goodsForm">
 <!-- 결제 ㄱㄱ. -->
 <input type="hidden" value="${goods.goods_name }" name="goods_name" />
+
 <input type="hidden" value="${goods.goods_price }" name="goods_price" />
 <input type="hidden" value="${goods.goods_dc }" name="goods_dc" />
 <input type="hidden" value="${goods.goods_maker }" name="goods_maker" />
@@ -52,7 +77,10 @@
 						
 					</div>
 <!-- 					제목 및 제품 설명 -->
+
 					<div class="details col-md-6">
+						<br>
+					<span class="review-no"><strong><input type="hidden" value="${goods.goods_no }" name="goods_no" /> NO. : ${goods.goods_no }</strong></span>
 						<h3 class="product-title">${goods.goods_name }</h3>
 						<div class="rating">
 							<div class="stars">
@@ -62,64 +90,76 @@
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 							</div>
-							<span class="review-no"><strong><input type="hidden" value="${goods.goods_no }" name="goods_no" /> 상품 번호 : ${goods.goods_no }</strong></span>
+							
 						</div>
+							<p class="product-description"><input type="hidden" value="${goods.catesub_cd }" name="catesub_cd" /> 상품분류 : ${goods.catesub_cd }</p>
 							<p class="product-description"><input type="hidden" value="${goods.goods_maker }" name="goods_maker" /> 제조사 : ${goods.goods_maker }</p>
 							<p class="product-description"><input type="hidden" value="${goods.goods_origin }" name="goods_origin" /> 원산지 : ${goods.goods_origin }</p>
 
-							<!-- 추가설명 -->
-<!-- 						<p class="product-description"> -->
-<!-- 						제품 설명란으로 쓸거임 , 가구 퍼니쳐 디테일 뷰 입니다. -->
-<!-- 						</p> -->
+<%-- 						<c:choose> --%>
+<%-- 						  		<c:when test="${goods.catesub_cd == 'A011'}"> --%>
+<!-- 						  			<p class="product-description">상품분류 : 티</p> -->
+<%-- 						  		</c:when> --%>
+<%-- 						  		<c:when test="${goods.catesub_cd == A012 }"> --%>
+<!-- 									<p class="product-description">상품분류 : 긴팔</p> -->
+<%-- 						  		</c:when> --%>
+<%-- 						  		<c:when test="${goods.catesub_cd == A013 }"> --%>
+<!-- 									<p class="product-description">상품분류 : 머시기</p> -->
+<%-- 						  		</c:when> --%>
+<%-- 						  	</c:choose> --%>
+
+
 
 							<h5 class="price"> 판매가 : <span class="old-Price"><fmt:formatNumber value="${goods.goods_price }" pattern=""/> 원</span><br /></h5>
 							<p class="product-description">할인가 : <span class="dis-price" style="color: #ff4242"><fmt:formatNumber value="${goods.goods_price-(goods.goods_price/goods.goods_dc) }" pattern=""/> 원</span></p>
 							<input type="hidden" name="goods_disPer" value="${goods.goods_dc } " />
-							<c:choose>
-						  		<c:when test="${goods.catesub_cd == A011}">
-						  			<p class="product-description">상품분류 : 티</p>
-						  		</c:when>
-						  		<c:when test="${goods.catesub_cd == A012 }">
-									<p class="product-description">상품분류 : 긴팔ㄹ</p>
-						  		</c:when>
-						  		<c:when test="${goods.catesub_cd == A013 }">
-									<p class="product-description">상품분류 : 머시기</p>
-						  		</c:when>
-						  	</c:choose>
 						  	
 							<p class="product-description">수량 : ${goods.goods_pcs } 개</p>
 							<p class="product-description">사이즈 : 
 							<select name="op_price" id="op_price" style="position: relative;">
+							<option value="0"> - [ 필수] 옵션 - </option>
 								<option value="1"> S</option>
 								<option value="2"> M</option>
 								<option value="3"> L</option>
 								<option value="4"> XL</option>
 							</select>
 							</p>
-							<p class="product-description">배송비 : ${goods.goods_charge } 원</p>
-							
-						<br />
+								<h5 class="colors">
+						<p>
+						colors: 
+							<select name="op_color" id="op_color" style="position: relative;">
+								<option value="select"> - [ 필수] 옵션 - </option>
+								<option value="Black">Black</option>
+								<option value="White">White</option>
+								<option value="Brown">Brown</option>
+								<option value="Red">Red</option>
+								<option value="Gray">Gray</option>
+							</select>
+							</p>
+							<p class="product-description">배송비 : <span class="delv-Price"><fmt:formatNumber value="${goods.goods_charge }" pattern=""/>원</span></p>
 						<br />
 						<p class="vote">
 							<strong>*최소 주문수량 1개 이상<br/>
 							5만원 이상 구입 시 배송비는 무료입니다.</strong>
 						</p>
 
-						<h5 class="colors">
-						colors: 
-							<select name="op_color" id="op_color" style="position: relative;">
-								<option value="Black">Black</option>
-								<option value="White">White</option>
-								<option value="Brown">Brown</option>
-								<option value="Gray">Gray</option>
-							</select>
+					
 
 						</h5>
 						<div class="action">
-							<!-- 버튼 동그라미로 처리 -->
-							<button id="#circle1" class="btn_blk" type="submit">즉시 구매하기</button>
-							<button id="#circle2" class="btn_blk" type="button">장바구니 담기</button>
+						
+							<button id="#circle1" class="btn btn-info" type="submit">즉시 구매하기</button>
+							<button id="#circle2" class="btn btn-success" type="button">장바구니 담기</button>
+							<button id="#circle2" class="btn btn-white" type="button" >Q&A</button>
+												
+							<c:if test="${login.mb_id == 'admin'}">
+							<button type="submit" class="btn btn-warning">상품 수정</button>
+							<button type="submit" class="btn btn-danger">상품 삭제</button>
+							</c:if>
+						
 						</div>
+						<br>
+						
 
 					</div>
 				</div>
