@@ -3,6 +3,7 @@ package com.project.dto;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("QnaReplyDto")
 public class QnaReplyDto {
@@ -11,7 +12,9 @@ public class QnaReplyDto {
 	private Integer qna_no;
 	private String replytext;
 	private String replyer;
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date regdate;
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date updatedate;
 	
 	

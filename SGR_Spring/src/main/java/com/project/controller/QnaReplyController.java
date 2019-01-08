@@ -20,13 +20,14 @@ import com.project.dto.QnaReplyDto;
 import com.project.service.QnaReplyService;
 
 @RestController
+@RequestMapping("/qnareply")
 public class QnaReplyController {
 
 	@Inject
 	private QnaReplyService qnaReplyService;
 	
 	//게시물 등록
-	@RequestMapping(value="/qnareply/", method= RequestMethod.POST)
+	@RequestMapping(value="", method= RequestMethod.POST)
 	public ResponseEntity<String> write(@RequestBody QnaReplyDto qnaReplyDto) {
 		ResponseEntity<String> entity = null;
 		try {
@@ -41,7 +42,7 @@ public class QnaReplyController {
 	}
 	
 	//리스트보기
-	@RequestMapping(value = "/qnareply/all/{qna_no}", method = RequestMethod.GET)
+	@RequestMapping(value = "/all/{qna_no}", method = RequestMethod.GET)
 	  public ResponseEntity<List<QnaReplyDto>> list(@PathVariable("qna_no") Integer qna_no) {
 
 	    ResponseEntity<List<QnaReplyDto>> entity = null;
@@ -57,7 +58,7 @@ public class QnaReplyController {
 	  }
 	
 	//게시물 수정
-	 @RequestMapping(value = "/qnareply/{rno}", method = { RequestMethod.PUT, RequestMethod.PATCH })
+	 @RequestMapping(value = "/{rno}", method = { RequestMethod.PUT, RequestMethod.PATCH })
 	  public ResponseEntity<String> update(@PathVariable("rno") Integer rno, @RequestBody QnaReplyDto qnaReplyDto) {
 
 	    ResponseEntity<String> entity = null;
@@ -74,7 +75,7 @@ public class QnaReplyController {
 	  }
 	
 	//게시물 삭제
-	 @RequestMapping(value = "/qnareply/{rno}", method = RequestMethod.DELETE)
+	 @RequestMapping(value = "/{rno}", method = RequestMethod.DELETE)
 	  public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
 
 	    ResponseEntity<String> entity = null;
@@ -90,10 +91,10 @@ public class QnaReplyController {
 	  }
 	 
 	 //페이징처리된 리스트
-	 @RequestMapping(value = "/qnareply/{qna_no}/{page}", method = RequestMethod.GET)
+	 @RequestMapping(value = "/{qna_no}/{page}", method = RequestMethod.GET)
 	  public ResponseEntity<Map<String, Object>> listPage(
 	      @PathVariable("qna_no") Integer qna_no,  @PathVariable("page") Integer page) {
-
+		 System.out.println("ReplyContoller.listPage().no:" + qna_no + ",page:" + page);
 	    ResponseEntity<Map<String, Object>> entity = null;
 	    
 	    try {

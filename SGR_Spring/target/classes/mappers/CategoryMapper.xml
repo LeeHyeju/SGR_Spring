@@ -54,16 +54,16 @@
 
 	<!-- 카테고리 대분류 -->
 	<select id="depthOne" resultType="java.util.HashMap">
-		select CATE_NM 
-		from category 
-		group by CATE_NM 
-		ORDER BY CATE_NM DESC;
+		SELECT cate_nm,cate_cd 
+		FROM category 
+		GROUP BY cate_nm 
+		ORDER BY cate_nm DESC;
 	</select>
 
-	<!-- 카테고리 대분류 -->
+	<!-- 카테고리 소분류 -->
 	<select id="depthTwo" resultType="java.util.HashMap">
-		SELECT CATESUB_NM 
-		FROM CATEGORY
-		WHERE CATE_NM = #{cate_nm};
+		SELECT catesub_nm, catesub_cd
+		FROM category
+		WHERE cate_nm = #{cateGory1};
 	</select>
 </mapper>

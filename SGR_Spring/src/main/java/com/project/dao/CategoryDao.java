@@ -60,8 +60,8 @@ public class CategoryDao {
 		return session.selectList(NAMESPACE + ".depthOne");
 	}
 
-	public List<Map<String, Object>> depthTwo(String cate_nm) {
-		return session.selectList(NAMESPACE + ".depthTwo",cate_nm);
+	public List<Map<String, Object>> depthTwo(Map<String, Object> cateGory1) {
+		return session.selectList(NAMESPACE + ".depthTwo",cateGory1);
 	}
 
 }

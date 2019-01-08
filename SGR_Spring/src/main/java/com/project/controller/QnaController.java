@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,9 +66,11 @@ public class QnaController {
 	 }
 	 //관리자 글쓰기 처리
 	 @RequestMapping(value = "/qna/adminWrite.ad", method = RequestMethod.POST)
-	  public String adminWrite(QnaDto qnaDto, RedirectAttributes rttr,  Model model) throws Exception {
+	  public String adminWrite(QnaDto qnaDto, RedirectAttributes rttr,  Model model, HttpSession session) throws Exception {
 		 System.out.println("qna- admin 글쓰기- post");
 		 System.out.println("qnadto"+qnaDto.toString());
+		 String writer = (String) session.getAttribute("mb_id");
+		 qnaDto.setMb_id(writer);
 		 qnaService.write(qnaDto);
 	    rttr.addFlashAttribute("msg", "success");
 	    return "redirect:/qna/adminList.ad";

@@ -2,7 +2,7 @@ package com.project.dto;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("GoodsDto")
+
 public class GoodsDto {
 	
 	private int goods_no; //상품번호

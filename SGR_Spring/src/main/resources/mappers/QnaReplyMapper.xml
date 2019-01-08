@@ -19,7 +19,8 @@
 <insert id="create">
 	INSERT INTO 
 	qna_reply
-	(qna_no,
+	(rno, 
+	qna_no,
 	replytext,
 	replyer
 	)
@@ -50,7 +51,7 @@
 <!-- 페이징처리 -->
 <select id="listPage" resultType="QnaReplyDto">
 	SELECT
-		*
+		rno,  replytext, replyer, regdate, updatedate
 	FROM
 	qna_reply
 	WHERE	

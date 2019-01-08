@@ -238,7 +238,7 @@ $(document).ready(function() {
 				<div class="form-group">
 				<br/><label class="col-md-4 control-label">Writer</label> 
 				<div class="col-md-4">
-				<input type="text" 	name="mb_id" class="form-control input-md" value="${qna.mb_id } " readonly="readonly">
+				<input type="text" 	name="mb_id" class="form-control input-md" value="${login.mb_id } " readonly="readonly">
 				</div>
 				</div>
 

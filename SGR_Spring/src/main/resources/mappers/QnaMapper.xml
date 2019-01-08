@@ -36,6 +36,7 @@
 		SELECT
 					qna_no, 
 					qna_title,
+					mb_id,
 					qna_content,
 					reg_date, 
 					qna_hit, 
@@ -75,7 +76,7 @@
 	<select id="adminList" resultType="QnaDto">
 		SELECT
 		qna_no, goods_no,catesub_cd,
-		qna_title,qna_content,reg_date,
+		qna_title,mb_id, qna_content,reg_date,
 		qna_hit, qna_notice, parent
 		FROM qna
 		where qna_no > 0

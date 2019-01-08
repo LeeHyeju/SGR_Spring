@@ -79,7 +79,7 @@
 								Writer OR Title OR Content</option>
 						</select> <input type="text" name='keyword' id="keywordInput"
 							value='${cri.keyword }'>
-						<button id='searchBtn'>Search</button>
+						<button  id="searchBtn">Search</button>
 						<button id='newBtn'>New Q&A</button>
 
 					</div>
