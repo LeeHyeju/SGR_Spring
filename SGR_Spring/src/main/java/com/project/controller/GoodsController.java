@@ -32,7 +32,15 @@ public class GoodsController {
 	@Inject
 	private CategoryService cateGoryService;
 	
-	// 회원 상품 조회 리스트
+	/**
+	 * 회원 상품조회 리스트
+	 * 작성자 : 이혜주
+	 * since : 20181210
+	 * @param cri
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/goods/goodsList.do", method = RequestMethod.GET)
 	public String goodsList(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		System.out.println("회원 상품 리스트-get");
@@ -48,7 +56,13 @@ public class GoodsController {
 		return "goods/goodsList";
 	}
 	
-	// adminList 관리자 상품 조회 리스트
+	/**
+	 * adminList 관리자 상품 조회 리스트
+	 * @param cri
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 		@RequestMapping("/goods/adminList.ad")
 		public String adminGoodsList(SearchCriteria cri, Model model) throws Exception {
 			System.out.println("관리자 상품 리스트");
@@ -63,7 +77,14 @@ public class GoodsController {
 			return "goods/adminList";
 		}
 
-	// 상품 보기
+	/**
+	 * 상품 보기
+	 * @param goods_no
+	 * @param cri
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 		@RequestMapping("/goods/view.do")
 		public String view(int goods_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
 				throws Exception {
@@ -78,7 +99,14 @@ public class GoodsController {
 			}
 		}
 		
-		//상품 입력 - get
+		/**
+		 * 상품 입력 GET
+		 * @param model
+		 * @param req
+		 * @param cateGory1
+		 * @return
+		 * @throws Exception
+		 */
 		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
 		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
@@ -94,6 +122,14 @@ public class GoodsController {
 			return "/goods/adminWrite";
 		}
 		
+		/**
+		 * 상품등록
+		 * 이혜주
+		 * @param model
+		 * @param cateGory1
+		 * @return
+		 * @throws Exception
+		 */
 		@ResponseBody
 		@RequestMapping(value = "/category", method=RequestMethod.POST) //포스트 방식으로 받는다.
 		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
@@ -112,7 +148,14 @@ public class GoodsController {
 
 		}
 		
-		//상품 입력 - post
+		/**
+		 * 상품입력 POST
+		 * @param goodsDto
+		 * @param model
+		 * @param rttr
+		 * @return
+		 * @throws Exception
+		 */
 		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
 		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
 			System.out.println("관리자 상품 작성 - post입니다");
@@ -123,14 +166,29 @@ public class GoodsController {
 			rttr.addFlashAttribute("msg", "writeOK");
 			return "redirect:/goods/adminList.ad";
 			}
-		//상품 수정 - get 
+
+
+		/**
+		 * 상품수정 GET
+		 * @param goods_no
+		 * @param model
+		 * @throws Exception
+		 */
 		@RequestMapping(value = "/goods/adminUpdate.ad", method = RequestMethod.GET)
 		public void adminUpdate(int goods_no, Model model) throws Exception {
 			System.out.println("관리자 상품 수정 - Get");
 			System.out.println(goods_no);
 			model.addAttribute("adminList",goodsService.view(goods_no));
 		}
-		//상품 수정 - post
+		
+		
+		/**
+		 * 상품수정 POST
+		 * @param goodsDto
+		 * @param rttr
+		 * @return
+		 * @throws Exception
+		 */
 		@RequestMapping(value = "/goods/adminUpdate.ad", method = RequestMethod.POST)
 		public String adminUpdateProcess(GoodsDto goodsDto,RedirectAttributes rttr) throws Exception {
 			System.out.println("관리자 상품  수정 - Post");
@@ -139,7 +197,16 @@ public class GoodsController {
 			rttr.addFlashAttribute("msg", "updateOK");
 			return "redirect:/goods/adminList.ad";
 		}
-		//상품 삭제
+		
+		
+		/**
+		 * 상품삭제 POST
+		 * @param goods_no
+		 * @param model
+		 * @param rttr
+		 * @return
+		 * @throws Exception
+		 */
 		@RequestMapping(value="/goods/adminDelete.ad", method=RequestMethod.POST)
 		public String delete(int goods_no, Model model,RedirectAttributes rttr) throws Exception{
 			System.out.println("상품 삭제- post");
