@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.project.mapper.MemberMapper">
+
+<!-- dto  -->
+<!-- mb_id,mb_pw,mb_name,mb_sex,mb_bday,mb_phone,mb_email, -->
+<!-- 	mb_zipcode,mb_address,mb_grade,mb_joinDate,mb_leaveDate -->
+
+<!-- 로그인 -->
+<select id="login" resultType="MemberDto">
+SELECT
+	mb_id, mb_name,mb_grade
+FROM member
+WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw}  AND mb_grade !=9
+</select>
+
+<!--아이디 중복확인  -->
+<select id="idCheck" resultType="int">
+SELECT count(*) 
+FROM member
+WHERE mb_id = #{mb_id}
+</select>
+
+<!-- 회원가입 -->
+<insert id="join">
+INSERT INTO member 
+(mb_id,mb_pw,mb_name,mb_sex,mb_bday,
+mb_phone,mb_email,mb_zipcode,mb_address,mb_addressDetail)
+VALUES (#{mb_id},#{mb_pw},#{mb_name},#{mb_sex},#{mb_bday},
+#{mb_phone},#{mb_email},#{mb_zipcode},#{mb_address},#{mb_addressDetail})
+</insert>
+
+
+<!-- 내정보 보기-->
+<select id="view" resultType="MemberDto">
+SELECT mb_id,mb_name,mb_sex,mb_bday,mb_phone,mb_email,mb_pw,
+mb_zipcode,mb_address,mb_addressDetail,mb_grade,mb_joinDate
+FROM member
+WHERE mb_id = #{mb_id}
+</select>
+
+<!-- 내정보수정 처리 -->
+<update id="updateProcess" >
+UPDATE member  
+SET  mb_name = #{mb_name}, mb_sex= #{mb_sex}, mb_bday= #{mb_bday}, 
+mb_phone= #{mb_phone}, mb_email= #{mb_email}, mb_zipcode=#{mb_zipcode}, 
+mb_address=#{mb_address}, mb_addressDetail = #{mb_addressDetail}
+WHERE mb_id = #{mb_id} 
+</update>
+
+
+<!-- 정보 수정 시 비밀번호 확인 -->
+<select id="pwCheck" resultType="int">
+select count(*) 
+from member
+where mb_id =#{mb_id} and mb_pw = #{mb_pw}
+</select>
+
+<!-- 비밀번호 변경 -->
+<update id="changePw">
+UPDATE member 
+SET mb_pw = #{mb_pw}  
+WHERE mb_id = #{mb_id}
+</update>
+
+<!-- 아이디 찾기 -->
+<select id="searchId" resultType="MemberDto">
+SELECT mb_id
+FROM member
+WHERE mb_name = #{mb_name} AND mb_email = #{mb_email}
+</select>
+
+<!-- 비밀번호 찾기 -->
+<select id="searchPw" resultType="MemberDto">
+SELECT mb_pw
+FROM member
+WHERE mb_id = #{mb_id} AND mb_name = #{mb_name} AND mb_email = #{mb_email}
+</select>
+
+<!-- 회원탈퇴 : 9등급-->
+<update id="leave">
+UPDATE member 
+SET mb_grade = 9, mb_leaveDate = current_date()
+WHERE mb_id = #{mb_id}
+</update>
+</mapper>	

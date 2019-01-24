@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.mapper.QnaMapper">
+
+	<!-- 검색하는 쿼리 -->
+	<sql id="search">
+		<if test="searchType != 'x'.toString() and searchType != null and searchType != ''.toString()">
+
+			<!-- 아이디: i , 제목: t , 내용:: c -->
+			<if test="searchType == 'i'.toString()">
+				and mb_id like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 't'.toString()">
+				and qna_title like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and qna_content like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'itc'.toString()">
+				and ( mb_id like CONCAT('%', #{keyword}, '%')
+				OR
+				qna_title
+				like CONCAT('%', #{keyword}, '%')
+				OR
+				qna_content like CONCAT('%',
+				#{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+
+	<!-- 회원 화면 -->
+	<select id="qnaList" resultType="QnaDto">
+		SELECT
+					qna_no, 
+					qna_title,
+					mb_id,
+					qna_content,
+					reg_date, 
+					qna_hit, 
+					qna_notice,
+					parent
+		FROM 
+					qna
+		where 
+					qna_no > 0
+		<include refid="search"></include>
+		ORDER BY 
+					qna_no DESC,
+					reg_date DESC
+		limit #{pageStart}, #{perPageNum}
+	</select>
+
+	<insert id="write">
+		INSERT INTO
+						qna( 
+						mb_id, 
+						qna_title,
+						qna_content, 
+						parent,
+						goods_no, 
+						catesub_cd)
+		VALUES
+						(#{mb_id},
+						#{qna_title},
+						#{qna_content},
+						0,
+						#{goods_no},
+						#{catesub_cd})
+	</insert>
+
+
+	<!-- 관리자 화면 -->
+	<select id="adminList" resultType="QnaDto">
+		SELECT
+		qna_no, goods_no,catesub_cd,
+		qna_title,mb_id, qna_content,reg_date,
+		qna_hit, qna_notice, parent
+		FROM qna
+		where qna_no > 0
+		<include refid="search"></include>
+		ORDER BY qna_no DESC, reg_date DESC
+		limit #{pageStart}, #{perPageNum}
+	</select>
+
+	<insert id="adminWrite">
+			INSERT INTO
+						qna( 
+						mb_id, 
+						qna_title,
+						qna_content, 
+						parent,
+						goods_no, 
+						catesub_cd)
+		VALUES
+						(#{mb_id},
+						#{qna_title},
+						#{qna_content},
+						0,
+						#{goods_no},
+						#{catesub_cd})
+	</insert>
+
+	<!-- 공통 -->
+	<select id="qnaListCount" resultType="Integer">
+		SELECT COUNT(qna_no)
+		FROM qna
+		where qna_no > 0
+		<include refid="search"></include>
+	</select>
+
+	<select id="view" resultType="QnaDto">
+		SELECT 
+		 qna_no, mb_id, qna_title, qna_content, reg_date 
+		FROM qna
+		where qna_no=#{qna_no}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.project.mapper.AdminMapper">
+
+<!-- 회원 리스트 보기 : 페이징처리 X -->
+<select id="listAll" resultType="MemberDto">
+SELECT  mb_id, 
+			mb_name, 
+			mb_grade, 
+			mb_joinDate,
+			mb_leaveDate
+FROM member
+ORDER BY mb_joinDate desc
+</select>
+
+<!-- 페이지 보기 -->
+<select id="listPage" resultType="MemberDto">
+SELECT mb_id,
+		 mb_name, 
+		 mb_grade, 
+		 mb_joinDate,
+		 mb_leaveDate
+FROM member
+ORDER BY mb_id DESC, mb_joinDate DESC
+LIMIT #{page}, 10
+</select>
+
+<!-- 페이지 보기 (Criteria)-->
+<select id="listCriteria" resultType="MemberDto">
+SELECT mb_id, 
+mb_name, 
+mb_grade, 
+mb_joinDate,
+mb_leaveDate
+FROM member
+ORDER BY mb_id DESC, mb_joinDate DESC
+LIMIT #{pageStart}, #{perPageNum}
+</select>
+
+<!-- 하단 페이지 보기 (Paging)-->
+<select id="countPaging" resultType="int">
+SELECT count(mb_id)
+FROM member
+</select>
+
+<!-- 검색하는 쿼리 -->
+<sql id="search">
+<if test="searchType != 'x'.toString() and searchType != null and searchType != ''.toString()">
+<!-- 	'n' : 숫자로 인식을 해서 searchType을 숫자 변환을 시도한다. "n" : 문자로 인식 -->
+<!-- 	<if test='searchType != "n" and searchType != null'> : OK -->
+ 
+ <!-- 아이디: i , 이름 : n , 성별 : s , 등급 : g -->
+   <if test="searchType == 'i'.toString()">
+     and mb_id like CONCAT('%', #{keyword}, '%')
+   </if>
+   <if test="searchType == 'n'.toString()">
+     and mb_name like CONCAT('%', #{keyword}, '%')
+   </if>
+   <if test="searchType == 's'.toString()">
+     and mb_sex like CONCAT('%', #{keyword}, '%')
+   </if>
+   <if test="searchType == 'g'.toString()">
+     and mb_grade like CONCAT('%', #{keyword}, '%')
+   </if>      
+   <if test="searchType == 'in'.toString()">
+     and ( mb_id like CONCAT('%', #{keyword}, '%') OR mb_name like CONCAT('%', #{keyword}, '%'))
+   </if>              
+   <if test="searchType == 'sing'.toString()">
+     and (   mb_sex like CONCAT('%', #{keyword}, '%') 
+           OR 
+             mb_id like CONCAT('%', #{keyword}, '%') 
+           OR 
+             mb_name like CONCAT('%', #{keyword}, '%')
+           OR 
+             mb_grade like CONCAT('%', #{keyword}, '%'))
+   </if>              
+ </if>  
+</sql>
+
+<select id="listSearch" resultType="MemberDto">
+  SELECT  mb_id, mb_name, mb_grade, mb_joinDate, mb_leaveDate 
+  FROM member 
+  where 1=1
+ <include refid="search"></include>
+    ORDER BY mb_joinDate  DESC 
+  limit #{pageStart}, #{perPageNum} 
+</select>
+
+
+<select id="listSearchCount" resultType="int">
+  SELECT COUNT(mb_id) 
+  FROM member
+ 
+  <include refid="search"></include>
+</select> 
+
+<!-- 회원리스트 상세보기 -->
+<select id="listDetail" resultType="MemberDto">
+SELECT mb_id,mb_name,mb_sex,mb_bday,mb_phone,mb_email,mb_pw,
+mb_zipcode,mb_address,mb_addressDetail,mb_grade,mb_joinDate,mb_leaveDate
+FROM member
+WHERE mb_id= #{mb_id}
+</select>
+
+<!-- 회원 등급 변경 -->
+<update id="update">
+UPDATE 
+			member 
+SET 
+			mb_leaveDate  = null,
+			mb_grade = 6 
+WHERE mb_id = #{mb_id}
+</update>
+
+<!-- 회원 강제 탈퇴 -->
+<update id="memberDrop">
+UPDATE member 
+SET mb_grade = 9, mb_leaveDate = current_date()
+WHERE mb_id = #{mb_id}
+</update>
+</mapper>
