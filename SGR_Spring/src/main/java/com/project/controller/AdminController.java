@@ -27,6 +27,15 @@ public class AdminController {
 	@Inject
 	private AdminService adminService;
 
+	
+	/**
+	 * 관리자 리스트
+	 * 작성자 : 이혜주
+	 * since : 20181210
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	// 기본게시판 글 리스트
 	@RequestMapping(value = "/admin/listAll.ad", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {

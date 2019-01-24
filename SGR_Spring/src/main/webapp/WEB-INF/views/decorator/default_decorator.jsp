@@ -17,12 +17,11 @@
 
 <!-- jQuery, BootStrap 웹 라이브러리를 등록 했으므로 url 적용되는 개별 jsp에 등록 금지 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href = "/resources/main/AdminLTE.css">
+<link href="/resources/main/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 header, footer {
 	background: AntiqueWhite;
@@ -90,11 +89,6 @@ article {
 	margin: 0 auto;
 }
 </style>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-	});
-</script>
 <!-- 개별 jsp의 head 태그안에 있는 css, js를 넣어준다. -->
 <decorator:head />
 </head>
@@ -113,16 +107,8 @@ article {
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<c:if test="${!empty login }">
-							<c:choose>
-								<c:when test="${login.mb_id == 'admin'}">
-						<li><a class="navbar-brand" href="../qna/adminList.ad">Q&A</a></li>
-						<li><a class="navbar-brand" href="#">Review</a></li>
-							</c:when>
-							<c:otherwise>
 							<li><a class="navbar-brand" href="../qna/qnaList.do">Q&A</a></li>
 						<li><a class="navbar-brand" href="#">Review</a></li>
-							</c:otherwise>
-							</c:choose>
 							</c:if>
 					</ul>
 					<!-- 오른쪽에 위치하는 메뉴바 -->

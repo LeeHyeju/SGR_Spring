@@ -1,203 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
- 
-$(document).ready(function() {
-     
-    //Main 카테고리를 선택 할때 마다 AJAX를 호출할 수 있지만 DB접속을 매번 해야 하기 때문에 main, sub카테고리 전체를 들고온다.
-     
-    //****************이부분은 DB로 셋팅하세요.
-    //Main 카테고리 셋팅 (DB에서 값을 가져와 셋팅 하세요.)
-    var cateArray = new Array();
-    var cateObject = new Object();
-     
-    cateObject = new Object();
-    cateObject.main_category_cd = "A01";
-    cateObject.main_category_nm = "TOP";
-    cateArray.push(cateObject);
-     
-    cateObject = new Object();
-    cateObject.main_category_cd = "B01";
-    cateObject.main_category_nm = "OUTER";
-    cateArray.push(cateObject);
+$(function() {
+	
+	//카테고리 처음 불러오기	(1차가 TOP인데 2차가 안불러 와져서 한번 불러오는것.)
+	cateSelect();
+	
+})
 
-    cateObject = new Object();
-    cateObject.main_category_cd = "C01";
-    cateObject.main_category_nm = "BOTTOM";
-    cateArray.push(cateObject);
-    
-    
-    cateObject = new Object();
-    cateObject.main_category_cd = "D01";
-    cateObject.main_category_nm = "ACC";
-    cateArray.push(cateObject);
-    
-    cateObject = new Object();
-    cateObject.main_category_cd = "E01";
-    cateObject.main_category_nm = "SHOES";
-    cateArray.push(cateObject);
-    
-    
-    //Sub 카테고리 셋팅 (DB에서 값을 가져와 셋팅 하세요.)
-    var catesubArray = new Array();
-    var catesubObject = new Object();
-     
-    //TOP에 해당하는 sub category 리스트
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "A01";
-    catesubObject.sub_category_cd = "A011"
-    catesubObject.sub_category_nm = "TEE" 
-    catesubArray.push(catesubObject);
-     
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "A01";
-    catesubObject.sub_category_cd = "A012"
-    catesubObject.sub_category_nm = "BLOUSE" 
-    catesubArray.push(catesubObject);
+function cateSelect(){
+	
+ var	cate_nm =  $("#exampleFormControlSelect1").val();	//현재 카테고리 선택되어 있는 값을 가져옴
+	
+ //아작스 시작
+ $.ajax({
+		url:"/category",				//자바(서버) 로 보낼 url명
+		type: "POST",					//서버로 보낼때 전송방식
+		data : {							//서버로 보낼 데이터들
+				cateGory1 : cate_nm
+		},
+		
+		dataType : "Json", //서버에서 보내는 데이터 타입
+		
+// 		contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
+		
+		//ajax 성공했을떄 success 메소드로 원하는 것 실행시킴(이런걸 콜백함수라고 함).
+		//error:function() -- 에러났을때 원하는 것 실행시킴
+		success : function(result) {		
+					
+			// map(키,값) 형식을 JSON으로 변환 해서 확인함 [필요없음]
+			console.log("success : "+JSON.stringify(result.cateGory2)); 
+				
+			//map(키,값) 형식을 cateGory22에 담음                  [필요없음]
+			var cateGory22 =JSON.stringify(result.cateGory2);			
+			
+			//2차 카테고리 초기화  -1차 카테고리 별로 2차카테고리를 재설정 해줘야 하기 때문. 이거 없으면 2차카테고리가 계속 늘어남
+			$("#catesub_nm").empty();				
+			
+			//2차카테고리 초기화 - 맨 위에 선택하세요가 뜨게끔 설정해주는 것.
+			$("#catesub_nm").append('<option>선택하세요</option>'); 
+			
+	
+			 //콘솔찍어 데이터들 확인
+			console.log("result.cateGory2-name = "+result.cateGory2[0].catesub_nm);
+			console.log("result.cateGory2[0].catesub_cd = "+result.cateGory2[0].catesub_cd);
+			console.log("result = "+result);
+			console.log("MSG = "+result.msg);
+					
+			
+		//	배열 반복문인듯. var = 인덱스(배열 방번호)  in = 변수
+			for(var i in result.cateGory2) {
+				
+			//	ID가 catesub_cd인곳을 찾아서 append 메소드로 해당 html끝부분에 append() 괄호 안 내용을 그대로 추가해줌
+				$("#catesub_nm").append("<option name='catesub_cd' value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
+				
+				$("#catesub_cd option:checked").val();
+				
+				//로그찍어봄
+				console.log(result.cateGory2[i].catesub_nm);
+				console.log(result.cateGory2[i].catesub_cd);
+				
+			
+			}
+	  },
+	  //에러 났을시 success를 안타고 이쪽을 탐.
+	  	error:function(jqXHR){
+	  		alert(jqXHR.status);
+	  		alert(jqXHR.statusText);
+	  	}
 
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "A01";
-    catesubObject.sub_category_cd = "A013"
-    catesubObject.sub_category_nm = "SHIRT" 
-    catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "A01";
-    catesubObject.sub_category_cd = "A014"
-    catesubObject.sub_category_nm = "KNIT" 
-    catesubArray.push(catesubObject);
-    
-    //OUTER에 해당하는 sub category 리스트
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "B01";
-    catesubObject.sub_category_cd = "B011"
-    catesubObject.sub_category_nm = "JACKET" 
-   	catesubArray.push(catesubObject);
-     
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "B01";
-    catesubObject.sub_category_cd = "B012"
-    catesubObject.sub_category_nm = "CARDIGAN" 
-   	catesubArray.push(catesubObject);
-
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "B01";
-    catesubObject.sub_category_cd = "B013"
-    catesubObject.sub_category_nm = "COAT" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "B01";
-    catesubObject.sub_category_cd = "B014"
-    catesubObject.sub_category_nm = "JUMPER" 
-   	catesubArray.push(catesubObject);
-    
-    //BOTTOM에 해당하는 sub category 리스트
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "C01";
-    catesubObject.sub_category_cd = "C011"
-    catesubObject.sub_category_nm = "PANTS" 
-   	catesubArray.push(catesubObject);
-     
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "C01";
-    catesubObject.sub_category_cd = "C012"
-    catesubObject.sub_category_nm = "OPS" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "C01";
-    catesubObject.sub_category_cd = "C013"
-    catesubObject.sub_category_nm = "SKIRT" 
-   	catesubArray.push(catesubObject);
-    
-    //ACC에 해당하는 sub category 리스트
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "D01";
-    catesubObject.sub_category_cd = "D011"
-    catesubObject.sub_category_nm = "EARRING" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "D01";
-    catesubObject.sub_category_cd = "D012"
-    catesubObject.sub_category_nm = "HAT" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "D01";
-    catesubObject.sub_category_cd = "D013"
-    catesubObject.sub_category_nm = "LEGGINGS" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "D01";
-    catesubObject.sub_category_cd = "D014"
-    catesubObject.sub_category_nm = "BAG" 
-   	catesubArray.push(catesubObject);
-    
-    //SHOES에 해당하는 sub category 리스트
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "E01";
-    catesubObject.sub_category_cd = "E011"
-    catesubObject.sub_category_nm = "WARKER" 
-   	catesubArray.push(catesubObject);
-   
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "E01";
-    catesubObject.sub_category_cd = "E012"
-    catesubObject.sub_category_nm = "BOOTS" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "E01";
-    catesubObject.sub_category_cd = "E013"
-    catesubObject.sub_category_nm = "SNEAKERS" 
-   	catesubArray.push(catesubObject);
-    
-    catesubObject = new Object();
-    catesubObject.main_category_cd = "E01";
-    catesubObject.sub_category_cd = "E014"
-    catesubObject.sub_category_nm = "FLAT" 
-   	catesubArray.push(catesubObject);
-    
-    //****************이부분은 DB로 셋팅하세요.
-     
-     
-    //메인 카테고리 셋팅
-    var cateSelectBox = $("select[name='cate_cd']");
-     
-    for(var i=0;i<cateArray.length;i++){
-    	cateSelectBox.append("<option value='"+cateArray[i].main_category_cd+"'>"+cateArray[i].main_category_nm+"</option>");
-    }
-     
-    //*********** 1depth카테고리 선택 후 2depth 생성 START ***********
-    $(document).on("change","select[name='cate_cd']",function(){
-         
-        //두번째 셀렉트 박스를 삭제 시킨다.
-        var catesubSelectBox = $("select[name='catesub_cd']");
-        catesubSelectBox.children().remove(); //기존 리스트 삭제
-         
-        //선택한 첫번째 박스의 값을 가져와 일치하는 값을 두번째 셀렉트 박스에 넣는다.
-        $("option:selected", this).each(function(){
-            var selectValue = $(this).val(); //main category 에서 선택한 값
-            catesubSelectBox.append("<option value=''>전체</option>");
-            for(var i=0;i<catesubArray.length;i++){
-                if(selectValue == catesubArray[i].main_category_cd){
-                     
-                	catesubSelectBox.append("<option value='"+catesubArray[i].sub_category_cd+"'>"+catesubArray[i].sub_category_nm+"</option>");
-                }
-            }
-        });
-         
-    });
-    //*********** 1depth카테고리 선택 후 2depth 생성 END ***********
-         
+	});
+}
+</script>
+<script type="text/javascript">
+$(function(){
+   var cate2val = $('#catesub_cd');
+	$('#catesub_nm').change(function(){
+		var element = $(this).find('option:selected');
+		var myTag = element.attr('value');
+		cate2val.val(myTag);
+	});
 });
 </script>
 </head>
@@ -209,16 +97,25 @@ $(document).ready(function() {
 			<!-- hidden -->
 			<input type="hidden" value="1" name="goods_no">
 			<input type="hidden" value="a011" name="catesub_cd">
-			<!-- 셀렉트 박스 -->
-<!-- 			<div class="form-group"> -->
-<!-- 				<label class="col-md-4 control-label" >분류</label>  -->
-<!-- 			 <select name="cate_cd" style="width:200px"> -->
-<!--         <option value="">전체</option> -->
-<!--     </select> -->
-<!--    <select name="catesub_cd" style="width:200px" > -->
-<!--         <option value="">전체</option> -->
-<!--     </select> -->
-<!--     </div>				 -->
+			셀렉트 박스
+			<div class="form-group">
+				<label class="col-md-4 control-label" >분류</label> 
+			 <select  id="exampleFormControlSelect1" onchange="cateSelect()" class="form-control" name="cate_nm">
+		
+				<!-- 반복문으로 1차 카테고리 불러오고 갯수만큼 select 출력 -->
+				<c:forEach items="${depthOne}" var="cate1">
+				<option >${cate1.cate_nm}</option>
+				</c:forEach>
+				
+		</select>
+		</div>
+		<div style='display:inline;float:left;width:180px' >
+				
+				<!-- 이 부분에 1차 선택시마다 2차 카테고리,  append()안에 내용이 들어감.-->
+		<select id="catesub_nm" class="form-control"  onchange="alert(this.options[this.selectedIndex].value)">
+
+		</select>
+   			 </div>				
 				<br>
 				<div class="form-group">
 				<label class="col-md-4 control-label" >Title</label> 

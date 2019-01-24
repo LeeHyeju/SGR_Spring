@@ -20,20 +20,21 @@ import com.project.dto.QnaReplyDto;
 import com.project.service.QnaReplyService;
 
 @RestController
-@RequestMapping("/qnareply")
+@RequestMapping("/replies")
 public class QnaReplyController {
 
 	@Inject
 	private QnaReplyService qnaReplyService;
+	
 	
 	//게시물 등록
 	@RequestMapping(value="", method= RequestMethod.POST)
 	public ResponseEntity<String> write(@RequestBody QnaReplyDto qnaReplyDto) {
 		ResponseEntity<String> entity = null;
 		try {
-			System.out.println("qnareply의 게시물 등록입니다.");
+			System.out.println("qna_reply의 게시물 등록입니다.");
 			qnaReplyService.create(qnaReplyDto);
-			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -47,7 +48,7 @@ public class QnaReplyController {
 
 	    ResponseEntity<List<QnaReplyDto>> entity = null;
 	    try {
-	    	System.out.println("qnareply의 게시물 리스트입니다.");
+	    	System.out.println("qna_reply의 게시물 리스트입니다.");
 	      entity = new ResponseEntity<>(qnaReplyService.list(qna_no), HttpStatus.OK);
 
 	    } catch (Exception e) {
@@ -94,7 +95,8 @@ public class QnaReplyController {
 	 @RequestMapping(value = "/{qna_no}/{page}", method = RequestMethod.GET)
 	  public ResponseEntity<Map<String, Object>> listPage(
 	      @PathVariable("qna_no") Integer qna_no,  @PathVariable("page") Integer page) {
-		 System.out.println("ReplyContoller.listPage().no:" + qna_no + ",page:" + page);
+	
+		 System.out.println("Reply_listPage().no:" + qna_no + ",page:" + page);
 	    ResponseEntity<Map<String, Object>> entity = null;
 	    
 	    try {

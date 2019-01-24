@@ -9,44 +9,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class QnaDto {
 
 	private int qna_no; //질문번호
-	private int goods_no; //상품번호
-	private String catesub_cd; //소분류코드
-	private String mb_id; //아이디
 	private String qna_title; //제목
 	private String qna_content; //내용
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date reg_date; //작성일
+	private String mb_id; //아이디
+	@DateTimeFormat(pattern="yyyy-mm-dd")
+	private Date regdate; //작성일
 	private int qna_hit; //조회수
-	private String qna_notice; //공지사항
-	private int parent;
-	private String reply;//답글 
-	private String comment; //댓글
-	private String comment_reply; //답댓글
-	private int replycnt;
+	private int reply_cnt; //댓글
+	private int view_cnt;
+	
+	
+	
 	
 	public int getQna_no() {
 		return qna_no;
 	}
 	public void setQna_no(int qna_no) {
 		this.qna_no = qna_no;
-	}
-	public int getGoods_no() {
-		return goods_no;
-	}
-	public void setGoods_no(int goods_no) {
-		this.goods_no = goods_no;
-	}
-	public String getCatesub_cd() {
-		return catesub_cd;
-	}
-	public void setCatesub_cd(String catesub_cd) {
-		this.catesub_cd = catesub_cd;
-	}
-	public String getMb_id() {
-		return mb_id;
-	}
-	public void setMb_id(String mb_id) {
-		this.mb_id = mb_id;
 	}
 	public String getQna_title() {
 		return qna_title;
@@ -60,11 +39,17 @@ public class QnaDto {
 	public void setQna_content(String qna_content) {
 		this.qna_content = qna_content;
 	}
-	public Date getReg_date() {
-		return reg_date;
+	public String getMb_id() {
+		return mb_id;
 	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	public int getQna_hit() {
 		return qna_hit;
@@ -72,49 +57,24 @@ public class QnaDto {
 	public void setQna_hit(int qna_hit) {
 		this.qna_hit = qna_hit;
 	}
-	public String getQna_notice() {
-		return qna_notice;
+	public int getReply_cnt() {
+		return reply_cnt;
 	}
-	public void setQna_notice(String qna_notice) {
-		this.qna_notice = qna_notice;
+	public void setReply_cnt(int reply_cnt) {
+		this.reply_cnt = reply_cnt;
 	}
-	public int getParent() {
-		return parent;
+	public int getView_cnt() {
+		return view_cnt;
 	}
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-	public String getReply() {
-		return reply;
-	}
-	public void setReply(String reply) {
-		this.reply = reply;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public String getComment_reply() {
-		return comment_reply;
-	}
-	public void setComment_reply(String comment_reply) {
-		this.comment_reply = comment_reply;
-	}
-	public int getReplycnt() {
-		return replycnt;
-	}
-	public void setReplycnt(int replycnt) {
-		this.replycnt = replycnt;
-	}
-	@Override
-	public String toString() {
-		return "QnaDto [qna_no=" + qna_no + ", goods_no=" + goods_no + ", catesub_cd=" + catesub_cd + ", mb_id=" + mb_id
-				+ ", qna_title=" + qna_title + ", qna_content=" + qna_content + ", reg_date=" + reg_date + ", qna_hit="
-				+ qna_hit + ", qna_notice=" + qna_notice + ", parent=" + parent + ", reply=" + reply + ", comment="
-				+ comment + ", comment_reply=" + comment_reply + ", replycnt=" + replycnt + "]";
+	public void setView_cnt(int view_cnt) {
+		this.view_cnt = view_cnt;
 	}
 	
+	@Override
+	public String toString() {
+		return "QnaDto [qna_no=" + qna_no + ", qna_title=" + qna_title + ", qna_content=" + qna_content + ", mb_id="
+				+ mb_id + ", regdate=" + regdate + ", qna_hit=" + qna_hit + ", reply_cnt=" + reply_cnt + ", view_cnt="
+				+ view_cnt + "]";
+	}
 	
 }

@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 <script>
 	var result = '${msg}';
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
+	if (result == 'success') {
+		alert("글 작성이 완료되었습니다.");
 	}
 </script>
 <script>
@@ -19,7 +19,7 @@
 				$('#searchBtn').on(
 						"click",
 						function(event) {
-							str = "list"
+							str = "qnaList.do"
 									+ '${pageMaker.makeQuery(1)}'
 									+ "&searchType="
 									+ $("select option:selected").val()
@@ -30,13 +30,13 @@
 							self.location = str;
 						});
 				$('#newBtn').on("click", function(evt) {
-					self.location = "/qna/write.do";
+					self.location = "../qna/write.do";
 				});
 			});
 </script>
 </head>
 <body>
-	<h2>MY Q&A</h2>
+	<h2 style="text-align: center;">SGR 문의 게시판</h2>
 	<hr>
 	<!-- Main content -->
 	<section class="content">
@@ -46,71 +46,55 @@
 			<div class="col-md-12">
 				<!-- general form elements -->
 				<div class='box'>
-					<div class="box-header with-border">
-						<h3 class="box-title">Q&A List</h3>
-					</div>
-
-					<div class='box-body'>
-
-						<select name="searchType">
+					
+					<div class='box-body' style="width: 80%; margin: auto; text-align: right; ">
+						<select name="searchType" >
 							<option value="x"
 								<c:out value="${cri.searchType == null?'selected':''}"/>>
-								---</option>
+								--선택--</option>
 							<option value="i"
 								<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
-								Writer</option>
+								작성자</option>
 							<option value="t"
 								<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-								Title</option>
+								제목</option>
 							<option value="c"
 								<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-								Content</option>
+								내용</option>
 							<option value="itc"
 								<c:out value="${cri.searchType eq 'itc'?'selected':''}"/>>
-								Writer OR Title OR Content</option>
-						</select> <input type="text" name='keyword' id="keywordInput"
+								전체</option>
+						</select> 
+						<input type="text" name='keyword' id="keywordInput"
 							value='${cri.keyword }'>
 						<button id='searchBtn'>Search</button>
 						<button id='newBtn'>New Q&A</button>
+					</div>
+				</div>
+					<br><br>						
 
-					</div>
-				</div>
-						
-				<div class="box">
-					<div class="box-header with-border">
-						<h3 class="box-title">공지사항</h3>
-					</div>
-					
-	<div class="form-group">
-				<div class="col-md-5">
-				<input type="text" 	name='title' class="form-control input-md" value="">
-				</div>
-				</div>
 					<div class="box">
-						<div class="box-header with-border">
-							<h3 class="box-title">Q&A 내역</h3>
-						</div>
+<!-- 						<div class="box-header with-border" > -->
+<!-- 							<h3 class="box-title" align="center" style="text-align: center; color: gray; ;">Q&A 내역</h3> -->
+<!-- 						</div> -->
 						<div class="box-body">
-							<table class="table table-bordered">
+							<table class="table table-bordered" style="width: 80%; margin: auto; text-align:center; "  >
 								<tr>
-									<th style="width: 10px">NO</th>
-									<th>TITLE</th>
-									<th>WRITER</th>
-									<th>DATE</th>
-									<th style="width: 40px">HIT</th>
+									<th style=" text-align:center;">NO</th>
+									<th style="text-align: center;">TITLE</th>
+									<th style="text-align: center;">WRITER</th>
+									<th style=" text-align:center;">HIT</th>
+									<th style="text-align: center;">DATE</th>
 								</tr>
 
 								<c:forEach items="${list}" var="list">
-
 									<tr>
 										<td>${list.qna_no}</td>
-										<td><a
-											href='/qna/view.do${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${list.qna_no}'>
-												${list.qna_title} </a></td>
+										<td><a href='/qna/view.do${pageMaker.makeSearch(pageMaker.cri.page) }&qna_no=${list.qna_no}'>
+												${list.qna_title} <strong>[ ${list.reply_cnt} ]</strong> </a></td>
 										<td>${list.mb_id}</td>
-										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-												value="${list.reg_date}" /></td>
-										<td><span class="badge bg-red">${list.qna_hit }</span></td>
+										<td><span class="badge badge-danger" style="background-color: orange;;">${list.qna_hit }</span></td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd" 	value="${list.regdate}" /></td>
 									</tr>
 
 								</c:forEach>
@@ -127,20 +111,20 @@
 
 									<c:if test="${pageMaker.prev}">
 										<li><a
-											href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+											href="qnaList.do${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 									</c:if>
 
 									<c:forEach begin="${pageMaker.startPage }"
 										end="${pageMaker.endPage }" var="idx">
 										<li
 											<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-											<a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a>
+											<a href="qnaList.do${pageMaker.makeSearch(idx)}">${idx}</a>
 										</li>
 									</c:forEach>
 
 									<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 										<li><a
-											href="list.do${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+											href="qnaList.do${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 									</c:if>
 
 								</ul>

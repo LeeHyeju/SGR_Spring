@@ -61,7 +61,7 @@
 
 					<div class='box-body'>
 
-						<select name="searchType">
+						<select name="searchType" >
 							<option value="x"
 								<c:out value="${cri.searchType == null?'selected':''}"/>>
 								---</option>

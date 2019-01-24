@@ -1,6 +1,5 @@
 package com.project.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +30,9 @@ public class GoodsController {
 	private GoodsService goodsService;
 	@Inject
 	private CategoryService cateGoryService;
+	
+	//파일 저장 위치
+	private String uploadPath;
 	
 	/**
 	 * 회원 상품조회 리스트
@@ -113,7 +115,6 @@ public class GoodsController {
 			
 			String cate_nm = req.getParameter("cate_nm");
 			
-			
 			//카테고리 대분류 코드	
 			model.addAttribute("depthOne", cateGoryService.depthOne());
 			//소분류 코드
@@ -123,7 +124,7 @@ public class GoodsController {
 		}
 		
 		/**
-		 * 상품등록
+		 * 상품 등록 시 카테고리 받아오기
 		 * 이혜주
 		 * @param model
 		 * @param cateGory1
@@ -136,7 +137,7 @@ public class GoodsController {
 
 		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌
 		    
-		    System.out.println("acascascascasc"+cateGory1);
+		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
 		    
 		    //List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
 		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);

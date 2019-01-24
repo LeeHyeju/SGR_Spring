@@ -19,7 +19,7 @@
 <insert id="create">
 	INSERT INTO 
 	qna_reply
-	(rno, 
+	(
 	qna_no,
 	replytext,
 	replyer
@@ -67,5 +67,14 @@
 	qna_reply
 	WHERE
 	qna_no = #{qna_no}
+</select>
+
+<select id="getQno" resultType="int">
+	SELECT
+	qna_no
+	FROM
+	qna_reply
+	WHERE
+	rno = #{rno}
 </select>
 </mapper>

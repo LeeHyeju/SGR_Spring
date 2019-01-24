@@ -45,11 +45,15 @@ public class QnaReplyDao {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("qna_no", qna_no);
 		paramMap.put("cri", cri);
-		
 		return session.selectList(NAMESPACE+".listPage", paramMap);
 	}
 
 	public int count(Integer qna_no) throws Exception{
 		return session.selectOne(NAMESPACE+".count", qna_no);
+	}
+	
+	public int getQno(Integer rno) throws Exception {
+		//rno 가져오기
+		return session.selectOne(NAMESPACE+".getQno", rno);
 	}
 }

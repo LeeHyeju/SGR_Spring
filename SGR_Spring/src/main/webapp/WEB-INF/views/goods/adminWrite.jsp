@@ -14,7 +14,7 @@ $(function() {
 	//카테고리 처음 불러오기	(1차가 TOP인데 2차가 안불러 와져서 한번 불러오는것.)
 	cateSelect();
 	
-})
+});
 
 function cateSelect(){
 	
@@ -27,7 +27,6 @@ function cateSelect(){
 		data : {							//서버로 보낼 데이터들
 				cateGory1 : cate_nm
 		},
-		
 		dataType : "Json", //서버에서 보내는 데이터 타입
 		
 // 		contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
@@ -43,28 +42,32 @@ function cateSelect(){
 			var cateGory22 =JSON.stringify(result.cateGory2);			
 			
 			//2차 카테고리 초기화  -1차 카테고리 별로 2차카테고리를 재설정 해줘야 하기 때문. 이거 없으면 2차카테고리가 계속 늘어남
-			$("#catesub_cd").empty();				
+			$("#catesub_nm").empty();				
 			
-			//2차카테고리 초기화 - 맨 위에 선택하세요가 뜨게끔? 설정해주는 것.
-					
-			$("#catesub_cd").append('<option>선택하세요</option>'); 
+			//2차카테고리 초기화 - 맨 위에 선택하세요가 뜨게끔 설정해주는 것.
+			$("#catesub_nm").append('<option>선택하세요</option>'); 
 			
-			
+	
 			 //콘솔찍어 데이터들 확인
 			console.log("result.cateGory2-name = "+result.cateGory2[0].catesub_nm);
 			console.log("result.cateGory2[0].catesub_cd = "+result.cateGory2[0].catesub_cd);
 			console.log("result = "+result);
 			console.log("MSG = "+result.msg);
+					
 			
-			//배열 반복문인듯. var = 인덱스(배열 방번호)  in = 변수
+		//	배열 반복문. var = 인덱스(배열 방번호)  in = 변수
 			for(var i in result.cateGory2) {
 				
-				//ID가 catesub_cd인곳을 찾아서 append 메소드로 해당 html끝부분에 append() 괄호 안 내용을 그대로 추가해줌
-				$("#catesub_cd").append("<option value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
+			//	ID가 catesub_cd인곳을 찾아서 append 메소드로 해당 html끝부분에 append() 괄호 안 내용을 그대로 추가해줌
+				$("#catesub_nm").append("<option name='catesub_cd' value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
 				
+				$("#catesub_cd option:checked").val();
 				
 				//로그찍어봄
 				console.log(result.cateGory2[i].catesub_nm);
+				console.log(result.cateGory2[i].catesub_cd);
+				
+			
 			}
 	  },
 	  //에러 났을시 success를 안타고 이쪽을 탐.
@@ -76,9 +79,18 @@ function cateSelect(){
 	});
 }
 </script>
+<script type="text/javascript">
+$(function(){
+   var cate2val = $('#catesub_cd');
+	$('#catesub_nm').change(function(){
+		var element = $(this).find('option:selected');
+		var myTag = element.attr('value');
+		cate2val.val(myTag);
+	});
+});
+</script>
 </head>
 <body>
-
 <form action="./adminWrite.ad" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
 <h2  style="text-align: center; color: silver;">관리자 상품 등록</h2>
 <fieldset> 
@@ -101,8 +113,11 @@ function cateSelect(){
 		<div style='display:inline;float:left;width:180px' >
 				
 				<!-- 이 부분에 1차 선택시마다 2차 카테고리,  append()안에 내용이 들어감.-->
-		<!-- <select id="catesub_cd" class="form-control"  name="catesub_cd">
-		</select>-->
+		<select id="catesub_nm" class="form-control"  onchange="alert(this.options[this.selectedIndex].value)">
+
+		</select>
+		
+<!-- 		<input id="catesub_cd" name="catesub_cd" > -->
 		</div>
 		</div>
 		</div>
@@ -203,31 +218,31 @@ function cateSelect(){
 
 <!-- 상품 이미지 파일 첨부 1,2,3 -->
 <!-- \uploadfile name값 -단일: uploadFile, 다중 : uploadFiles  -->
-<div>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label>
-  <div class="col-md-5">
-    <input id="uploadFile" name="uploadFile" type="file" placeholder="파일 첨부1" class="form-control" ><br />
-    &nbsp;
-    <br>
-  </div>
-</div>
-</div> 
+<!-- <div> -->
+<!-- <div class="form-group"> -->
+<!--   <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label> -->
+<!--   <div class="col-md-5"> -->
+<!--     <input id="uploadFile" name="uploadFile" type="file" multiple="multiple" placeholder="파일 첨부1" class="form-control" ><br /> -->
+<!--     &nbsp; -->
+<!--     <br> -->
+<!--   </div> -->
+<!-- </div> -->
+<!-- </div>  -->
 
-<!-- 상품 상세 페이지  --> 
- <div> 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="uploadFiles">상세 페이지 첨부 </label>
-  <div class="col-md-5">
-    <input id="uploadFile2" name="uploadFile2" type="file" placeholder="상세1" class="form-control" ><br />
-    &nbsp;
-    <input id="uploadFile3" name="uploadFile3" type="file" placeholder="상세2" class="form-control" ><br />
-    &nbsp;
-    <input id="uploadFile4" name="uploadFile4" type="file" placeholder="상세3" class="form-control" ><br />
-    &nbsp;
-  </div>
-</div>
-</div> 
+<!-- <!-- 상품 상세 페이지  -->  -->
+<!--  <div>  -->
+<!-- <div class="form-group"> -->
+<!--   <label class="col-md-4 control-label" for="uploadFiles">상세 페이지 첨부 </label> -->
+<!--   <div class="col-md-5"> -->
+<!--     <input id="uploadFile2" name="uploadFile2" type="file" multiple="multiple" placeholder="상세1" class="form-control" ><br /> -->
+<!--     &nbsp; -->
+<!--     <input id="uploadFile3" name="uploadFile3" type="file" multiple="multiple" placeholder="상세2" class="form-control" ><br /> -->
+<!--     &nbsp; -->
+<!--     <input id="uploadFile4" name="uploadFile4" type="file" multiple="multiple" placeholder="상세3" class="form-control" ><br /> -->
+<!--     &nbsp; -->
+<!--   </div> -->
+<!-- </div> -->
+<!-- </div>  -->
 
 
 <!-- Button -->

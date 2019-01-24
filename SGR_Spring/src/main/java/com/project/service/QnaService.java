@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.common.model.SearchCriteria;
 import com.project.dao.QnaDao;
+import com.project.dto.CategoryDto;
 import com.project.dto.QnaDto;
 
 @Service
@@ -16,26 +18,16 @@ public class QnaService {
 	@Inject
 	private QnaDao qnaDao;
 
-	// 관리자 화면
-	public List<QnaDto> adminList(SearchCriteria cri) throws Exception {
-		// 관리자 글 리스트
-		return qnaDao.adminList(cri);
-	}
 
-	public void adminWrite(QnaDto qnaDto) throws Exception {
-		// 글쓰기
-		qnaDao.adminWrite(qnaDto);
-	}
-
-	// 회원 화면
 	public List<QnaDto> qnaList(SearchCriteria cri) throws Exception {
 		// 글 리스트
 		return qnaDao.qnaList(cri);
 	}
 
+
 	public void write(QnaDto qnaDto) throws Exception {
 		// 글쓰기
-		qnaDao.write(qnaDto);
+		qnaDao.write(qnaDto);		
 	}
 
 	public void update(QnaDto qnaDto) throws Exception {
@@ -46,6 +38,11 @@ public class QnaService {
 	public void delete(Integer qna_no) throws Exception {
 		// 글 삭제
 		qnaDao.delete(qna_no);
+	}
+	
+	public void hit(Integer qna_no) throws Exception{
+		//조회수 증가
+		qnaDao.hit(qna_no);
 	}
 
 	// 공통
@@ -58,5 +55,6 @@ public class QnaService {
 		// 글보기
 		return qnaDao.view(qna_no);
 	}
+	
 
 }

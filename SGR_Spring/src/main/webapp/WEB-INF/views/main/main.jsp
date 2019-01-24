@@ -85,7 +85,7 @@ border : 0; height : 2px
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- Wrapper for slides : 컨베이어에서 사용할 이미지 선언 -->
+   <!-- 메인 슬라이드 이미지 -->
     <div class="carousel-inner" role="listbox">
       <div class="item active" >
         <img src="../resources/main/main01.jpg" alt="테스트" width=100% height=400px;>
