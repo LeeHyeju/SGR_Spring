@@ -1,8 +1,9 @@
 package com.project.dto;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
-
+@Alias("GoodsDto")
 public class GoodsDto {
 	
 	private int goods_no; //상품번호
@@ -15,6 +16,7 @@ public class GoodsDto {
 	private int goods_hit; //조회수
 	private int goods_charge; //배송비
 	private String catesub_cd; //소분류코드
+	private MultipartFile goods_img; //대표사진
 	
 	
 	
@@ -79,12 +81,17 @@ public class GoodsDto {
 		this.catesub_cd = catesub_cd;
 	}
 	
-	
+	public MultipartFile getGoods_img() {
+		return goods_img;
+	}
+	public void setGoods_img(MultipartFile goods_img) {
+		this.goods_img = goods_img;
+	}
 	@Override
 	public String toString() {
 		return "GoodsDto [goods_no=" + goods_no + ", goods_name=" + goods_name + ", goods_price=" + goods_price
 				+ ", goods_dc=" + goods_dc + ", goods_maker=" + goods_maker + ", goods_origin=" + goods_origin
 				+ ", goods_pcs=" + goods_pcs + ", goods_hit=" + goods_hit + ", goods_charge=" + goods_charge
-				+ ", catesub_cd=" + catesub_cd + "]";
+				+ ", catesub_cd=" + catesub_cd + ", goods_img=" + goods_img + "]";
 	}
 }

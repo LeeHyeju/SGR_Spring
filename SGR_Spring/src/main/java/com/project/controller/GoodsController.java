@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.common.model.PageMaker;
@@ -109,8 +114,21 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
+//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
+//		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
+//			System.out.println("관리자 상품 작성 - get입니다");
+//			
+//			String cate_nm = req.getParameter("cate_nm");
+//			
+//			//카테고리 대분류 코드	
+//			model.addAttribute("depthOne", cateGoryService.depthOne());
+//			//소분류 코드
+//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
+//			System.out.println("카테고리 ㅇㅇ");			
+//			return "/goods/adminWrite";
+//		}
 		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
-		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
+		public ModelAndView adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
 			
 			String cate_nm = req.getParameter("cate_nm");
@@ -119,10 +137,12 @@ public class GoodsController {
 			model.addAttribute("depthOne", cateGoryService.depthOne());
 			//소분류 코드
 			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
-						
-			return "/goods/adminWrite";
+			System.out.println("카테고리 ㅇㅇ");	
+			
+			ModelAndView mv = new ModelAndView();
+			
+			return mv;
 		}
-		
 		/**
 		 * 상품 등록 시 카테고리 받아오기
 		 * 이혜주
@@ -144,7 +164,7 @@ public class GoodsController {
 		    //hashmap.put("data", resultList); // 받아온 쿼리 리스트를 hashmap data에 담는다.
 		    hashmap.put("cateGory2", cateGory2);
 		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
-		   
+		   System.out.println("카테고리 끝");
 		    return hashmap; // 화면으로 던져준다!!
 
 		}
@@ -157,18 +177,45 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
+//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
+//		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
+//			System.out.println("관리자 상품 작성 - post입니다");
+//		
+//			System.out.println("goodsController.dto:" +goodsDto.toString());
+//			String uploadFile = goodsDto.getGoods_img();
+//			//db에 저장
+//			goodsService.adminWrite(goodsDto);
+//			rttr.addFlashAttribute("msg", "writeOK");
+//			return "redirect:/goods/adminList.ad";
+//			}
 		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
-		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
+		public String adminWriteProcess(GoodsDto goodsDto,  Model model,  RedirectAttributes rttr)throws Exception {
 			System.out.println("관리자 상품 작성 - post입니다");
-			
+		MultipartFile uploadfile = goodsDto.getGoods_img();
 			System.out.println("goodsController.dto:" +goodsDto.toString());
-		
+			MultipartFile uploadFile = goodsDto.getGoods_img();
+			
+			if (uploadfile != null) {
+			      String fileName = uploadfile.getOriginalFilename();
+			      try {
+			        // 1. FileOutputStream 사용
+			        // byte[] fileData = file.getBytes();
+			        // FileOutputStream output = new FileOutputStream("C:/images/" + fileName);
+			        // output.write(fileData);
+			         
+			        // 2. File 사용
+			        File file = new File("D:\\sgr\\img\\upload" + fileName);
+			        uploadfile.transferTo(file);
+			      } catch (IOException e) {
+			        e.printStackTrace();
+			      } // try - catch
+			    } // if
 			goodsService.adminWrite(goodsDto);
 			rttr.addFlashAttribute("msg", "writeOK");
-			return "redirect:/goods/adminList.ad";
-			}
-
-
+			    // 데이터 베이스 처리를 현재 위치에서 처리
+			    return "redirect:/goods/adminList.ad"; // 리스트 요청으로 보내야하는데 일단 제외하고 구현
+			  }
+	
 		/**
 		 * 상품수정 GET
 		 * @param goods_no

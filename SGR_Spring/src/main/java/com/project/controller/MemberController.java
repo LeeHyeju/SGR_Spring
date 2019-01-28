@@ -76,23 +76,29 @@ public class MemberController {
 
 	// 로그인 처리
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public String loginProcess(MemberDto memberDto, HttpSession session, RedirectAttributes rttr) throws Exception {
+	public String loginProcess(MemberDto memberDto,  HttpSession session, RedirectAttributes rttr) throws Exception {
 		System.out.println(memberDto);
 		// 가져온 정보를 세션에 담는다. --> 로그인 처리
 		session.setAttribute("login", memberService.login(memberDto.getMb_id(), memberDto.getMb_pw()));
+		
 
 		// 메인 페이지로 돌아간다.
 		String goURI = (String) session.getAttribute("goURI");
 		System.out.println("admin : " + memberDto.getMb_id());
 
 		MemberDto mbDto = memberService.login(memberDto.getMb_id(), memberDto.getMb_pw());
+		
 		System.out.println("서비스에서 id, pw를 dto에 담음");
+		System.out.println(memberDto.getMb_grade());
+		
 		if (mbDto != null) {
 			System.out.println("성공");
 			System.out.println("아이디는?" + mbDto.getMb_id());
 			return "redirect:../main/main.do";
-
-		} else {
+		}
+		
+		else {
+			
 			System.out.println("실패");
 			rttr.addFlashAttribute("message", "fail");
 			return "redirect:../member/login.do";

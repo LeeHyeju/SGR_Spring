@@ -1,10 +1,8 @@
 <!-- sitemesh 사용을 위한 설정 파일 -->
 <!-- 작성자 : 이영환 -->
 <!-- 작성일 : 2018-11-14 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="decorator"
-	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 	pageEncoding="UTF-8"%>
+<%@taglib prefix="decorator" 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -106,10 +104,10 @@ article {
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<c:if test="${!empty login }">
+<%-- 						<c:if test="${!empty login }"> --%>
 							<li><a class="navbar-brand" href="../qna/qnaList.do">Q&A</a></li>
-						<li><a class="navbar-brand" href="#">Review</a></li>
-							</c:if>
+						<li><a class="navbar-brand" href="../admin/listPage.ad">Review</a></li>
+<%-- 							</c:if> --%>
 					</ul>
 					<!-- 오른쪽에 위치하는 메뉴바 -->
 					<ul class="nav navbar-nav navbar-right">
@@ -189,8 +187,8 @@ article {
 	<footer class="container-fluid text-center" style="float:left;">
 		<p>COMPANY : (주)SGR OWNER : 이혜주 BUSINESS LICENSE : 123-45-67890
 			MALL-ORDER LICENSE : 제2018-서울구로-00123호 ADDRESS : 12345 서울특별시 구로구 구로동
-			123-45 1층 TEL : 1234-5789 COPYRIGHT © (주)SGR ALL RIGHTS RESERVED.
-			HOSTING By CAFE24 | DESIGNED By SGRCo.</p>
+			123-45 1층 TEL : 032-123-4567 COPYRIGHT © (주)SGR ALL RIGHTS RESERVED.
+			HOSTING By SGRCo. | DESIGNED By SGRCo.</p>
 	</footer>
 </body>
 </html>

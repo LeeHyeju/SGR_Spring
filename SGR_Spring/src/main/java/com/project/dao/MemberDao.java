@@ -35,6 +35,10 @@ public class MemberDao {
 		return session.selectOne(NAMESPACE+".idCheck", map);
 	}
 
+	public int loginCheck(int mb_grade) throws Exception {
+		
+		return session.selectOne(NAMESPACE+".loginCheck", mb_grade);
+	}
 
 	public MemberDto login(String mb_id, String mb_pw) throws Exception {
 		// 로그인

@@ -17,8 +17,9 @@
 <script type="text/javascript">
 	var result = "${message}";
 	if (result == "fail")
-		alert("아이디와 비밀번호가 맞지 않거나 사용할 수 없는 계정입니다.");
+		alert("회원 정보가 없습니다.");
 </script>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script

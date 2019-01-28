@@ -34,7 +34,5 @@ public class EmailSender {
 			System.out.println("MailException발생");
 			e.printStackTrace();
 		}
-
 	}
-
 }

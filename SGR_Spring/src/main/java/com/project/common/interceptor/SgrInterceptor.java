@@ -28,7 +28,7 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 		admin.put("/member/view.do", 6);
 
 		// admin - 1(관리자 권한이 있어야 한다.)
-		admin.put("/admin/list.ad", 1);
+		admin.put("/admin/listPage.ad", 1);
 		admin.put("/admin/listDetail.ad", 1);
 		admin.put("/admin/memberDrop.ad", 1);
 
@@ -38,10 +38,10 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 		admin.put("/goods/adminUpdate.ad", 1);
 		admin.put("/goods/adminDelete.ad", 1);
 
-		//qna-admin
-		admin.put("/qna/adminList.ad", 1);
-		//qna-user
-		admin.put("/qna/qnaList", 6);
+		//qna-
+		admin.put("/qna/qnaList.do", 6);
+		admin.put("/qna/write", 6);
+		admin.put("/qna/view", 6);
 	}
 
 	@Override
@@ -80,6 +80,7 @@ public class SgrInterceptor extends HandlerInterceptorAdapter {
 				System.out.println("권한이 없는 페이지입니다.");
 				// 권한 없음 페이지로 이동
 				response.sendRedirect("../error/noPermission.do");
+//				response.sendRedirect("../main/main.do");
 				// 요청한 URI을 실행하지 않게 한다.
 				return false;
 			}

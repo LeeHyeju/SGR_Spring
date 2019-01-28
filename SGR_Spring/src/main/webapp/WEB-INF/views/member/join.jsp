@@ -140,7 +140,6 @@
 
 		}
 	}
-
 	$(function() {
 		// 비밀번호확인 체크 이벤트 처리
 		$("#joinForm").on("submit", function() {
@@ -174,13 +173,13 @@
 			dataType : "text",
 			success : function(data) {
 				//     alert(data);
-				var str = "";
-				if (data == "OK")
-					$("#idCheckRes").html(
-							"<span style='color:blue'>사용 가능한 아이디입니다.</span>");
-				else
-					$("#idCheckRes").html(
-							"<span style='color:red'>사용중인 아이디입니다.</span>");
+			  var str = "";
+			   if (data == "OK")
+		   	   $("#idCheckRes").html(
+				"<span style='color:blue'>사용 가능한 아이디입니다.</span>");
+			   else
+				$("#idCheckRes").html(
+				"<span style='color:red'>사용중인 아이디입니다.</span>");
 			}
 		});
 	} // 아이디 중복 체크 끝
@@ -261,20 +260,16 @@
 				</div>
 				
 					<div class="form-group">
-			<label class="col-md-4 control-label" for="mb_zipcode">주소</label>
-			<input type="button" 	onclick="execPostCode()" value="우편번호 찾기" >		
-			<div class="col-md-1">
-			<input type="text" 	 name="mb_zipcode" 	class="form-control input-md"  id="mb_zipcode" placeholder="우편번호" required size="5"
-						readonly>
-				</div>
+								<label class="col-md-4 control-label" for="mb_zipcode">주소</label>
+								<input type="button" 	onclick="execPostCode()" value="우편번호 찾기" >		
+						<div class="col-md-1">
+								<input type="text" 	name="mb_zipcode" 	class="form-control input-md"  id="mb_zipcode" placeholder="우편번호" required size="5" readonly>
+						</div>
 						<div class="col-md-3">
-						<input 	type="text" name="mb_address"  id="mb_address" placeholder="주소" class="form-control input-md"
-						size="30" required readonly> 
-			<input type="text"	 name="mb_addressDetail"	class="form-control input-md" id="mb_addressDetail" placeholder="상세주소" size="30"
-						required>
+								<input 	type="text" name="mb_address"  id="mb_address" placeholder="주소" class="form-control input-md"  size="30" required readonly> 
+								<input type="text" name="mb_addressDetail" class="form-control input-md" id="mb_addressDetail" placeholder="상세주소" size="30" required>
 						</div>
-<!-- 						</div> -->
-						</div>
+				   </div>
 		
 		
 				<div class="form-group">
@@ -791,7 +786,7 @@
 선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
             </textarea>
 					<p>
-						<input type="checkbox" id="check_3" name="check" required /> 위의
+						<input type="checkbox" id="check_3" name="check"  /> 위의
 						약관에 동의 합니다.(선택)<br />
 					</p>
 				</div>
@@ -812,7 +807,7 @@
 				<div class="form-group" >
 				<label class="col-md-4 control-label" for=""></label>
 			<div class="btnJoinArea" >
-			<center>	<button type="submit" class="btn btn-info" onclick="ok()">회원가입</button>
+			<center>	<button type="submit" class="btn btn-info" >회원가입</button>
 				<button type="button" class="btn btn-danger"	onclick="history.back();">취소</button></center>
 			</div>
 			</div>

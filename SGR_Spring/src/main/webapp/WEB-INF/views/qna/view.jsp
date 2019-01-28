@@ -33,7 +33,7 @@
                 <div class="timeline-body">{{replytext}} </div>
 								<div class="timeline-footer">
 								{{#eqReplyer replyer }}
-                  <a class="btn btn-primary btn-xs" 
+                  <a class="btn btn-default btn-xs" 
 									data-toggle="modal" data-target="#modifyModal">수정</a>
 								{{/eqReplyer}}
 							  </div>
@@ -227,7 +227,38 @@
 		});
 		
 	});
-</script>			
+</script>		
+<script>
+	$(document).ready(function() {
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		$(".btn-warning").on("click", function() {
+			formObj.attr("action", "../qna/update.do");
+			formObj.attr("method", "get");
+			formObj.submit();
+		});
+
+		$(".btn-danger").on("click", function() {
+			
+			var replyCnt =  $("#replycntSmall").html();
+			
+			if(replyCnt > 0 ){
+				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
+				return;
+			}else{
+
+			formObj.attr("action", "../qna/delete.do");
+			formObj.submit();
+			}
+		});
+
+		$(".btn-info").on("click", function() {
+			formObj.attr("method", "get");
+			formObj.attr("action", "/qna/qnaList.do");
+			formObj.submit();
+		});
+	});
+</script>	
 </head>
 <body>
 <!-- Main content -->
@@ -242,7 +273,6 @@
 		type='hidden' name='perPageNum' value="${cri.perPageNum}">
 	<input type='hidden' name='searchType' value="${cri.searchType}">
 	<input type='hidden' name='keyword' value="${cri.keyword}">
-
 
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="qna_title">글 제목</label> 
@@ -307,7 +337,7 @@
 				<div class="col-md-12">
 						<div class="box box-success">
 										  <div class="box-header">
-										    <h3 class="box-title" style="text-align: center">댓글 달기</h3>
+										    <h2 class="box-title" style="text-align: center; color: gray;">댓글 입력</h2>
 										  </div>
 									  
 									  		<c:if test="${not empty login}">  
@@ -315,7 +345,8 @@
 											  	<label for="exampleInputEmail1">작성자</label>
 											  		<input	class="form-control" type="text" placeholder="USER ID"	id="newReplyWriter"value="${login.mb_id }" readonly="readonly"> 
 											  	<label for="exampleInputEmail1">댓글 내용</label> 
-											  		<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+<!-- 											  		<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText"> -->
+											  		<textarea class="form-control input-md"  placeholder="댓글 내용을 작성해주세요." id="newReplyText" rows="5" style=" resize: none;" ></textarea>
 											  	
 											  	<!-- 								  	
 												  	<div class="form-group">
@@ -330,10 +361,10 @@
 														  		<textarea class="form-control input-md"  rows="4" placeholder="REPLY TEXT" id="newReplyText"></textarea>
 														  </div>
 													 </div>-->
-												 
+												 <br>
 											</div>
 											<div class="box-footer">
-												 			<center> <button type="submit" class="btn btn-primary" id="replyAddBtn">댓글 추가</button></center><br/><br/>
+												 			<center> <button type="submit" class="btn btn-success" id="replyAddBtn">댓글 추가</button></center><br/><br/>
 											</div>
 									 		</c:if> 
 									<c:if test="${empty login}">
@@ -349,7 +380,7 @@
 						<ul class="timeline">
 									 <!-- timeline time label -->
 								<li class="time-label" id="repliesDiv">
-									<span class="bg-green">Replies List <small id='replycntSmall' > [ ${list.reply_cnt} ] </small></span>
+									<span class="bg-green">전체 댓글 <small id='replycntSmall' > [ ${list.reply_cnt} ] </small></span>
 								</li>
 						</ul>
 									
@@ -386,36 +417,6 @@
 
 
 	
-<script>
-	$(document).ready(function() {
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		$(".btn-warning").on("click", function() {
-			formObj.attr("action", "../qna/update.do");
-			formObj.attr("method", "get");
-			formObj.submit();
-		});
 
-		$(".btn-danger").on("click", function() {
-			
-			var replyCnt =  $("#replycntSmall").html();
-			
-			if(replyCnt > 0 ){
-				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
-				return;
-			}else{
-
-			formObj.attr("action", "../qna/delete.do");
-			formObj.submit();
-			}
-		});
-
-		$(".btn-info").on("click", function() {
-			formObj.attr("method", "get");
-			formObj.attr("action", "/qna/qnaList.do");
-			formObj.submit();
-		});
-	});
-</script>
 </body>
 </html>

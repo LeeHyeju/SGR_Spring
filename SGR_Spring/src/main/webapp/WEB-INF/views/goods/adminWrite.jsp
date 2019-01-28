@@ -89,9 +89,10 @@ $(function(){
 	});
 });
 </script>
+
 </head>
 <body>
-<form action="./adminWrite.ad" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
+<form action="./adminWrite.ad" class="form-horizontal" method="post" enctype="multipart/form-data">
 <h2  style="text-align: center; color: silver;">관리자 상품 등록</h2>
 <fieldset> 
 <legend></legend>
@@ -117,7 +118,7 @@ $(function(){
 
 		</select>
 		
-<!-- 		<input id="catesub_cd" name="catesub_cd" > -->
+<!-- 		<input id="catesub_cd" name="catesub_cd"  value="A013"> -->
 		</div>
 		</div>
 		</div>
@@ -182,9 +183,9 @@ $(function(){
 <!-- 상품 할인율 컬럼 추가해야함 -->
 <!-- 상품 할인율 5%, 10% -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="go_disPer">상품 할인율</label>
+  <label class="col-md-4 control-label" for="go_dc">상품 할인율</label>
   <div class="col-md-3">
-    <input id="go_disPer" name="go_disPer" type="text" placeholder="상품할인율 (5% or 10%)" class="form-control" >
+    <input id="go_dc" name="go_dc" type="text" placeholder="상품할인율 (5% or 10%)" class="form-control" >
 	<p style="font-size: 11px; font-family: sans-serif; font-weight: bold; color: blue; margin-top: 5px;">
     	(할인이 없을시 1%로 기재)
     </p>
@@ -216,20 +217,20 @@ $(function(){
   </div>
 </div>
 
-<!-- 상품 이미지 파일 첨부 1,2,3 -->
+<!-- 상품 이미지 파일 첨부 1-->
 <!-- \uploadfile name값 -단일: uploadFile, 다중 : uploadFiles  -->
-<!-- <div> -->
-<!-- <div class="form-group"> -->
-<!--   <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label> -->
-<!--   <div class="col-md-5"> -->
-<!--     <input id="uploadFile" name="uploadFile" type="file" multiple="multiple" placeholder="파일 첨부1" class="form-control" ><br /> -->
-<!--     &nbsp; -->
-<!--     <br> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- </div>  -->
+<div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label>
+  <div class="col-md-5">
+    <input id="goods_img1" name="file" type="file"  class="form-control" ><br />
+    &nbsp;
+    <br>
+  </div>
+</div>
+</div> 
 
-<!-- <!-- 상품 상세 페이지  -->  -->
+<!-- <!-- 상품 상세 페이지  --> 
 <!--  <div>  -->
 <!-- <div class="form-group"> -->
 <!--   <label class="col-md-4 control-label" for="uploadFiles">상세 페이지 첨부 </label> -->

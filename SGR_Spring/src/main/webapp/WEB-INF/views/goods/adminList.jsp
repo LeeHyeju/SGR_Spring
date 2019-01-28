@@ -144,7 +144,7 @@ function itemChange(){
 							<a href="/goods/view.do${pageMaker.makeSearch (pageMaker.cri.page)}&goods_no=${goods.goods_no }">${goods.goods_name }</a>
 						</div></div>
 						<div class="panel-body"> <!-- 이미지 사진 부분 -->
-							<img src="https://placehold.it/150x80?text=IMAGE" 	class="img-responsive" style="width: 100%" alt="Image">
+							<img src="${path }/resources/img/${goods.goods_img}" 	class="img-responsive" style="width: 100%" alt="Image">
 						</div>
 						<div class="panel-footer">
 							<div class="heading">

@@ -26,6 +26,9 @@ public class MemberService {
 		return memberDao.idcheck(id);
 	}
 
+	public int loginCheck(int mb_grade) throws Exception {
+		return memberDao.loginCheck(mb_grade);
+	}
 	
 	public MemberDto login(String mb_id, String mb_pw) throws Exception {
 		// 로그인
