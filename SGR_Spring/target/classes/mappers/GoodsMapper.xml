@@ -79,11 +79,11 @@
 	<!-- 상품 등록하기 -->
 	<insert id="adminWrite">
 		INSERT INTO
-		goods(goods_name, goods_price, goods_dc,goods_maker, goods_origin,
-		goods_pcs, goods_hit,goods_charge, catesub_cd, goods_img )
+		goods(goods_name, goods_price, goods_dc, goods_maker, goods_origin,
+		goods_pcs, goods_charge, catesub_cd, goods_img )
 		VALUES (#{goods_name}, #{goods_price},
 		#{goods_dc}, #{goods_maker}, #{goods_origin},
-		#{goods_pcs}, #{goods_hit}, #{goods_charge}, #{catesub_cd},#{goods_img} )
+		#{goods_pcs}, default, #{catesub_cd},#{goods_img} )
 	</insert>
 
 	<!-- 상품 수정 -->

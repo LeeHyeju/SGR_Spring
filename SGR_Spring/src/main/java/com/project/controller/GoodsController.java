@@ -36,8 +36,6 @@ public class GoodsController {
 	@Inject
 	private CategoryService cateGoryService;
 	
-	//파일 저장 위치
-	private String uploadPath;
 	
 	/**
 	 * 회원 상품조회 리스트
@@ -114,16 +112,18 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
-		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
+		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
+		public String adminWrite(Model model, HttpServletRequest req
+//				,@RequestParam Map<String,Object> cateGory1
+				)throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
 			
-			String cate_nm = req.getParameter("cate_nm");
-			
-			//카테고리 대분류 코드	
-			model.addAttribute("depthOne", cateGoryService.depthOne());
-			//소분류 코드
-			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
+//			String cate_nm = req.getParameter("cate_nm");
+//			
+//			//카테고리 대분류 코드	
+//			model.addAttribute("depthOne", cateGoryService.depthOne());
+//			//소분류 코드
+//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
 			return "/goods/adminWrite";
 		}
 //		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
@@ -150,22 +150,23 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-		@ResponseBody
-		@RequestMapping(value = "/category", method=RequestMethod.POST) //포스트 방식으로 받는다.
-		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
-
-		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌
-		    
-		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
-		    
-		    //List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
-		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);
-		    //hashmap.put("data", resultList); // 받아온 쿼리 리스트를 hashmap data에 담는다.
-		    hashmap.put("cateGory2", cateGory2);
-		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
-		   System.out.println("카테고리 끝");
-		    return hashmap; // 화면으로 던져준다!!
-		}
+		
+//		@RequestMapping(value = "goods/category.ad", method=RequestMethod.POST) //포스트 방식으로 받는다.
+//		@ResponseBody
+//		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
+//
+//		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌
+//		    
+//		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
+//		    
+//		    //List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
+//		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);
+//		    //hashmap.put("data", resultList); // 받아온 쿼리 리스트를 hashmap data에 담는다.
+//		    hashmap.put("cateGory2", cateGory2);
+//		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
+//		   System.out.println("카테고리 끝");
+//		    return hashmap; // 화면으로 던져준다!!
+//		}
 		
 		/**
 		 * 상품입력 POST
@@ -175,44 +176,43 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
-//		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
-//			System.out.println("관리자 상품 작성 - post입니다");
-//		
-//			System.out.println("goodsController.dto:" +goodsDto.toString());
-//			String uploadFile = goodsDto.getGoods_img();
-//			//db에 저장
-//			goodsService.adminWrite(goodsDto);
-//			rttr.addFlashAttribute("msg", "writeOK");
-//			return "redirect:/goods/adminList.ad";
-//			}
-		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
-		public String adminWriteProcess(GoodsDto goodsDto,  Model model,  RedirectAttributes rttr)throws Exception {
+		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.GET)
+		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
 			System.out.println("관리자 상품 작성 - post입니다");
-		MultipartFile uploadfile = goodsDto.getGoods_img();
+		
 			System.out.println("goodsController.dto:" +goodsDto.toString());
-			MultipartFile uploadFile = goodsDto.getGoods_img();
-			
-			if (uploadfile != null) {
-			      String fileName = uploadfile.getOriginalFilename();
-			      try {
-			        // 1. FileOutputStream 사용
-			        // byte[] fileData = file.getBytes();
-			        // FileOutputStream output = new FileOutputStream("C:/images/" + fileName);
-			        // output.write(fileData);
-			         
-			        // 2. File 사용
-			        File file = new File("D:\\sgr\\img\\upload" + fileName);
-			        uploadfile.transferTo(file);
-			      } catch (IOException e) {
-			        e.printStackTrace();
-			      } // try - catch
-			    } // if
+//			String uploadFile = goodsDto.getGoods_img();
+			//db에 저장
 			goodsService.adminWrite(goodsDto);
 			rttr.addFlashAttribute("msg", "writeOK");
-			    // 데이터 베이스 처리를 현재 위치에서 처리
-			    return "redirect:/goods/adminList.ad"; // 리스트 요청으로 보내야하는데 일단 제외하고 구현
-			  }
+			return "redirect:/goods/adminList";
+			}
+//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
+//		public String adminWriteProcess(GoodsDto goodsDto,  Model model,  RedirectAttributes rttr)throws Exception {
+//			System.out.println("관리자 상품 작성 - post입니다");
+//		MultipartFile uploadfile = goodsDto.getGoods_img();
+//			System.out.println("goodsController.dto:" +goodsDto.toString());
+//			
+//			if (uploadfile != null) {
+//			      String fileName = uploadfile.getOriginalFilename();
+//			      try {
+//			        // 1. FileOutputStream 사용
+//			        // byte[] fileData = file.getBytes();
+//			        // FileOutputStream output = new FileOutputStream("C:/images/" + fileName);
+//			        // output.write(fileData);
+//			         
+//			        // 2. File 사용
+//			        File file = new File("D:\\sgr\\img\\upload" + fileName);
+//			        uploadfile.transferTo(file);
+//			      } catch (IOException e) {
+//			        e.printStackTrace();
+//			      } // try - catch
+//			    } // if
+//			goodsService.adminWrite(goodsDto);
+//			rttr.addFlashAttribute("msg", "writeOK");
+//			    // 데이터 베이스 처리를 현재 위치에서 처리
+//			    return "redirect:/goods/adminList.ad"; // 리스트 요청으로 보내야하는데 일단 제외하고 구현
+//			  }
 	
 		/**
 		 * 상품수정 GET
