@@ -1,6 +1,5 @@
 <!-- sitemesh 사용을 위한 설정 파일 -->
-<!-- 작성자 : 이영환 -->
-<!-- 작성일 : 2018-11-14 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" 	pageEncoding="UTF-8"%>
 <%@taglib prefix="decorator" 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
