@@ -29,6 +29,7 @@ public class QnaReplyService {
 		return qnaReplyDao.list(qna_no);
 	}
 	
+	@Transactional
 	public void create(QnaReplyDto qnaReplyDto) throws Exception {
 		//댓글 쓰기
 		qnaReplyDao.create(qnaReplyDto);
@@ -46,7 +47,6 @@ public class QnaReplyService {
 		int qna_no = qnaReplyDao.getQno(rno);
 		qnaReplyDao.delete(rno);
 		qnaDao.updateReplyCnt(qna_no, -1);
-		
 	}
 	
 	//페이징처리 된 리스트

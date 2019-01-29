@@ -240,13 +240,13 @@
 
 		$(".btn-danger").on("click", function() {
 			
-			var replyCnt =  $("#replycntSmall").html();
+// 			var replyCnt =  $("#replycntSmall").html();
+			var replyCnt =  ${list.reply_cnt};
 			
 			if(replyCnt > 0 ){
 				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
-				return;
+				return false;
 			}else{
-
 			formObj.attr("action", "../qna/delete.do");
 			formObj.submit();
 			}
@@ -254,7 +254,7 @@
 
 		$(".btn-info").on("click", function() {
 			formObj.attr("method", "get");
-			formObj.attr("action", "/qna/qnaList.do");
+			formObj.attr("action", "../qna/qnaList.do");
 			formObj.submit();
 		});
 	});
@@ -407,7 +407,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-info" id="replyModBtn">수정</button>
-        <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+        <button type="button" class="btn btn-primary" id="replyDelBtn">삭제</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
     </div>

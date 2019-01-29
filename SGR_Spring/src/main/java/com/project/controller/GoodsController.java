@@ -114,21 +114,8 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
-//		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
-//			System.out.println("관리자 상품 작성 - get입니다");
-//			
-//			String cate_nm = req.getParameter("cate_nm");
-//			
-//			//카테고리 대분류 코드	
-//			model.addAttribute("depthOne", cateGoryService.depthOne());
-//			//소분류 코드
-//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
-//			System.out.println("카테고리 ㅇㅇ");			
-//			return "/goods/adminWrite";
-//		}
-		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
-		public ModelAndView adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
+		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
+		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
 			
 			String cate_nm = req.getParameter("cate_nm");
@@ -137,12 +124,24 @@ public class GoodsController {
 			model.addAttribute("depthOne", cateGoryService.depthOne());
 			//소분류 코드
 			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
-			System.out.println("카테고리 ㅇㅇ");	
-			
-			ModelAndView mv = new ModelAndView();
-			
-			return mv;
+			return "/goods/adminWrite";
 		}
+//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
+//		public ModelAndView adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
+//			System.out.println("관리자 상품 작성 - get입니다");
+//			
+//			String cate_nm = req.getParameter("cate_nm");
+//			
+//			//카테고리 대분류 코드	
+//			model.addAttribute("depthOne", cateGoryService.depthOne());
+//			//소분류 코드
+//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
+//			System.out.println("카테고리 ㅇㅇ");	
+//			
+//			ModelAndView mv = new ModelAndView();
+//			
+//			return mv;
+//		}
 		/**
 		 * 상품 등록 시 카테고리 받아오기
 		 * 이혜주
@@ -166,7 +165,6 @@ public class GoodsController {
 		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
 		   System.out.println("카테고리 끝");
 		    return hashmap; // 화면으로 던져준다!!
-
 		}
 		
 		/**

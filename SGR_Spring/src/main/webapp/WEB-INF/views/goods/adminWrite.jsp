@@ -25,16 +25,17 @@ function cateSelect(){
 		url:"/category",				//자바(서버) 로 보낼 url명
 		type: "POST",					//서버로 보낼때 전송방식
 		data : {							//서버로 보낼 데이터들
-				cateGory1 : cate_nm
-		},
+			cateGory1 : cate_nm
+	},
 		dataType : "Json", //서버에서 보내는 데이터 타입
 		
-// 		contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
+ 		//contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
 		
 		//ajax 성공했을떄 success 메소드로 원하는 것 실행시킴(이런걸 콜백함수라고 함).
 		//error:function() -- 에러났을때 원하는 것 실행시킴
 		success : function(result) {		
-					
+			console.log(result);		
+	
 			// map(키,값) 형식을 JSON으로 변환 해서 확인함 [필요없음]
 			console.log("success : "+JSON.stringify(result.cateGory2)); 
 				
@@ -59,15 +60,15 @@ function cateSelect(){
 			for(var i in result.cateGory2) {
 				
 			//	ID가 catesub_cd인곳을 찾아서 append 메소드로 해당 html끝부분에 append() 괄호 안 내용을 그대로 추가해줌
-				$("#catesub_nm").append("<option name='catesub_cd' value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
+				$("#catesub_nm").append(
+				"<option name='catesub_cd' value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
 				
 				$("#catesub_cd option:checked").val();
 				
 				//로그찍어봄
 				console.log(result.cateGory2[i].catesub_nm);
 				console.log(result.cateGory2[i].catesub_cd);
-				
-			
+						
 			}
 	  },
 	  //에러 났을시 success를 안타고 이쪽을 탐.
@@ -89,7 +90,7 @@ $(function(){
 	});
 });
 </script>
-
+ 
 </head>
 <body>
 <form action="./adminWrite.ad" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -103,8 +104,7 @@ $(function(){
   <div style='display:inline; min-width:350px;'>
 	<div style='display:inline;float:left;width:150px'>
 		<select  id="exampleFormControlSelect1" onchange="cateSelect()" class="form-control" name="cate_nm">
-		
-				<!-- 반복문으로 1차 카테고리 불러오고 갯수만큼 select 출력 -->
+				<!--  반복문으로 1차 카테고리 불러오고 갯수만큼 select 출력-->
 				<c:forEach items="${depthOne}" var="cate1">
 				<option >${cate1.cate_nm}</option>
 				</c:forEach>
@@ -115,7 +115,6 @@ $(function(){
 				
 				<!-- 이 부분에 1차 선택시마다 2차 카테고리,  append()안에 내용이 들어감.-->
 		<select id="catesub_nm" class="form-control"  onchange="alert(this.options[this.selectedIndex].value)">
-
 		</select>
 		
 <!-- 		<input id="catesub_cd" name="catesub_cd"  value="A013"> -->
@@ -163,13 +162,13 @@ $(function(){
   </div>
 </div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="goods_dc ">상품 가격<br>/할인 가격</label>  
-  <div class="col-md-3">
-  	${goods.goods_price } / ${goods.goods_dc }
-  <input id="goods_dc" name="goods_dc" type="text" placeholder="상품 가격을 입력하세요." class="form-control input-md" >
-  </div>
-</div>
+<!-- <div class="form-group"> -->
+<!--   <label class="col-md-4 control-label" for="goods_dc ">상품 가격<br>/할인 가격</label>   -->
+<!--   <div class="col-md-3"> -->
+<%--   	${goods.goods_price } / ${goods.goods_dc } --%>
+<!--   <input id="goods_dc" name="goods_dc" type="text" placeholder="상품 가격을 입력하세요." class="form-control input-md" > -->
+<!--   </div> -->
+<!-- </div> -->
 
 <!-- 상품 재고 컬럼 추가해야함 -->
 <!-- 상품 재고 입력  -->
@@ -185,7 +184,7 @@ $(function(){
 <div class="form-group">
   <label class="col-md-4 control-label" for="go_dc">상품 할인율</label>
   <div class="col-md-3">
-    <input id="go_dc" name="go_dc" type="text" placeholder="상품할인율 (5% or 10%)" class="form-control" >
+    <input id="goods_dc" name="goods_dc" type="text" placeholder="상품할인율 (5% or 10%)" class="form-control" >
 	<p style="font-size: 11px; font-family: sans-serif; font-weight: bold; color: blue; margin-top: 5px;">
     	(할인이 없을시 1%로 기재)
     </p>
@@ -223,7 +222,7 @@ $(function(){
 <div class="form-group">
   <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label>
   <div class="col-md-5">
-    <input id="goods_img1" name="file" type="file"  class="form-control" ><br />
+    <input id="goods_img1" name="file" type="file"  multiple="multiple" class="form-control" ><br />
     &nbsp;
     <br>
   </div>

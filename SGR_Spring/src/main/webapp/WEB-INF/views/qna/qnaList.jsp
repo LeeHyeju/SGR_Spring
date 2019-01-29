@@ -34,6 +34,20 @@
 				});
 			});
 </script>
+<style type="text/css">
+select {
+	width: 100px; /* 원하는 너비설정 */
+	padding: .1em .1em; /* 여백으로 높이 설정 */
+	font-family: inherit; /* 폰트 상속 */
+	/*     background: url('이미지 경로') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+	*/
+	border: 1px solid #999;
+	border-radius: 0px; /* iOS 둥근모서리 제거 */
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+</style>
 </head>
 <body>
 	<h2 style="text-align: center;">SGR 문의 게시판</h2>
@@ -51,7 +65,7 @@
 						<select name="searchType" >
 							<option value="x"
 								<c:out value="${cri.searchType == null?'selected':''}"/>>
-								--선택--</option>
+								&nbsp;&nbsp;▼Check ▼</option>
 							<option value="i"
 								<c:out value="${cri.searchType eq 'i'?'selected':''}"/>>
 								작성자</option>
