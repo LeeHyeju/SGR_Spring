@@ -105,7 +105,7 @@ article {
 					<ul class="nav navbar-nav">
 <%-- 						<c:if test="${!empty login }"> --%>
 							<li><a class="navbar-brand" href="../qna/qnaList.do">Q&A</a></li>
-						<li><a class="navbar-brand" href="../admin/listPage.ad">Review</a></li>
+						<li><a class="navbar-brand" href="../review/reviewList.do">Review</a></li>
 <%-- 							</c:if> --%>
 					</ul>
 					<!-- 오른쪽에 위치하는 메뉴바 -->
@@ -138,8 +138,6 @@ article {
 														tabindex="-1" href="../category/cateList.ad">카테고리 리스트</a></li>
 													<li role="presentation"><a role="menuitem"
 														tabindex="-1" href="../goods/adminList.ad">상품 관리 리스트</a></li>
-													<li role="presentation"><a role="menuitem"
-														tabindex="-1" href="#">이벤트 등록</a></li>
 													<li role="presentation"><a role="menuitem"
 														tabindex="-1" href="#">결제 리스트</a></li>
 												</ul></li>

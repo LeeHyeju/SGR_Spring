@@ -14,7 +14,7 @@
 		console.log(formObj);
 
 		$(".btn-white").on("click", function() {
-			formObj.attr("action", "../qna/adminWrite.ad");
+			formObj.attr("action", "../review/write.do");
 			formObj.attr("method", "get");
 			formObj.submit();
 		});
@@ -34,8 +34,8 @@
 <body>
 <form  method="get" role="goodsForm">
 <!-- 결제 ㄱㄱ. -->
+<input type="hidden" value="${goods.goods_no }" name="goods_no" />
 <input type="hidden" value="${goods.goods_name }" name="goods_name" />
-
 <input type="hidden" value="${goods.goods_price }" name="goods_price" />
 <input type="hidden" value="${goods.goods_dc }" name="goods_dc" />
 <input type="hidden" value="${goods.goods_maker }" name="goods_maker" />
@@ -150,7 +150,7 @@
 						
 							<button id="#circle1" class="btn btn-info" type="submit">즉시 구매하기</button>
 							<button id="#circle2" class="btn btn-success" type="button">장바구니 담기</button>
-							<button id="#circle2" class="btn btn-white" type="button" >Q&A</button>
+							<button type="submit"   class="btn btn-white" type="button" >Review 작성</button>
 												
 							<c:if test="${login.mb_id == 'admin'}">
 							<button type="submit" class="btn btn-warning">상품 수정</button>

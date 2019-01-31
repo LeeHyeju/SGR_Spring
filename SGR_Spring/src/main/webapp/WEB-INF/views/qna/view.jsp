@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <!-- Main content -->
     <style type="text/css">
     .popup {position: absolute;}
@@ -22,6 +22,7 @@
      } 
   	
     </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="template" type="text/x-handlebars-template">
 				{{#each .}}
 	         <li class="replyLi" data-rno={{rno}}> <i class="fa fa-comments bg-blue"></i>
@@ -239,7 +240,6 @@
 		});
 
 		$(".btn-danger").on("click", function() {
-			
 // 			var replyCnt =  $("#replycntSmall").html();
 			var replyCnt =  ${list.reply_cnt};
 			
@@ -307,7 +307,6 @@
 							readonly="readonly">
 							</div>
 					</div>
-					
 				
 				<br> <br>
 				<div class="form-group" >

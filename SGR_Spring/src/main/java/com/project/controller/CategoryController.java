@@ -21,6 +21,15 @@ public class CategoryController {
 	@Inject
 	private CategoryService categoryService;
 	
+	
+	/**
+	 * 관리자 카테고리조회 리스트
+	 * 작성자 : 이혜주
+	 * @param categoryDto
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	// 카테고리 보기
 	@RequestMapping(value = "/category/cateList.ad", method = RequestMethod.GET)
 	public String list(CategoryDto categoryDto, Model model) throws Exception {
@@ -33,7 +42,14 @@ public class CategoryController {
 					
 		return "category/cateList";
 	}
-
+	
+	/**
+	 * 카테고리 보기
+	 * @param catesub_cd
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	// 카테고리 보기
 			@RequestMapping(value = "/category/read.ad", method = RequestMethod.GET)
 			public String read(String catesub_cd, Model model) throws Exception {
@@ -42,12 +58,23 @@ public class CategoryController {
 				return "category/read";
 			}
 			
+			/**
+			 * 카테고리 만들기 - get
+			 * @throws Exception
+			 */		
 	//카테고리 만들기
 	@RequestMapping(value = "/category/create.ad", method = RequestMethod.GET)
 	public void create() throws Exception{
 		System.out.println("카테고리 만들기 - get창입니다");
 	}
 	
+	/**
+	 * 카테고리 만들기 -post
+	 * @param categoryDto
+	 * @param rttr
+	 * @return
+	 * @throws Exception
+	 */
 	//카테고리 만들기
 	@RequestMapping(value = "/category/create.ad", method = RequestMethod.POST)
 	public String createProcess(CategoryDto categoryDto, RedirectAttributes rttr) throws Exception{
@@ -58,6 +85,13 @@ public class CategoryController {
 			return "redirect:/category/cateList.ad";
 	}
 	
+	/**
+	 * 카테고리 수정 -get
+	 * @param catesub_cd
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 		// 카테고리 수정 
 		@RequestMapping(value = "/category/update.ad", method = RequestMethod.GET)
 		public void update(String catesub_cd, Model model) throws Exception {
@@ -65,7 +99,14 @@ public class CategoryController {
 			System.out.println(catesub_cd);
 			model.addAttribute("list",categoryService.read(catesub_cd));
 		}
-	
+		
+		/**
+		 * 카테고리 수정 -post
+		 * @param categoryDto
+		 * @param rttr
+		 * @return
+		 * @throws Exception
+		 */
 		// 카테고리 수정 처리
 		@RequestMapping(value = "/category/update.ad", method = RequestMethod.POST)
 		public String updateProcess(CategoryDto categoryDto,RedirectAttributes rttr) throws Exception {
@@ -76,6 +117,13 @@ public class CategoryController {
 			return "redirect: ../category/cateList.ad";
 		}
 		
+		/**
+		 * 카테고리 삭제
+		 * @param catesub_cd
+		 * @param rttr
+		 * @return
+		 * @throws Exception
+		 */		
 		// 카테고리 삭제
 		@RequestMapping(value = "/category/delete.ad", method = RequestMethod.POST)
 		public String delete(String catesub_cd, RedirectAttributes rttr) throws Exception {

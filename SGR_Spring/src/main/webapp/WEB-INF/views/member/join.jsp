@@ -230,7 +230,7 @@
 				<div class="form-group">
 			<label class="col-md-4 control-label" for="mb_pw">비밀번호</label>
 			<div class="col-md-4">
-					<input type="password"	name="mb_pw" size="10" class="form-control input-md" required  placeholder="3~10자">
+					<input type="password"	name="mb_pw" size="10" class="form-control input-md" required  placeholder="3~10자" pattern="^[A-Za-z0-9]{3,10}$">
 					</div>
 			</div>	
 

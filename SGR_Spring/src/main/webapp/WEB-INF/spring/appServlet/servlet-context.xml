@@ -55,6 +55,8 @@
 			<mapping path="/goods/**" />
 			<mapping path="/category/**" />
 			<mapping path="/qna/**" />
+			<mapping path="/review/**" />
+			
 			<beans:bean class="com.project.common.interceptor.SgrInterceptor" />
 		</interceptor>
 	</interceptors>

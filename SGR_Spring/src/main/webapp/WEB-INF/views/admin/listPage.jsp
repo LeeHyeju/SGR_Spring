@@ -51,11 +51,12 @@ select {
 </style>
 </head>
 <body>
-	<br>
+<h2 style="text-align: center;">SGR 회원리스트</h2>
+	<hr>
 	<form id="jobForm">
 		<input type="hidden" name="page" value=${pageMaker.cri.page }>
 		<input type="hidden" name="perPageNum" 	value=${pageMaker.cri.perPageNum }>
-		<div class="box-body" align="right">
+		<div class="box-body"  style="width: 80%; margin: auto; text-align: right; " >
 			<select name="searchType">
 				<option value="x"
 					${cri.searchType == null or cri.searchType == "x"?"selected='selected'":"" }>&nbsp;&nbsp;▼
@@ -72,19 +73,18 @@ select {
 			<button id="searchBtn" class="btn btn-info">SEARCH</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
+		<br>
 	</form>
-	<h1>:: SGR 회원리스트::</h1>
 	<fieldset>
-		<legend></legend>
 		<div class="box-body">
-			<table class="table table-bordered">
+			<table class="table table-bordered" style="width: 80%; margin: auto; text-align:center; ">
 				<tr>
 <!-- 					<th style="width: 10px">No.</th> -->
-					<th>회원 ID</th>
-					<th>회원 이름</th>
-					<th>등급</th>
-					<th>가입일자</th>
-					<th>탈퇴일자</th>
+					<th style=" text-align:center;">회원 ID</th>
+					<th style=" text-align:center;">회원 이름</th>
+					<th style=" text-align:center;">등급</th>
+					<th style=" text-align:center;">가입일자</th>
+					<th style=" text-align:center;">탈퇴일자</th>
 				</tr>
 				<c:forEach items="${list }" var="member">
 					<tr>

@@ -18,7 +18,7 @@ public class MemberDto {
 	private String mb_address; //도로명주소
 	private String mb_addressDetail; //상세주소
 	private int mb_grade; //회원등급
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date mb_joinDate; //가입일자
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date mb_leaveDate; //탈퇴일자

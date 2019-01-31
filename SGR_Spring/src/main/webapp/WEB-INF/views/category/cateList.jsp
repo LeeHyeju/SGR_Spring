@@ -14,11 +14,13 @@
 </script>
 </head>
 <body>
-	<h2>카테고리 리스트</h2>
+	<h2 style="text-align: center;">카테고리 리스트</h2>
 <fieldset>
 <legend></legend>
 <form>
-<table>
+<center><button  onclick="location='../category/create.ad'">카테고리 등록</button></center>
+<br>
+<table class="table table-bordered"  style=" width: 80%;  margin: auto; text-align:center; " >
 <tr>
 <td><input  style="background-color:transparent;border:0 solid black;text-align:center;" value="대분류코드" readonly="readonly"></td>
 <td><input  style="background-color:transparent;border:0 solid black;text-align:center;" value="대분류명" readonly="readonly"></td>
@@ -37,7 +39,6 @@
 </table>
 </form>
 <br><br>
-<button onclick="location='../category/create.ad'">카테고리 등록</button>
 </fieldset>
 
 </body>

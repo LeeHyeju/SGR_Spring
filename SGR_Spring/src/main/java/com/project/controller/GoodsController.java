@@ -40,7 +40,6 @@ public class GoodsController {
 	/**
 	 * 회원 상품조회 리스트
 	 * 작성자 : 이혜주
-	 * since : 20181210
 	 * @param cri
 	 * @param model
 	 * @return
@@ -113,19 +112,19 @@ public class GoodsController {
 		 * @throws Exception
 		 */
 		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
-		public String adminWrite(Model model, HttpServletRequest req
-//				,@RequestParam Map<String,Object> cateGory1
-				)throws Exception {
+		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)
+			throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
 			
-//			String cate_nm = req.getParameter("cate_nm");
-//			
+			String cate_nm = req.getParameter("cate_nm");
+		
 //			//카테고리 대분류 코드	
-//			model.addAttribute("depthOne", cateGoryService.depthOne());
+			model.addAttribute("depthOne", cateGoryService.depthOne());
 //			//소분류 코드
-//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
+			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
 			return "/goods/adminWrite";
 		}
+		
 //		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
 //		public ModelAndView adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
 //			System.out.println("관리자 상품 작성 - get입니다");
@@ -151,22 +150,21 @@ public class GoodsController {
 		 * @throws Exception
 		 */
 		
-//		@RequestMapping(value = "goods/category.ad", method=RequestMethod.POST) //포스트 방식으로 받는다.
-//		@ResponseBody
-//		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
-//
-//		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌
-//		    
-//		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
-//		    
-//		    //List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
-//		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);
-//		    //hashmap.put("data", resultList); // 받아온 쿼리 리스트를 hashmap data에 담는다.
-//		    hashmap.put("cateGory2", cateGory2);
-//		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
-//		   System.out.println("카테고리 끝");
-//		    return hashmap; // 화면으로 던져준다!!
-//		}
+		@RequestMapping(value = "goods/category.ad", method=RequestMethod.GET) //포스트 방식으로 받는다.
+		@ResponseBody
+		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
+			
+		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌		    
+		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
+	    
+		    List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
+		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);
+		    hashmap.put("data", resultList); // 받아온 쿼리 리스트를 hashmap data에 담는다.
+		    hashmap.put("cateGory2", cateGory2);
+		    hashmap.put("msg", "success"); //  문자열을 hashmap msg에 담는다.
+		   System.out.println("카테고리 끝");
+		    return hashmap; // 화면으로 던져준다!!
+		}
 		
 		/**
 		 * 상품입력 POST
