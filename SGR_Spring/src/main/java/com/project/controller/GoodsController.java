@@ -115,13 +115,10 @@ public class GoodsController {
 		public String adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)
 			throws Exception {
 			System.out.println("관리자 상품 작성 - get입니다");
-			
-			String cate_nm = req.getParameter("cate_nm");
 		
-//			//카테고리 대분류 코드	
+			//카테고리 대분류 코드	
 			model.addAttribute("depthOne", cateGoryService.depthOne());
-//			//소분류 코드
-			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
+			
 			return "/goods/adminWrite";
 		}
 		
@@ -150,12 +147,12 @@ public class GoodsController {
 		 * @throws Exception
 		 */
 		
-		@RequestMapping(value = "goods/category.ad", method=RequestMethod.GET) //포스트 방식으로 받는다.
+		@RequestMapping(value = "goods/category.ad", method=RequestMethod.POST) //포스트 방식으로 받는다.
 		@ResponseBody
-		public  HashMap<String, Object> testJson( ModelMap model, @RequestParam Map<String,Object> cateGory1) throws Exception {
+		public  HashMap<String, Object> testJson( ModelMap model, HttpServletRequest req) throws Exception {
 			
 		    HashMap<String, Object> hashmap = new HashMap<String, Object>(); //HashMap을 이용해서 던져줌		    
-		    System.out.println("관리자가 선택한 대분류 : "+cateGory1);
+		    String cateGory1 = req.getParameter("cateGory1");
 	    
 		    List resultList = cateGoryService.depthOne();// 서비스를 호출하여 쿼리 리스트를 담는다.
 		    List cateGory2 =  cateGoryService.depthTwo(cateGory1);

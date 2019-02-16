@@ -40,4 +40,15 @@ public class ReviewService {
 		//글 쓰기
 		reviewDao.write(reviewDto);
 	}
+	
+	public void update(ReviewDto reviewDto) throws Exception{
+		//글 수정
+		reviewDao.update(reviewDto);
+	}
+
+	public void delete(Integer review_no) throws Exception{
+		//글 삭제
+		reviewDao.delete(review_no);
+	}
 }
+

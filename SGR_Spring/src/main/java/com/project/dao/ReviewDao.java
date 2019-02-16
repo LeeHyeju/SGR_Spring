@@ -42,4 +42,14 @@ public class ReviewDao {
 		//글 쓰기
 		session.insert(NAMESPACE+".write", reviewDto);
 	}
+	
+	public void update(ReviewDto reviewDto) throws Exception{
+		//글 수정
+		session.update(NAMESPACE+".update", reviewDto);
+	}
+	
+	public void delete(Integer review_no) throws Exception{
+		//글 삭제
+		session.delete(NAMESPACE+".delete", review_no);
+	}
 }

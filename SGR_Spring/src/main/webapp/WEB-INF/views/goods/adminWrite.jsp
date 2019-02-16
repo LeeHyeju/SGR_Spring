@@ -27,7 +27,7 @@ function cateSelect(){
 		data : {							//서버로 보낼 데이터들
 			cateGory1 : cate_nm
 	},
-		dataType : "Json", //서버에서 보내는 데이터 타입
+		dataType : "json", //서버에서 보내는 데이터 타입
 		
  		//contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
 		

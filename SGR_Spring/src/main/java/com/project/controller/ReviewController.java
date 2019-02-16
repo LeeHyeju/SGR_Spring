@@ -47,9 +47,11 @@ public class ReviewController {
 	
 	  //글 쓰기
 	  @RequestMapping(value = "/review/write.do", method = RequestMethod.GET)
-	  public void insert(ReviewDto reviewDto, 
+	  public void insert(@ModelAttribute("review") ReviewDto reviewDto, 
 			  int goods_no, String catesub_cd, HttpServletRequest request, Model model) throws Exception{
 		  System.out.println("review 글 쓰기 -get");
+		  request.getParameter("goods_no");
+		  request.getParameter("catesub_cd");
 		  System.out.println("goods_no:"+goods_no);
 		  System.out.println("catesub_cd:"+catesub_cd);
 	  }
@@ -63,5 +65,29 @@ public class ReviewController {
 		    return "redirect:/review/reviewList.do";
 	  }
 	  
+	  //글 수정 
+	  @RequestMapping(value = "/review/update.do", method = RequestMethod.GET)
+	  public void update(@RequestParam("review_no") int review_no, Model model) throws Exception{
+		  System.out.println("review 글 수정 -get");
+		  model.addAttribute("review", reviewService.view(review_no));
+	  }
 	  
+	  //글 수정 처리
+	  @RequestMapping(value="/review/update.do", method=RequestMethod.POST)
+	  public String updateProcess(ReviewDto reviewDto) throws Exception{
+		  System.out.println("review 글 수정-post");
+		  System.out.println("reviewController.dto:"+reviewDto.toString());
+		  reviewService.update(reviewDto);
+		  
+		  return "redirect: ../review/reviewList.do";
+	  }
+	  
+	  //글 삭제 처리
+	  @RequestMapping(value="/review/delete.do", method=RequestMethod.POST)
+	  public String delete(int review_no) throws Exception{
+		  System.out.println("review 삭제");
+		  reviewService.delete(review_no);
+	  
+		  return "redirect: ../review/reviewList.do";
+	  }
 }

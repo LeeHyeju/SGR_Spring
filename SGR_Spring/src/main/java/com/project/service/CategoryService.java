@@ -64,7 +64,7 @@ public class  CategoryService {
 		return categoryDao.depthOne();
 	}
 
-	public List<Map<String,Object>> depthTwo(Map<String, Object> cateGory1) {
+	public List<Map<String,Object>> depthTwo(String cateGory1) {
 		return categoryDao.depthTwo(cateGory1);
 		
 	}

@@ -100,10 +100,33 @@ INSERT INTO
 					review_content
 					)
 VALUES 				
+					(
 					#{goods_no}, 
 					#{catesub_cd},
 					#{mb_id},
 					#{review_title},
 					#{review_content}
+					)
 </insert>
+
+
+<update id="update">
+UPDATE 
+			review
+SET 
+		review_title =#{review_title}, 
+		review_content =#{review_content}
+WHERE 
+		review_no=#{review_no}
+</update>
+
+<delete id="delete">
+DELETE
+
+FROM
+		review
+WHERE
+		review_no=#{review_no}
+
+</delete>
 </mapper>

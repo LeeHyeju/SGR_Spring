@@ -66,7 +66,7 @@ select {
 							value='${cri.keyword }'>
 						<button id='searchBtn'>Search</button>
 						
-						<button type="button"  id='newBtn'>리뷰 작성</button>
+<!-- 						<button type="button"  id='newBtn'>리뷰 작성</button> -->
 					</div>
 					<br><br>		
 					

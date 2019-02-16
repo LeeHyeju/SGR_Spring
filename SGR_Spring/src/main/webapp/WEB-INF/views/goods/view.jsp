@@ -32,7 +32,7 @@
 </script>
 </head>
 <body>
-<form  method="get" role="goodsForm">
+<form  method="post" role="goodsForm">
 <!-- 결제 ㄱㄱ. -->
 <input type="hidden" value="${goods.goods_no }" name="goods_no" />
 <input type="hidden" value="${goods.goods_name }" name="goods_name" />
