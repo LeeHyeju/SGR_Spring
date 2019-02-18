@@ -89,18 +89,26 @@ $(function(){
 		var myTag = element.attr('value');
 		cate2val.val(myTag);
 	});
+	
+	
 });
+
+var submit_btn = function()	{
+		
+		$("#form").submit();
+	
+}
+
 </script>
  
 </head>
 <body>
-<form action="./adminWriteProcess.ad" class="form-horizontal" method="get" >
+<form action="/goods/adminWriteProcess.ad" class="form-horizontal" method="POST" id="form" enctype="multipart/form-data">
 <!-- enctype="multipart/form-data" -->
-
+<input id="goods_no" name="goods_no" type="hidden"  >
 <h2  style="text-align: center; color: silver;">관리자 상품 등록</h2>
 <fieldset> 
 <legend></legend>
- <input id="goods_no" name="goods_no" type="hidden"  class="form-control input-md"  > 
 <!-- 분류 -->
 <div class="form-group">
   <label class="col-md-4 control-label" >분류명</label>  
@@ -117,7 +125,7 @@ $(function(){
 		<div style='display:inline;float:left;width:180px' >
 				
 				<!-- 이 부분에 1차 선택시마다 2차 카테고리,  append()안에 내용이 들어감.-->
-		<select id="catesub_cd" class="form-control" name="catesub_cd" onchange="alert(this.options[this.selectedIndex].value)">
+		<select id="catesub_cd" class="form-control" name="catesub_cd" >
 		</select>
 		
 <!-- 		<input id="catesub_cd" name="catesub_cd"  value="A013"> -->
@@ -225,7 +233,7 @@ $(function(){
 <!-- <div class="form-group"> -->
 <!--   <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label> -->
 <!--   <div class="col-md-5"> -->
-<!--     <input id="goods_img1" name="file" type="file"  multiple="multiple" class="form-control" ><br /> -->
+     <input id="goods_img" name="goods_img" type="file"  multiple="multiple" class="form-control"  value=""><br /> 
 <!--     &nbsp; -->
 <!--     <br> -->
 <!--   </div> -->
@@ -253,7 +261,7 @@ $(function(){
   <label class="col-md-4 control-label" for=""></label>
   <div class="col-md-4">
   	
-    <button type="submit" id="btn" class="btn btn-info">상품 등록</button>
+    <button type="button" id="btn" class="btn btn-info" onclick="javascript:submit_btn();">상품 등록</button>
     <button type="reset" class="btn btn-danger">등록 취소</button>
 	<button id="adminListBtn"type="button" name="adminListBtn" class="btn btn-white"  onclick="history.back();">목록</button>
  	

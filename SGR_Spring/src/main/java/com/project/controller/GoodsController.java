@@ -163,6 +163,8 @@ public class GoodsController {
 		    return hashmap; // 화면으로 던져준다!!
 		}
 		
+		
+		
 		/**
 		 * 상품입력 POST
 		 * @param goodsDto
@@ -171,44 +173,37 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.GET)
-		public String adminWriteProcess(GoodsDto goodsDto, Model model,  RedirectAttributes rttr)throws Exception {
+		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
+		public String adminWriteProcess(GoodsDto goodsDto,Model model,  RedirectAttributes rttr, HttpServletRequest req)throws Exception {
 			System.out.println("관리자 상품 작성 - post입니다");
 		
-			System.out.println("goodsController.dto:" +goodsDto.toString());
 //			String uploadFile = goodsDto.getGoods_img();
 			//db에 저장
-			goodsService.adminWrite(goodsDto);
-			rttr.addFlashAttribute("msg", "writeOK");
-			return "redirect:/goods/adminList";
-			}
-//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.POST)
-//		public String adminWriteProcess(GoodsDto goodsDto,  Model model,  RedirectAttributes rttr)throws Exception {
-//			System.out.println("관리자 상품 작성 - post입니다");
-//		MultipartFile uploadfile = goodsDto.getGoods_img();
-//			System.out.println("goodsController.dto:" +goodsDto.toString());
-//			
-//			if (uploadfile != null) {
-//			      String fileName = uploadfile.getOriginalFilename();
-//			      try {
-//			        // 1. FileOutputStream 사용
-//			        // byte[] fileData = file.getBytes();
-//			        // FileOutputStream output = new FileOutputStream("C:/images/" + fileName);
-//			        // output.write(fileData);
-//			         
-//			        // 2. File 사용
-//			        File file = new File("D:\\sgr\\img\\upload" + fileName);
-//			        uploadfile.transferTo(file);
-//			      } catch (IOException e) {
-//			        e.printStackTrace();
-//			      } // try - catch
-//			    } // if
 //			goodsService.adminWrite(goodsDto);
-//			rttr.addFlashAttribute("msg", "writeOK");
-//			    // 데이터 베이스 처리를 현재 위치에서 처리
-//			    return "redirect:/goods/adminList.ad"; // 리스트 요청으로 보내야하는데 일단 제외하고 구현
-//			  }
+			rttr.addFlashAttribute("msg", "writeOK");
+			return "redirect:/goods/adminList.ad";
+			}
 	
+		public String upload(GoodsDto goodsDto, RedirectAttributes rttr)	throws Exception {
+			System.out.println(goodsDto);
+			// 서버에 저장된 이미지 파일을 가져온다. file1~ file6번까지 (file1 : 썸네일,큰이미지, file2~6(detail.jsp) : 서브 이미지
+			MultipartFile uploadFile = goodsDto.getGoods_img();
+
+			System.out.println("Upload file 넘기는곳 뒤");
+			// 첨부 파일이 없는 경우 업로드 시키지 않고 글쓰기 화면으로 돌아감
+			System.out.println("+++++++++++++++++++++++++++++++++");
+			System.out.println("uploadfile : " + uploadFile);
+			if (uploadFile.getSize() == 0) {
+				return "goods/adminWrite";
+			}
+
+			// 첨부 파일을 업로드하고 리사이즈 해서 저장하는 것을 호출하면 s_ 가 붙은 파일명을 file1에 넣는다.
+			// 서버에 저장된 이미지 파일을 가져온다. file1~ file6번까지 (file1 : 썸네일,큰이미지, file2~6(detail.jsp) : 서브 이미지
+	
+			
+			return "redirect:adminList.go";
+		}
+		
 		/**
 		 * 상품수정 GET
 		 * @param goods_no
