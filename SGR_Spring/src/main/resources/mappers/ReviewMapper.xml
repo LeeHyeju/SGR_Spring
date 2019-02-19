@@ -32,25 +32,30 @@
 	</sql>
 
 <select id="reviewList" resultType="ReviewDto">
-	SELECT 
-			review_no,
-			goods_no,
-			catesub_cd,
-			mb_id,
-			review_title,
-			review_content,
-			review_img,
-			reg_date,
-			review_hit
-	FROM
-			review
+	SELECT * FROM (
+		SELECT 
+					review_no,
+					review_title,
+					goods_img,
+					mb_id,
+					review_content,
+					reg_date,
+					review_hit
+		FROM (
+					SELECT 
+								r.review_no, r.review_title, g.goods_img, r.mb_id,
+								r.review_content, r.reg_date, r.review_hit
+					FROM
+								review r, goods g
+					WHERE
+								r.goods_no = g.goods_no
+								<include refid="search"></include>
+					ORDER BY
+ 									review_no DESC, reg_date DESC							
+					)
+ 	)
  	WHERE 
- 			review_no > 0
- 			<include refid="search"></include>
- 	ORDER BY
- 				review_no DESC,
-				reg_date DESC
-		limit #{pageStart}, #{perPageNum}		
+				limit #{pageStart}, #{perPageNum}		
 </select>
 
 <select id="reviewCount" resultType="Integer">

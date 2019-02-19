@@ -93,7 +93,7 @@ public class UploadFileUtils {
     BufferedImage destImg = 
         Scalr.resize(sourceImg, 
             Scalr.Method.AUTOMATIC, 
-            Scalr.Mode.FIT_TO_HEIGHT,300); //높이
+            Scalr.Mode.FIT_TO_HEIGHT,100); //높이
     //실제적으로 저장해야 하는 파일명 작성(문자열)
     //폴더 (위치) + 파일 구분자(보통 \ 사용) + "S_"(small) + 파일명   
     String thumbnailName = 

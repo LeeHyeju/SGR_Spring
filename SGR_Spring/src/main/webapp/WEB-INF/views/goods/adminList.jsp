@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html >
 <html>
 <head>
@@ -143,8 +144,9 @@ function itemChange(){
 							<div class="info">NO : ${goods.goods_no } &nbsp;&nbsp;&nbsp;
 							<a href="/goods/view.do${pageMaker.makeSearch (pageMaker.cri.page)}&goods_no=${goods.goods_no }">${goods.goods_name }</a>
 						</div></div>
-						<div class="panel-body"> <!-- 이미지 사진 부분 -->
-							<img src="${path }/resources/img/${goods.goods_img}" 	class="img-responsive" style="width: 100%" alt="Image">
+						<div class="panel-body" style="height: 180px;"> <!-- 이미지 사진 부분 -->
+<%-- 							<img src="${path }/resources/img//${goods.goods_img}" 	class="img-responsive" style="width: 100%" alt="Image"> --%>
+							<img src="<spring:url value='/image${goods.goods_img }'/>" 	class="img-responsive" style="width: 100%" >
 						</div>
 						<div class="panel-footer">
 							<div class="heading">

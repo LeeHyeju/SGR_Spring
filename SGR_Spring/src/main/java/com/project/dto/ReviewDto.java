@@ -14,10 +14,10 @@ public class ReviewDto {
 	private String mb_id; //아이디
 	private String review_title; //제목
 	private String review_content; //내용
-	private String review_img; //사진
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private Date reg_date; //날짜
 	private int review_hit;//조회수
+	private String goods_img;
 	
 	
 	public int getReview_no() {
@@ -56,12 +56,6 @@ public class ReviewDto {
 	public void setReview_content(String review_content) {
 		this.review_content = review_content;
 	}
-	public String getReview_img() {
-		return review_img;
-	}
-	public void setReview_img(String review_img) {
-		this.review_img = review_img;
-	}
 	public Date getReg_date() {
 		return reg_date;
 	}
@@ -75,10 +69,17 @@ public class ReviewDto {
 		this.review_hit = review_hit;
 	}
 	
+	public String getGoods_img() {
+		return goods_img;
+	}
+	public void setGoods_img(String goods_img) {
+		this.goods_img = goods_img;
+	}
 	@Override
 	public String toString() {
 		return "ReviewDto [review_no=" + review_no + ", goods_no=" + goods_no + ", catesub_cd=" + catesub_cd
 				+ ", mb_id=" + mb_id + ", review_title=" + review_title + ", review_content=" + review_content
-				+ ", review_img=" + review_img + ", reg_date=" + reg_date + ", review_hit=" + review_hit + "]";
+				+ ", reg_date=" + reg_date + ", review_hit=" + review_hit + ", goods_img=" + goods_img + "]";
 	}
+	
 }

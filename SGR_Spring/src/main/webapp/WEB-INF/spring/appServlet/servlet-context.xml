@@ -19,7 +19,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 		<!-- view가 아닌 다른 자원파일 매핑 ex)bootstrap.css같은것...... 예씨로 -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/leehyeju/**" location="/WEB-INF/views/img/" />
+	<resources mapping="/image/**" location="file:///D:\sgr\img\upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->

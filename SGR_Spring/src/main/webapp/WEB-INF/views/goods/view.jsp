@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,9 @@
 						
 						<div class="preview-pic tab-content">
 						  <!-- class="img-rounded" -->
-<%-- 						  <div class="tab-pane active" id="pic-1"><img id="big" src="../download/displayFile?fileName=${goods.file1 }" class="demo" /></div> --%>
+						  <div class="tab-pane active" id="pic-1">
+					<img src="<spring:url value='/image${goods.goods_img }'/>" width="100%"  align="middle">
+						  </div>
 
 						  <div class="tab-pane" id="pic-2"><img src="" /></div>
 						  <div class="tab-pane" id="pic-3"><img src="" /></div>

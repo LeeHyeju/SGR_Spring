@@ -78,16 +78,18 @@ select {
 						<div class="box-body">
 							<table class="table table-bordered" style="width: 80%; margin: auto; text-align:center; "  >
 								<tr>
-									<th style=" text-align:center;">NO</th>
-									<th style="text-align: center;">TITLE</th>
-									<th style="text-align: center;">WRITER</th>
-									<th style=" text-align:center;">HIT</th>
-									<th style="text-align: center;">DATE</th>
+									<th style=" text-align:center;">글번호</th>
+									<th style=" text-align:center;">상 품</th>
+									<th style="text-align: center;">제 목</th>
+									<th style="text-align: center;">작성자</th>
+									<th style=" text-align:center;">조회수</th>
+									<th style="text-align: center;">작성일자</th>
 								</tr>
 
 								<c:forEach items="${review}" var="review">
 									<tr>
 										<td>${review.review_no}</td>
+										<td>${goods.goods_img }</td>
 										<td><a href='/review/view.do${pageMaker.makeSearch(pageMaker.cri.page) }&review_no=${review.review_no}'>
 												${review.review_title} </a></td>
 										<td>${review.mb_id}</td>
