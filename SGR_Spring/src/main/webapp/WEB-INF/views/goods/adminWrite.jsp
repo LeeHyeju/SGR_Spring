@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <!DOCTYPE html>
@@ -103,9 +102,9 @@ var submit_btn = function()	{
  
 </head>
 <body>
-<form action="/goods/adminWriteProcess.ad" class="form-horizontal" method="POST" id="form" enctype="multipart/form-data">
+<form action="/goods/adminWriteProcess.ad" class="form-horizontal" method="POST" id="form" enctype="multipart/form-data" accept-charset ="UTF-8">
 <!-- enctype="multipart/form-data" -->
-<input id="goods_no" name="goods_no" type="hidden"  >
+<input id="goods_no" name="goods_no" type="hidden" >
 <h2  style="text-align: center; color: silver;">관리자 상품 등록</h2>
 <fieldset> 
 <legend></legend>
@@ -133,7 +132,6 @@ var submit_btn = function()	{
 		</div>
 		</div>
 <br>
-
 
 <!-- 상품명 -->
 <div class="form-group">
@@ -233,7 +231,7 @@ var submit_btn = function()	{
 <!-- <div class="form-group"> -->
 <!--   <label class="col-md-4 control-label" for="file1">상품 이미지 첨부</label> -->
 <!--   <div class="col-md-5"> -->
-     <input id="goods_img" name="goods_img" type="file"  multiple="multiple" class="form-control"  value=""><br /> 
+     <input id="uploadFile" name="uploadFile" type="file"  class="form-control" ><br /> 
 <!--     &nbsp; -->
 <!--     <br> -->
 <!--   </div> -->

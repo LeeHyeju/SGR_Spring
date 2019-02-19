@@ -1,6 +1,7 @@
 package com.project.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +21,9 @@ public class GoodsDto {
 	private String goods_charge; //배송비
 	private String cate_nm;
 	private String catesub_cd; //소분류코드
-	private MultipartFile goods_img; //대표사진
+	private MultipartFile uploadFile; // form의 name 
+	private String goods_img; //사진(db 연결)
+	
 	public String getGoods_no() {
 		return goods_no;
 	}
@@ -81,14 +84,19 @@ public class GoodsDto {
 	public void setCatesub_cd(String catesub_cd) {
 		this.catesub_cd = catesub_cd;
 	}
-	public MultipartFile getGoods_img() {
+
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	public String getGoods_img() {
 		return goods_img;
 	}
-	public void setGoods_img(MultipartFile goods_img) {
+	public void setGoods_img(String goods_img) {
 		this.goods_img = goods_img;
 	}
-	
-	
 	public String getCate_nm() {
 		return cate_nm;
 	}

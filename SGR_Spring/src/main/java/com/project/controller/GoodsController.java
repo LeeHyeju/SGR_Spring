@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.common.model.PageMaker;
 import com.project.common.model.SearchCriteria;
+import com.project.common.util.UploadFileUtils;
 import com.project.dto.GoodsDto;
 import com.project.service.CategoryService;
 import com.project.service.GoodsService;
@@ -36,6 +40,9 @@ public class GoodsController {
 	@Inject
 	private CategoryService cateGoryService;
 	
+	//파일 저장 위치 
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	/**
 	 * 회원 상품조회 리스트
@@ -173,36 +180,70 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
-		public String adminWriteProcess(GoodsDto goodsDto,Model model,  RedirectAttributes rttr, HttpServletRequest req)throws Exception {
-			System.out.println("관리자 상품 작성 - post입니다");
 		
-//			String uploadFile = goodsDto.getGoods_img();
-			//db에 저장
-//			goodsService.adminWrite(goodsDto);
-			rttr.addFlashAttribute("msg", "writeOK");
-			return "redirect:/goods/adminList.ad";
-			}
-	
-		public String upload(GoodsDto goodsDto, RedirectAttributes rttr)	throws Exception {
-			System.out.println(goodsDto);
-			// 서버에 저장된 이미지 파일을 가져온다. file1~ file6번까지 (file1 : 썸네일,큰이미지, file2~6(detail.jsp) : 서브 이미지
-			MultipartFile uploadFile = goodsDto.getGoods_img();
-
-			System.out.println("Upload file 넘기는곳 뒤");
-			// 첨부 파일이 없는 경우 업로드 시키지 않고 글쓰기 화면으로 돌아감
-			System.out.println("+++++++++++++++++++++++++++++++++");
-			System.out.println("uploadfile : " + uploadFile);
-			if (uploadFile.getSize() == 0) {
-				return "goods/adminWrite";
-			}
-
-			// 첨부 파일을 업로드하고 리사이즈 해서 저장하는 것을 호출하면 s_ 가 붙은 파일명을 file1에 넣는다.
-			// 서버에 저장된 이미지 파일을 가져온다. file1~ file6번까지 (file1 : 썸네일,큰이미지, file2~6(detail.jsp) : 서브 이미지
-	
+		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
+		public String adminWriteProcess(GoodsDto goodsDto, HttpServletRequest req, Model model,  RedirectAttributes rttr)
+				throws Exception {
+			System.out.println("관리자 상품 작성 - post입니다");
 			
-			return "redirect:adminList.go";
+			// 첨부 파일의 정보 출력
+			System.out.println("파일사이즈:"+goodsDto.getUploadFile().getSize());
+			System.out.println("파일의 MIME Type:"
+					+goodsDto.getUploadFile().getContentType());
+			
+			goodsDto.setGoods_img(
+					UploadFileUtils.uploadFile(uploadPath, goodsDto.getUploadFile()));
+			
+			//DB에 저장			
+			goodsService.adminWrite(goodsDto);
+			rttr.addFlashAttribute("msg", "writeOK");
+			System.out.println("goods_img"+goodsDto.getGoods_img());
+			return "redirect:/goods/adminList.ad";
 		}
+		
+		
+//		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
+//		public String adminWriteProcess(GoodsDto goodsDto,  MultipartFile goods_img, 
+//				HttpServletRequest req, Model model,  RedirectAttributes rttr)
+//				throws Exception {
+//			System.out.println("관리자 상품 작성 - post입니다");
+//			
+//			goods_img = goodsDto.getGoods_img();
+//			
+//			//파일 업로드
+//			System.out.println("originalFileName: "+ goods_img.getOriginalFilename());
+//			System.out.println("size:"+ goods_img.getSize());
+//			System.out.println("contentType:" + goods_img.getContentType());
+//						
+//			System.out.println("업로드 준비");
+//		
+//			
+//			String savedName = uploadFile(goods_img.getOriginalFilename(), goods_img.getBytes());
+//			
+//			model.addAttribute("savedName", savedName);
+//			
+//			//db에 저장
+//			
+//			System.out.println("dto:"+goodsDto.toString());
+//			
+//			goodsService.adminWrite(goodsDto);
+//			rttr.addFlashAttribute("msg", "writeOK");
+//			return "redirect:/goods/adminList.ad";
+//			}
+//		
+		
+		
+//		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
+//		public String adminWriteProcess(GoodsDto goodsDto,Model model,  RedirectAttributes rttr, HttpServletRequest req)throws Exception {
+//			System.out.println("관리자 상품 작성 - post입니다");
+//		
+////			String uploadFile = goodsDto.getGoods_img();
+//			//db에 저장
+////			goodsService.adminWrite(goodsDto);
+//			rttr.addFlashAttribute("msg", "writeOK");
+//			return "redirect:/goods/adminList.ad";
+//			}
+	
 		
 		/**
 		 * 상품수정 GET
