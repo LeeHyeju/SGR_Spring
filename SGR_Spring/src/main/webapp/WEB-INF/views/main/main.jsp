@@ -61,11 +61,11 @@ border : 0; height : 2px
     <div class="collapse navbar-collapse" id="myNavbar" >
 <ul id="nav"  >
   <li><a href="/goods/goodsList.do">SGR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/about/">OUTER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/work/">BOTTOM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/clients/">ACC</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/contact/">SHOES</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do?searchType=n&keyword=TOP">TOP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do?searchType=n&keyword=OUTER">OUTER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do?searchType=n&keyword=BOTTOM">BOTTOM</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do?searchType=n&keyword=ACC">ACC</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/goods/goodsList.do?searchType=n&keyword=SHOES">SHOES</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/contact/"><span class="glyphicon glyphicon-picture"></span>PHOTO</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/contact/"><span class="glyphicon glyphicon-list-alt"></span>ORDER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
   <li><a href="/contact/"><span class="glyphicon glyphicon-shopping-cart"></span>CART</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>

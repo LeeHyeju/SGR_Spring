@@ -40,6 +40,7 @@ select {
 						});
 			});
 </script>
+<!-- 
 <script type="text/javascript">
 
 function itemChange(){
@@ -78,14 +79,17 @@ function itemChange(){
 	            }
 	}
 </script>
+ -->
 </head>
 <body>
+	<h2 style="text-align: center; color: black;"> 관리자 상품 리스트</h2> 
 	<br>
+
 	<form id="jobForm">
 		<input type="hidden" name="page" value=${pageMaker.cri.page }>
 		<input type="hidden" name="perPageNum"
 			value=${pageMaker.cri.perPageNum }>
-		<div class="box-body" align="right">
+		<div class="box-body" align="right" style="width: 80%; margin: auto; text-align: right; ">
 			<select name="searchType">
 				<option value="x"
 					${cri.searchType == null or cri.searchType == "x"?"selected='selected'":"" }>&nbsp;&nbsp;▼
@@ -97,10 +101,10 @@ function itemChange(){
 					${cri.searchType == "mno"?"selected='selected'":"" }>전체</option>
 			</select> <input name="keyword" value="${cri.keyword }" />
 			<button id="searchBtn" class="btn btn-info">SEARCH</button>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-white" type="submit" onclick="location='../goods/adminWrite.ad'">상품등록</button>
 		</div>
+		<br/>
 	</form>
-	<h1 style="text-align: center; color: silver;">:: 관리자 상품 리스트::</h1> 
 	<fieldset>
 		<legend></legend>
 	</fieldset>
@@ -109,31 +113,31 @@ function itemChange(){
 			id="page" type="hidden" value=${cri.page }> <input
 			id="perPageNum" type="hidden" value=${cri.perPageNum }>
 	</form>
-	
-	<div  style='display:inline; min-width:1200px;'>
-	<div align="center" style='display:inline;float:left;width:600px'>
-	<label for="exampleFormControlSelect1" >1차분류</label>
-		<select  id="exampleFormControlSelect1" onchange="itemChange()" class="form-control">
-		<option>TOP</option>
-		<option>OUTER</option>
-		<option>BOTTOM</option>
-		<option>ACC</option>
-		<option>SHOES</option>
-		</select>
-		</div>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style='display:inline;float:left;width:600px' align="center">
+	<br/>
+<!-- 	<div  style='display:inline; min-width:1200px;'> -->
+<!-- 	<div align="center" style='display:inline;float:left;width:600px'> -->
+<!-- 	<label for="exampleFormControlSelect1" >1차분류</label> -->
+<!-- 		<select  id="exampleFormControlSelect1" onchange="itemChange()" class="form-control"> -->
+<!-- 		<option>TOP</option> -->
+<!-- 		<option>OUTER</option> -->
+<!-- 		<option>BOTTOM</option> -->
+<!-- 		<option>ACC</option> -->
+<!-- 		<option>SHOES</option> -->
+<!-- 		</select> -->
+<!-- 		</div> -->
+<!-- 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 		<div style='display:inline;float:left;width:600px' align="center"> -->
 
-		<label >2차분류</label>
-		<select id="select2" class="form-control">
-		</select>
-		</div>
-	</div>
-<br>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- 		<label >2차분류</label> -->
+<!-- 		<select id="select2" class="form-control"> -->
+<!-- 		</select> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- <br>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
 	
-<button class="btn btn-white" type="submit" onclick="location='../goods/adminWrite.ad'">상품등록</button>
+
 <!-- 상품 이미지 반복 -->
-<br><br><br><hr>
+<br>
 	<c:forEach var="goods" items="${adminList }">
 		<div style="border: 1px solid white; float: left; width: 33%;">
 		<div class="container">
@@ -144,7 +148,7 @@ function itemChange(){
 							<div class="info">NO : ${goods.goods_no } &nbsp;&nbsp;&nbsp;
 							<a href="/goods/view.do${pageMaker.makeSearch (pageMaker.cri.page)}&goods_no=${goods.goods_no }">${goods.goods_name }</a>
 						</div></div>
-						<div class="panel-body" style="height: 180px;"> <!-- 이미지 사진 부분 -->
+						<div class="panel-body" style="height: 350px;"> <!-- 이미지 사진 부분 -->
 <%-- 							<img src="${path }/resources/img//${goods.goods_img}" 	class="img-responsive" style="width: 100%" alt="Image"> --%>
 							<img src="<spring:url value='/image${goods.goods_img }'/>" 	class="img-responsive" style="width: 100%" >
 						</div>

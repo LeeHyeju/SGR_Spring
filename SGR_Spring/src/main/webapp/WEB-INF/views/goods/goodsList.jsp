@@ -40,6 +40,7 @@ select {
 						});
 			});
 </script>
+<!-- 
 <script type="text/javascript">
 
 function itemChange(){
@@ -78,6 +79,7 @@ function itemChange(){
 	            }
 	}
 </script>
+-->
 </head>
 <body>
 	<br>
@@ -110,26 +112,26 @@ function itemChange(){
 			id="perPageNum" type="hidden" value=${cri.perPageNum }>
 	</form>
 	
-	<div  style='display:inline; min-width:1200px;'>
-	<div align="center" style='display:inline;float:left;width:600px'>
-	<label for="exampleFormControlSelect1" >1차분류</label>
-		<select  id="exampleFormControlSelect1" onchange="itemChange()" class="form-control">
-		<option>TOP</option>
-		<option>OUTER</option>
-		<option>BOTTOM</option>
-		<option>ACC</option>
-		<option>SHOES</option>
-		</select>
-		</div>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div style='display:inline;float:left;width:600px' align="center">
+<!-- 	<div  style='display:inline; min-width:1200px;'> -->
+<!-- 	<div align="center" style='display:inline;float:left;width:600px'> -->
+<!-- 	<label for="exampleFormControlSelect1" >1차분류</label> -->
+<!-- 		<select  id="exampleFormControlSelect1" onchange="itemChange()" class="form-control"> -->
+<!-- 		<option>TOP</option> -->
+<!-- 		<option>OUTER</option> -->
+<!-- 		<option>BOTTOM</option> -->
+<!-- 		<option>ACC</option> -->
+<!-- 		<option>SHOES</option> -->
+<!-- 		</select> -->
+<!-- 		</div> -->
+<!-- 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 		<div style='display:inline;float:left;width:600px' align="center"> -->
 
-		<label >2차분류</label>
-		<select id="select2" class="form-control">
-		</select>
-		</div>
-	</div>
-	<hr>
+<!-- 		<label >2차분류</label> -->
+<!-- 		<select id="select2" class="form-control"> -->
+<!-- 		</select> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	<hr> -->
 	<br>
 <!-- 상품 이미지 반복 -->
 <br>
@@ -143,7 +145,7 @@ function itemChange(){
 							<div class="info">NO : ${goods.goods_no } &nbsp;&nbsp;&nbsp;
 							<a href="/goods/view.do${pageMaker.makeSearch (pageMaker.cri.page)}&goods_no=${goods.goods_no }">${goods.goods_name }</a>
 						</div></div>
-						<div class="panel-body" style="height: 180px;"> <!-- 이미지 사진 부분 -->
+						<div class="panel-body" style="height: 350px;"> <!-- 이미지 사진 부분 -->
 							<img src="<spring:url value='/image${goods.goods_img }'/>" 	class="img-responsive" style="width: 100%" >
 						</div>
 						<div class="panel-footer">

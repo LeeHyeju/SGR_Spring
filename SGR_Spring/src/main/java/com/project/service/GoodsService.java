@@ -34,7 +34,6 @@ public class GoodsService {
 		
 		public GoodsDto view(Integer goods_no) throws Exception{
 			//상품 상세보기
-			System.out.println("goodsDao.view:"+goods_no);
 			return goodsDao.view(goods_no);	
 		}
 		

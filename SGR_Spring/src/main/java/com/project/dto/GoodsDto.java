@@ -22,7 +22,15 @@ public class GoodsDto {
 	private String cate_nm;
 	private String catesub_cd; //소분류코드
 	private MultipartFile uploadFile; // form의 name 
+	private MultipartFile uploadFile2; 
 	private String goods_img; //사진(db 연결)
+	private String goods_img2;
+	private String goods_explain; //설명
+	private int goods_stock; //재고 수량
+	private String goods_color; //색상
+	private String goods_size; //사이즈
+	
+	
 	
 	public String getGoods_no() {
 		return goods_no;
@@ -78,18 +86,29 @@ public class GoodsDto {
 	public void setGoods_charge(String goods_charge) {
 		this.goods_charge = goods_charge;
 	}
+	public String getCate_nm() {
+		return cate_nm;
+	}
+	public void setCate_nm(String cate_nm) {
+		this.cate_nm = cate_nm;
+	}
 	public String getCatesub_cd() {
 		return catesub_cd;
 	}
 	public void setCatesub_cd(String catesub_cd) {
 		this.catesub_cd = catesub_cd;
 	}
-
 	public MultipartFile getUploadFile() {
 		return uploadFile;
 	}
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public MultipartFile getUploadFile2() {
+		return uploadFile2;
+	}
+	public void setUploadFile2(MultipartFile uploadFile2) {
+		this.uploadFile2 = uploadFile2;
 	}
 	public String getGoods_img() {
 		return goods_img;
@@ -97,18 +116,46 @@ public class GoodsDto {
 	public void setGoods_img(String goods_img) {
 		this.goods_img = goods_img;
 	}
-	public String getCate_nm() {
-		return cate_nm;
+	public String getGoods_img2() {
+		return goods_img2;
 	}
-	public void setCate_nm(String cate_nm) {
-		this.cate_nm = cate_nm;
+	public void setGoods_img2(String goods_img2) {
+		this.goods_img2 = goods_img2;
 	}
+	public String getGoods_explain() {
+		return goods_explain;
+	}
+	public void setGoods_explain(String goods_explain) {
+		this.goods_explain = goods_explain;
+	}
+	public int getGoods_stock() {
+		return goods_stock;
+	}
+	public void setGoods_stock(int goods_stock) {
+		this.goods_stock = goods_stock;
+	}
+	public String getGoods_color() {
+		return goods_color;
+	}
+	public void setGoods_color(String goods_color) {
+		this.goods_color = goods_color;
+	}
+	public String getGoods_size() {
+		return goods_size;
+	}
+	public void setGoods_size(String goods_size) {
+		this.goods_size = goods_size;
+	}
+	
 	@Override
 	public String toString() {
 		return "GoodsDto [goods_no=" + goods_no + ", goods_name=" + goods_name + ", goods_price=" + goods_price
 				+ ", goods_dc=" + goods_dc + ", goods_maker=" + goods_maker + ", goods_origin=" + goods_origin
 				+ ", goods_pcs=" + goods_pcs + ", goods_hit=" + goods_hit + ", goods_charge=" + goods_charge
-				+ ", cate_nm=" + cate_nm + ", catesub_cd=" + catesub_cd + ", goods_img=" + goods_img + "]";
+				+ ", cate_nm=" + cate_nm + ", catesub_cd=" + catesub_cd + ", uploadFile=" + uploadFile
+				+ ", uploadFile2=" + uploadFile2 + ", goods_img=" + goods_img + ", goods_img2=" + goods_img2
+				+ ", goods_explain=" + goods_explain + ", goods_stock=" + goods_stock + ", goods_color=" + goods_color
+				+ ", goods_size=" + goods_size + "]";
 	}
 	
 }

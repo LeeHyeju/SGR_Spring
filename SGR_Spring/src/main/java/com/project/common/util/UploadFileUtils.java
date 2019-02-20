@@ -14,29 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadFileUtils {
 
-//  public static String uploadFile(String uploadPath, 
-//      String originalName, 
-//      byte[] fileData)throws Exception{
-//    
-//    return null;
-//  }
-  
-
-//  public static String uploadFile(String uploadPath, 
-//      String originalName, 
-//      byte[] fileData)throws Exception{
-//    
-//    return null;
-//  }
-//  
-
 
 	 //파일을 폴더에 업로드 하는 메서드
 	  //uploadFile(저장위치,원래 파일명,byte 단위로 파일을 읽어올 수 있는 데이터 객체)
 	  // --> uploadFile(저장 위치, MultipartFile)	
   public static String uploadFile(String uploadPath, 
 //                              String originalName,  byte[] fileData
-		  MultipartFile mfile )throws Exception{
+		  MultipartFile mfile,boolean isHeight, int len,
+		  String postStr )throws Exception{
 	  
 	//파일명의 중복을 배제시키기 위해 파일 앞에 붙이는 uid
     UUID uid = UUID.randomUUID();
@@ -59,7 +44,7 @@ public class UploadFileUtils {
     //이미지 파일인지 확인한다. 
     if(MediaUtils.getMediaType(formatName) != null){
     	 //이미지 파일인 경우, 높이 사이지를 100px로 만들어서 저장한 후에 파일명을 리턴한다.	
-      uploadedFileName = makeThumbnail(uploadPath,  savedName);
+      uploadedFileName = makeThumbnail(uploadPath,  savedName,isHeight, len, postStr);
     }else{
       uploadedFileName = makeIcon(uploadPath,  savedName);
     }
@@ -82,22 +67,30 @@ public class UploadFileUtils {
   //이미지의 사이즈를 고쳐서 다시 저장해준다.
   //사용법 
   //makeThumbnail (저장위치, 파일명) -- > 파일에 대한 높이를 지정한다.
-  private static  String makeThumbnail(
+  public static  String makeThumbnail(
               String uploadPath, 
 //              String path, 
-              String fileName)throws Exception{
+              String fileName, boolean isHeight, int len,
+              String postStr)throws Exception{
 	  //이미지를 바이트 단위로 읽어올 수 있도록 먼저 파일객체로 만들고   bufferedImage(임시 저장소)에 담아둔다.         
     BufferedImage sourceImg = 
         ImageIO.read(new File(uploadPath, fileName));
     //임시 저장소에 담아둔 이미지 파일을 높이 100px로 조정한 후 다른 임시 저장소(destImg)에 담아둔다. 
-    BufferedImage destImg = 
+    BufferedImage destImg = null;
+    if(isHeight) // 높이로 조정해서 이미지 크기 조정
+    	destImg =
         Scalr.resize(sourceImg, 
             Scalr.Method.AUTOMATIC, 
-            Scalr.Mode.FIT_TO_HEIGHT,100); //높이
+            Scalr.Mode.FIT_TO_HEIGHT,len); //높이
+    else // 너비로 조정해서 이미지 크기 조정
+    	destImg =
+    	Scalr.resize(sourceImg,
+    	Scalr.Method.AUTOMATIC,
+    	Scalr.Mode.FIT_TO_WIDTH,len);
     //실제적으로 저장해야 하는 파일명 작성(문자열)
     //폴더 (위치) + 파일 구분자(보통 \ 사용) + "S_"(small) + 파일명   
     String thumbnailName = 
-        uploadPath  + File.separator +"s_"+ fileName;
+        uploadPath  + File.separator +postStr+ fileName;
     //작은 이미지 이름으로 파일 객체를 만든다.
     File newFile = new File(thumbnailName);
     //확장자를 알아낸다.
@@ -114,7 +107,30 @@ public class UploadFileUtils {
 	//separatorChar(\)가 문자열 처리되는 경우 특수문자 인식이 될 수 있으므로 (/)로 바꿔준다.
 	//()는 안쪽부터, .은 앞에서 순서대로 실행된다. 
   } 
-  
+//넘어오는 파일 : s_ 파일이 넘어옴.
+public static boolean deleteUploadFile(String path,String fileName) {
+//"s_" 를 없애니다.
+String oriFile = fileName.substring(fileName.indexOf("_")+1);  
+try {
+deleteFile(path,oriFile);
+deleteFile(path,"s_"+oriFile);
+deleteFile(path,"b_"+oriFile);
+return true; // 정상적으로 지워짐
+}catch (Exception e) {
+//TODO: handle exception
+e.printStackTrace();
+return false; // 지워지지 않음.
+}
+}
+
+//upload 된 파일 지우기
+public static boolean deleteFile(String path,String fileName) throws Exception{
+File file = new File(path,fileName);
+return file.delete();
+}
+
+
+
  // 년/월/일 폴더를 작성해서 만드는 메서드 
 //  private static String calcPath(String uploadPath){
 //    

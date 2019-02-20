@@ -1,11 +1,8 @@
 package com.project.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -14,17 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.common.model.Criteria;
 import com.project.common.model.PageMaker;
 import com.project.common.model.SearchCriteria;
 import com.project.common.util.UploadFileUtils;
@@ -129,22 +124,7 @@ public class GoodsController {
 			return "/goods/adminWrite";
 		}
 		
-//		@RequestMapping(value="/goods/adminWrite.ad", method=RequestMethod.GET)
-//		public ModelAndView adminWrite(Model model, HttpServletRequest req,@RequestParam Map<String,Object> cateGory1)throws Exception {
-//			System.out.println("관리자 상품 작성 - get입니다");
-//			
-//			String cate_nm = req.getParameter("cate_nm");
-//			
-//			//카테고리 대분류 코드	
-//			model.addAttribute("depthOne", cateGoryService.depthOne());
-//			//소분류 코드
-//			model.addAttribute("depthTwo", cateGoryService.depthTwo(cateGory1));
-//			System.out.println("카테고리 ㅇㅇ");	
-//			
-//			ModelAndView mv = new ModelAndView();
-//			
-//			return mv;
-//		}
+
 		/**
 		 * 상품 등록 시 카테고리 받아오기
 		 * 이혜주
@@ -185,14 +165,23 @@ public class GoodsController {
 		public String adminWriteProcess(GoodsDto goodsDto, HttpServletRequest req, Model model,  RedirectAttributes rttr)
 				throws Exception {
 			System.out.println("관리자 상품 작성 - post입니다");
+			System.out.println(goodsDto);
 			
-			// 첨부 파일의 정보 출력
-			System.out.println("파일사이즈:"+goodsDto.getUploadFile().getSize());
-			System.out.println("파일의 MIME Type:"
-					+goodsDto.getUploadFile().getContentType());
+			//서버에 저장된 이미지 가져오기
+			MultipartFile uploadFile = goodsDto.getUploadFile();
+			MultipartFile uploadFile2 = goodsDto.getUploadFile2();
+			// 첨부 파일이 없는 경우 업로드 시키지 않고 글쓰기 화면으로 돌아감
+			if (uploadFile.getSize() == 0) {
+				return "goods/adminWrite";
+			}
+			System.out.println("========================================================================");
+			System.out.println("==============================글, 이미지 등록 ===============================");
+			System.out.println("========================================================================");
 			
-			goodsDto.setGoods_img(
-					UploadFileUtils.uploadFile(uploadPath, goodsDto.getUploadFile()));
+//			goodsDto.setGoods_img(UploadFileUtils.uploadFile(uploadPath, goodsDto.getUploadFile()));
+			goodsDto.setGoods_img(uploadFileAndResize(uploadFile));
+			System.out.println("메인사진:"+goodsDto.getGoods_img());
+			goodsDto.setGoods_img2(uploadFileAndResize(uploadFile2));
 			
 			//DB에 저장			
 			goodsService.adminWrite(goodsDto);
@@ -201,50 +190,23 @@ public class GoodsController {
 			return "redirect:/goods/adminList.ad";
 		}
 		
-		
-//		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
-//		public String adminWriteProcess(GoodsDto goodsDto,  MultipartFile goods_img, 
-//				HttpServletRequest req, Model model,  RedirectAttributes rttr)
-//				throws Exception {
-//			System.out.println("관리자 상품 작성 - post입니다");
-//			
-//			goods_img = goodsDto.getGoods_img();
-//			
-//			//파일 업로드
-//			System.out.println("originalFileName: "+ goods_img.getOriginalFilename());
-//			System.out.println("size:"+ goods_img.getSize());
-//			System.out.println("contentType:" + goods_img.getContentType());
-//						
-//			System.out.println("업로드 준비");
-//		
-//			
-//			String savedName = uploadFile(goods_img.getOriginalFilename(), goods_img.getBytes());
-//			
-//			model.addAttribute("savedName", savedName);
-//			
-//			//db에 저장
-//			
-//			System.out.println("dto:"+goodsDto.toString());
-//			
-//			goodsService.adminWrite(goodsDto);
-//			rttr.addFlashAttribute("msg", "writeOK");
-//			return "redirect:/goods/adminList.ad";
-//			}
-//		
-		
-		
-//		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
-//		public String adminWriteProcess(GoodsDto goodsDto,Model model,  RedirectAttributes rttr, HttpServletRequest req)throws Exception {
-//			System.out.println("관리자 상품 작성 - post입니다");
-//		
-////			String uploadFile = goodsDto.getGoods_img();
-//			//db에 저장
-////			goodsService.adminWrite(goodsDto);
-//			rttr.addFlashAttribute("msg", "writeOK");
-//			return "redirect:/goods/adminList.ad";
-//			}
-	
-		
+		// 사진 게시판 사진을 올리고 사이즈를 재조정해서 저장하는 메소드 - 사진올리기, 사진 수정에서 사용
+		private String uploadFileAndResize(MultipartFile multipartFile)throws Exception {
+			// 첨부 파일의 정보 출력
+			System.out.println("파일사이즈:" + multipartFile.getSize());
+			System.out.println("파일의 MIME Type:" + multipartFile.getContentType());
+			// 폴더 위치에 저장 - 이미지 파일인 경우는 사이즈 조정한다. ::
+			// 사진 리스트용 작은 이미지 - 높이로 00px 로 맞춘다.
+			String fileName = 
+			UploadFileUtils.uploadFile(uploadPath, multipartFile,
+				true, 1000, "s_"); // 썸네일
+			// 사진 보기 용 큰 이미지 - 너비를 800px로 맞춘다.
+			UploadFileUtils.makeThumbnail(uploadPath,
+					fileName.substring(fileName.indexOf("_")+1),
+					false, 400, "b_"); //큰 이미지
+			
+			return fileName;
+		}
 		/**
 		 * 상품수정 GET
 		 * @param goods_no
@@ -252,10 +214,12 @@ public class GoodsController {
 		 * @throws Exception
 		 */
 		@RequestMapping(value = "/goods/adminUpdate.ad", method = RequestMethod.GET)
-		public void adminUpdate(int goods_no, Model model) throws Exception {
+		public String adminUpdate(int goods_no, Model model,@ModelAttribute("cri") Criteria cri) throws Exception {
 			System.out.println("관리자 상품 수정 - Get");
 			System.out.println(goods_no);
-			model.addAttribute("adminList",goodsService.view(goods_no));
+			model.addAttribute("admin",goodsService.view(goods_no));
+			
+			return "goods/adminUpdate";
 		}
 		
 		
@@ -267,12 +231,19 @@ public class GoodsController {
 		 * @throws Exception
 		 */
 		@RequestMapping(value = "/goods/adminUpdate.ad", method = RequestMethod.POST)
-		public String adminUpdateProcess(GoodsDto goodsDto,RedirectAttributes rttr) throws Exception {
+		public String adminUpdateProcess(GoodsDto goodsDto,RedirectAttributes rttr, Criteria cri) throws Exception {
 			System.out.println("관리자 상품  수정 - Post");
 			System.out.println("GoodsController.dto:"+ goodsDto.toString());
 			goodsService.adminUpdate(goodsDto);
+			System.out.println("goods_no:"+goodsDto.getGoods_no());
+			
+			System.out.println("goods_img:"+goodsDto.getGoods_img());
+			
+			
 			rttr.addFlashAttribute("msg", "updateOK");
-			return "redirect:/goods/adminList.ad";
+			
+			return "redirect:/goods/view.do?page="+cri.getPage()+"&perPageNum="+
+			cri.getPerPageNum()+	"goods_no="+goodsDto.getGoods_no();
 		}
 		
 		

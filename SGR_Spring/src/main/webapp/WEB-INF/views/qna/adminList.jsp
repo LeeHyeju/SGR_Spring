@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 <script>
 	var result = '${msg}';
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
+	if (result == 'deleteOK') {
+		alert("삭제가 완료되었습니다.");
 	}
 </script>
 <script>

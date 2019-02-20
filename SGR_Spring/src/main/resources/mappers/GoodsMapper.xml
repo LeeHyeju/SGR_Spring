@@ -64,7 +64,8 @@
 	<!-- 상세 페이지 -->
 	<select id="view" resultType="GoodsDto">
 		SELECT goods_no, goods_name, goods_price, goods_dc,
-		goods_maker, goods_origin,goods_pcs, goods_hit, goods_charge, catesub_cd, goods_img
+		goods_maker, goods_origin,goods_pcs, goods_hit, goods_charge, 
+		catesub_cd, goods_img, goods_img2, goods_explain, goods_stock
 		FROM goods
 		WHERE goods_no= #{goods_no}
 	</select>
@@ -79,24 +80,27 @@
 	<!-- 상품 등록하기 -->
 	<insert id="adminWrite">
 		INSERT INTO
-		goods(goods_name, goods_price, goods_dc, goods_maker, goods_origin,
-		goods_pcs, goods_charge, catesub_cd, goods_img )
-		VALUES (#{goods_name}, #{goods_price},
-		#{goods_dc}, #{goods_maker}, #{goods_origin},
-		#{goods_pcs}, default, #{catesub_cd},#{goods_img} )
+		goods(goods_name, goods_maker, goods_origin, goods_price, 
+		goods_stock, goods_pcs, goods_dc, 
+		  goods_charge, goods_explain, catesub_cd, goods_img,goods_img2 )
+		VALUES (#{goods_name},  #{goods_maker}, #{goods_origin}, #{goods_price},
+		 #{goods_stock},#{goods_pcs}, #{goods_dc},
+		default, #{goods_explain}, #{catesub_cd},#{goods_img},#{goods_img2} )
 	</insert>
 
 	<!-- 상품 수정 -->
-	<update id="update">
+	<update id="adminUpdate">
 		UPDATE goods
-		SET goods_name = #{goods_name},
-		goods_price = #{goods_price},
-		goods_dc = #{goods_dc},
+		SET 
 		goods_maker = #{goods_maker},
 		goods_origin= #{goods_origin},
+		goods_price = #{goods_price},
+		goods_stock = #{goods_stock},
 		goods_pcs = #{goods_pcs},
+		goods_dc = #{goods_dc},
 		goods_charge = #{goods_charge},
-		catesub_cd = #{catesub_cd}
+		goods_img = #{goods_img},
+		goods_img2 = #{goods_img2}
 		WHERE goods_no = #{goods_no}
 	</update>
 	

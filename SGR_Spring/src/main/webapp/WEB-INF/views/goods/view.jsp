@@ -26,7 +26,7 @@
 			formObj.submit();
 		});
 		$(".btn-danger").on("click", function() {
-			formObj.attr("action", "../category/adminDelete.ad");
+			formObj.attr("action", "../goods/adminDelete.ad");
 			formObj.submit();
 		});
 	});
@@ -41,6 +41,8 @@
 <input type="hidden" value="${goods.goods_dc }" name="goods_dc" />
 <input type="hidden" value="${goods.goods_maker }" name="goods_maker" />
 <input type="hidden" value="${goods.goods_origin }" name="goods_orgin" />
+<input type="hidden" value="${goods.catesub_cd }" name="catesub_cd" />
+
 	<div class="container">
 		<div class="card" style="background-color: #fff;">
 			<div class="container-fliud" >
@@ -99,32 +101,33 @@
 							<p class="product-description"><input type="hidden" value="${goods.goods_maker }" name="goods_maker" /> 제조사 : ${goods.goods_maker }</p>
 							<p class="product-description"><input type="hidden" value="${goods.goods_origin }" name="goods_origin" /> 원산지 : ${goods.goods_origin }</p>
 
-<%-- 						<c:choose> --%>
-<%-- 						  		<c:when test="${goods.catesub_cd == 'A011'}"> --%>
-<!-- 						  			<p class="product-description">상품분류 : 티</p> -->
-<%-- 						  		</c:when> --%>
-<%-- 						  		<c:when test="${goods.catesub_cd == A012 }"> --%>
-<!-- 									<p class="product-description">상품분류 : 긴팔</p> -->
-<%-- 						  		</c:when> --%>
-<%-- 						  		<c:when test="${goods.catesub_cd == A013 }"> --%>
-<!-- 									<p class="product-description">상품분류 : 머시기</p> -->
-<%-- 						  		</c:when> --%>
-<%-- 						  	</c:choose> --%>
-
-
 
 							<h5 class="price"> 판매가 : <span class="old-Price"><fmt:formatNumber value="${goods.goods_price }" pattern=""/> 원</span><br /></h5>
 							<p class="product-description">할인가 : <span class="dis-price" style="color: #ff4242"><fmt:formatNumber value="${goods.goods_price-(goods.goods_price/goods.goods_dc) }" pattern=""/> 원</span></p>
-							<input type="hidden" name="goods_disPer" value="${goods.goods_dc } " />
+							<input type="hidden" name="goods_dc" value="${goods.goods_dc } " />
 						  	
-							<p class="product-description">수량 : ${goods.goods_pcs } 개</p>
+							<p class="product-description">재고 : ${goods.goods_pcs } 개</p>
+							<p class="product-description">수량 : 
+								<select>
+								 <option value="1">1</option>
+								 <option value="2">2</option>
+								 <option value="3">3</option>
+								 <option value="4">4</option>
+								 <option value="5">5</option>
+								 <option value="6">6</option>
+								 <option value="7">7</option>
+								 <option value="8">8</option>
+								 <option value="9">9</option>
+								 <option value="10">10</option>
+								</select>
+							 개</p>
 							<p class="product-description">사이즈 : 
-							<select name="op_price" id="op_price" style="position: relative;">
-							<option value="0"> - [ 필수] 옵션 - </option>
-								<option value="1"> S</option>
-								<option value="2"> M</option>
-								<option value="3"> L</option>
-								<option value="4"> XL</option>
+							<select name="goods_size" id="goods_size" style="position: relative;">
+							<option value="select"> - [ 필수] 옵션 - </option>
+								<option value="s"> S</option>
+								<option value="m"> M</option>
+								<option value="l"> L</option>
+								<option value="xl"> XL</option>
 							</select>
 							</p>
 								<h5 class="colors">
@@ -146,7 +149,6 @@
 							5만원 이상 구입 시 배송비는 무료입니다.</strong>
 						</p>
 
-					
 
 						</h5>
 						<div class="action">
@@ -169,22 +171,24 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div align="center">
 		<div id="explain" class="details col-md-10" style="width:100%; border-top:1px solid silver">
 			<span id="goods_explain" style="padding: 15px; text-align: center; font-size: 14px; color: #363636;">
-<%-- 				${goods.goods_explain } --%>
+			<textarea class="form-control" id="goods_explain"  wrap="VIRTUAL"  name="goods_explain" style="font-size:30px; width:100%; border: 0; resize: none;">
+			 ${goods.goods_explain }</textarea>
 			</span>
 		<!-- 상세 정보 이미지 들어가는곳 -->
 		</div>
+
+	<div >
+		<div class="row">
+			<div >
+			<img src="<spring:url value='/image${goods.goods_img2 }'/>" />
+	        </div>
+			<br/><br/>
+	        </div>
+	    </div>
 	</div>
-<!-- 	<div class="container"> -->
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-3 col-sm-4 col-xs-6"> -->
-<%-- 	        	<img id="" class="img-responsive" src="../download/displayFile?fileName=${goods.file7 }" /> --%>
-<!-- 	        </div> -->
-<!-- 	        </div> -->
-<!-- 	    </div> -->
-<!-- 	</div> -->
 <!-- 		<p class="info_img"> -->
 <%-- 			<img style="max-width: 100%; height: auto; margin: auto;" id="" class="img-responsive" src="../download/displayFile?fileName=${goods.file7 }" /> --%>
 <!-- 		</p> -->
