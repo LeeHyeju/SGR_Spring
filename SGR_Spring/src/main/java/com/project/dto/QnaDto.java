@@ -16,9 +16,6 @@ public class QnaDto {
 	private Date regdate; //작성일
 	private int qna_hit; //조회수
 	private int reply_cnt; //댓글
-	private int view_cnt;
-	
-	
 	
 	
 	public int getQna_no() {
@@ -63,18 +60,11 @@ public class QnaDto {
 	public void setReply_cnt(int reply_cnt) {
 		this.reply_cnt = reply_cnt;
 	}
-	public int getView_cnt() {
-		return view_cnt;
-	}
-	public void setView_cnt(int view_cnt) {
-		this.view_cnt = view_cnt;
-	}
-	
 	@Override
 	public String toString() {
 		return "QnaDto [qna_no=" + qna_no + ", qna_title=" + qna_title + ", qna_content=" + qna_content + ", mb_id="
-				+ mb_id + ", regdate=" + regdate + ", qna_hit=" + qna_hit + ", reply_cnt=" + reply_cnt + ", view_cnt="
-				+ view_cnt + "]";
+				+ mb_id + ", regdate=" + regdate + ", qna_hit=" + qna_hit + ", reply_cnt=" + reply_cnt + "]";
 	}
+
 	
 }
