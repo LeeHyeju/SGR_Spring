@@ -87,8 +87,7 @@ function itemChange(){
 
 	<form id="jobForm">
 		<input type="hidden" name="page" value=${pageMaker.cri.page }>
-		<input type="hidden" name="perPageNum"
-			value=${pageMaker.cri.perPageNum }>
+		<input type="hidden" name="perPageNum"	value=${pageMaker.cri.perPageNum }>
 		<div class="box-body" align="right" style="width: 80%; margin: auto; text-align: right; ">
 			<select name="searchType">
 				<option value="x"
@@ -101,13 +100,23 @@ function itemChange(){
 					${cri.searchType == "mno"?"selected='selected'":"" }>전체</option>
 			</select> <input name="keyword" value="${cri.keyword }" />
 			<button id="searchBtn" class="btn btn-info">SEARCH</button>
-			<button class="btn btn-white" type="submit" onclick="location='../goods/adminWrite.ad'">상품등록</button>
+			<button class="btn btn-white" type="button" onclick="location.href='../goods/adminWrite.ad'">상품등록</button>
 		</div>
 		<br/>
 	</form>
 	<fieldset>
 		<legend></legend>
 	</fieldset>
+	<div align="center">
+		<button type="button"  class="btn btn-primary" onclick="location.href='/goods/adminList.ad'">SGR</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-success" onclick="location.href='/goods/adminList.ad?searchType=n&keyword=TOP'">TOP</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-warning"  onclick="location.href='/goods/adminList.ad?searchType=n&keyword=OUTER'">OUTER</button>&nbsp;&nbsp;&nbsp;
+		<button type="button"  class="btn btn-danger"  onclick="location.href='/goods/adminList.ad?searchType=n&keyword=BOTTOM'">BOTTOM</button>&nbsp;&nbsp;&nbsp;
+		<button type="button"  class="btn btn-default"  onclick="location.href='/goods/adminList.ad?searchType=n&keyword=ACC'">ACC</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-info"  onclick="location.href='/goods/adminList.ad?searchType=n&keyword=SHOES'">SHOES</button>&nbsp;&nbsp;&nbsp;
+	</div>
+
+	
 	<form id="listForm">
 		<input id="goods_no" type="hidden" value=${goods.goods_no }> <input
 			id="page" type="hidden" value=${cri.page }> <input

@@ -10,6 +10,7 @@ public class ReviewDto {
 	
 	private int review_no; //리뷰 번호
 	private int goods_no; //상품 번호
+	private String goods_name; //상품 이름
 	private String catesub_cd; //소분류 코드
 	private String mb_id; //아이디
 	private String review_title; //제목
@@ -75,11 +76,20 @@ public class ReviewDto {
 	public void setGoods_img(String goods_img) {
 		this.goods_img = goods_img;
 	}
+	
+	
+	public String getGoods_name() {
+		return goods_name;
+	}
+	public void setGoods_name(String goods_name) {
+		this.goods_name = goods_name;
+	}
 	@Override
 	public String toString() {
-		return "ReviewDto [review_no=" + review_no + ", goods_no=" + goods_no + ", catesub_cd=" + catesub_cd
-				+ ", mb_id=" + mb_id + ", review_title=" + review_title + ", review_content=" + review_content
-				+ ", reg_date=" + reg_date + ", review_hit=" + review_hit + ", goods_img=" + goods_img + "]";
+		return "ReviewDto [review_no=" + review_no + ", goods_no=" + goods_no + ", goods_name=" + goods_name
+				+ ", catesub_cd=" + catesub_cd + ", mb_id=" + mb_id + ", review_title=" + review_title
+				+ ", review_content=" + review_content + ", reg_date=" + reg_date + ", review_hit=" + review_hit
+				+ ", goods_img=" + goods_img + "]";
 	}
 	
 }

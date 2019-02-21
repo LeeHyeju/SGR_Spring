@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,6 +37,7 @@
 	<form role="form" class="form-horizontal" >
 	<fieldset>
 		<legend></legend>
+		<input type="hidden" value="${goods.goods_no }" name="goods_name" />
 		<input type="hidden" value="${goods.goods_name }" name="goods_name" />
 		<input type="hidden" value="${goods.goods_price }" name="goods_price" />
 		<input type="hidden" value="${goods.goods_maker }" name="goods_maker" />
@@ -44,12 +46,18 @@
 		<input type="hidden" value="${review.review_no}" name="review_no" />
 		
 				<div class="form-group">
+				<label class="col-md-4 control-label" for="goods_img">상품</label> 
+				<div class="col-md-4">
+					<img src="<spring:url value='/image${review.goods_img }'/>" 	class="img-responsive" style="width: 30%" >
+					</div>
+			</div>
+				<div class="form-group">
 						<label class="col-md-4 control-label" for="review_title">글 제목</label> 
 							<div class="col-md-4">
 								<input type="text" 	name="review_title"  class="form-control input-md"  value="${review.review_title}" readonly="readonly">
 							</div>
 				</div>
-					
+				
 				<div class="form-group">
 						<label class="col-md-4 control-label" for="review_content">글 내용</label>
 							<div class="col-md-4"> 

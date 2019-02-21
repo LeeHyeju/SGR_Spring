@@ -82,6 +82,7 @@ function itemChange(){
 -->
 </head>
 <body>
+	<h1 style="text-align: center; color: silver;">:: 상품 리스트::</h1>
 	<br>
 	<form id="jobForm">
 		<input type="hidden" name="page" value=${pageMaker.cri.page }>
@@ -102,7 +103,7 @@ function itemChange(){
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	</form>
-	<h1 style="text-align: center; color: silver;">:: 상품 리스트::</h1>
+<br>
 	<fieldset>
 		<legend></legend>
 	</fieldset>
@@ -111,6 +112,14 @@ function itemChange(){
 			id="page" type="hidden" value=${cri.page }> <input
 			id="perPageNum" type="hidden" value=${cri.perPageNum }>
 	</form>
+	<div align="center">
+		<button type="button"  class="btn btn-primary" onclick="location.href='/goods/goodsList.do'">SGR</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-success" onclick="location.href='/goods/goodsList.do?searchType=n&keyword=TOP'">TOP</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-warning"  onclick="location.href='/goods/goodsList.do?searchType=n&keyword=OUTER'">OUTER</button>&nbsp;&nbsp;&nbsp;
+		<button type="button"  class="btn btn-danger"  onclick="location.href='/goods/goodsList.do?searchType=n&keyword=BOTTOM'">BOTTOM</button>&nbsp;&nbsp;&nbsp;
+		<button type="button"  class="btn btn-default"  onclick="location.href='/goods/goodsList.do?searchType=n&keyword=ACC'">ACC</button>&nbsp;&nbsp;&nbsp;
+		<button type="button" class="btn btn-info"  onclick="location.href='/goods/goodsList.do?searchType=n&keyword=SHOES'">SHOES</button>&nbsp;&nbsp;&nbsp;
+	</div>
 	
 <!-- 	<div  style='display:inline; min-width:1200px;'> -->
 <!-- 	<div align="center" style='display:inline;float:left;width:600px'> -->

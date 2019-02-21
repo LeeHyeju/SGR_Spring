@@ -39,7 +39,7 @@ public class ReviewController {
 	  @RequestMapping(value = "/review/view.do", method = RequestMethod.GET)
 	  public void read(@RequestParam("review_no") int review_no, @ModelAttribute("cri") SearchCriteria cri, Model model)
 	      throws Exception {
-		  System.out.println("review 상세보기: "+ review_no);
+		  System.out.println("상세보기 -- review 번호: "+ review_no);
 	    model.addAttribute( "review" , reviewService.view(review_no));
 	   System.out.println("조회수 증가");
 	    reviewService.hit(review_no);

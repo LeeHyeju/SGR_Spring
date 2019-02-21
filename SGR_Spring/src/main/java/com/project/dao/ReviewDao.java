@@ -1,6 +1,8 @@
 package com.project.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,6 +32,7 @@ public class ReviewDao {
 
 	public ReviewDto view(Integer review_no) throws Exception{
 		//글 보기
+		
 		return session.selectOne(NAMESPACE+".view", review_no);
 	}
 	

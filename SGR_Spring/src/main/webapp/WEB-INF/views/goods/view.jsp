@@ -41,7 +41,7 @@
 <input type="hidden" value="${goods.goods_dc }" name="goods_dc" />
 <input type="hidden" value="${goods.goods_maker }" name="goods_maker" />
 <input type="hidden" value="${goods.goods_origin }" name="goods_orgin" />
-<input type="hidden" value="${goods.catesub_cd }" name="catesub_cd" />
+<%-- <input type="hidden" value="${goods.catesub_cd }" name="catesub_cd" /> --%>
 
 	<div class="container">
 		<div class="card" style="background-color: #fff;">

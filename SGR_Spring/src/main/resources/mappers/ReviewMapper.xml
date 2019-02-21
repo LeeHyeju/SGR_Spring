@@ -31,33 +31,47 @@
 		</if>
 	</sql>
 
-<select id="reviewList" resultType="ReviewDto">
-	SELECT * FROM (
-		SELECT 
-					review_no,
-					review_title,
-					goods_img,
-					mb_id,
-					review_content,
-					reg_date,
-					review_hit
-		FROM (
-					SELECT 
-								r.review_no, r.review_title, g.goods_img, r.mb_id,
-								r.review_content, r.reg_date, r.review_hit
-					FROM
-								review r, goods g
-					WHERE
-								r.goods_no = g.goods_no
-								<include refid="search"></include>
-					ORDER BY
- 									review_no DESC, reg_date DESC							
-					)
- 	)
- 	WHERE 
-				limit #{pageStart}, #{perPageNum}		
-</select>
+<!-- <select id="reviewList" resultType="ReviewDto"> -->
+<!-- 	SELECT * FROM ( -->
+<!-- 		SELECT  -->
+<!-- 					review_no, -->
+<!-- 					review_title, -->
+<!-- 					goods_img, -->
+<!-- 					mb_id, -->
+<!-- 					review_content, -->
+<!-- 					reg_date, -->
+<!-- 					review_hit -->
+<!-- 		FROM ( -->
+<!-- 					SELECT  -->
+<!-- 								r.review_no, r.review_title, g.goods_img, r.mb_id, -->
+<!-- 								r.review_content, r.reg_date, r.review_hit -->
+<!-- 					FROM -->
+<!-- 								review r, goods g -->
+<!-- 					WHERE -->
+<!-- 								r.goods_no = g.goods_no -->
+<!-- 								<include refid="search"></include> -->
+<!-- 					ORDER BY -->
+<!--  									review_no DESC, reg_date DESC							 -->
+<!-- 					) -->
+<!--  	) -->
+<!--  	WHERE  -->
+<!-- 				limit #{pageStart}, #{perPageNum}		 -->
+<!-- </select> -->
 
+<select id="reviewList" resultType="ReviewDto">
+SELECT 
+			review_no, review_title, g.goods_img, g.goods_name, mb_id, review_content ,r.reg_date, review_hit
+FROM 
+			review r,  goods g
+ WHERE 
+ 			r.goods_no = g.goods_no   
+ 			<include refid="search"></include>
+ 			
+ ORDER BY
+ 			review_no desc
+limit #{pageStart}, #{perPageNum}			
+</select>
+<!-- limit #{pageStart}, #{perPageNum}	 -->
 <select id="reviewCount" resultType="Integer">
 	SELECT 
 				count(review_no)
@@ -70,20 +84,19 @@
 
 
 <select id="view" resultType="ReviewDto">
-	SELECT 
+
+	select
 			review_no,
-			goods_no,
-			catesub_cd,
 			mb_id,
 			review_title,
+			g.goods_img,
 			review_content,
-			review_img,
 			reg_date,
 			review_hit
 	FROM
-			review
+			review r, goods g 
 	WHERE
-			review_no = #{review_no}
+			review_no = #{review_no} and r.goods_no = g.goods_no
 </select>
 
 <update id="hit">
