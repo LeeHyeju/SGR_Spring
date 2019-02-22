@@ -98,6 +98,8 @@ public class GoodsController {
 			try {
 				model.addAttribute("goods", goodsService.view(goods_no));
 				System.out.println("값이 잘 넘어온다.");
+				System.out.println("조회수 증가");
+				goodsService.hit(goods_no);
 				return "goods/view";
 			} catch (Exception e) {
 				System.out.println("글보기 예외 발생: goods_no-"+ goods_no);
@@ -150,8 +152,6 @@ public class GoodsController {
 		    return hashmap; // 화면으로 던져준다!!
 		}
 		
-		
-		
 		/**
 		 * 상품입력 POST
 		 * @param goodsDto
@@ -160,7 +160,6 @@ public class GoodsController {
 		 * @return
 		 * @throws Exception
 		 */
-		
 		@RequestMapping(value="/goods/adminWriteProcess.ad", method=RequestMethod.POST)
 		public String adminWriteProcess(GoodsDto goodsDto, HttpServletRequest req, Model model,  RedirectAttributes rttr)
 				throws Exception {
@@ -174,11 +173,8 @@ public class GoodsController {
 			if (uploadFile.getSize() == 0) {
 				return "goods/adminWrite";
 			}
-			System.out.println("========================================================================");
-			System.out.println("==============================글, 이미지 등록 ===============================");
-			System.out.println("========================================================================");
+			System.out.println("==================글, 이미지 등록 ===========================");
 			
-//			goodsDto.setGoods_img(UploadFileUtils.uploadFile(uploadPath, goodsDto.getUploadFile()));
 			goodsDto.setGoods_img(uploadFileAndResize(uploadFile));
 			System.out.println("메인사진:"+goodsDto.getGoods_img());
 			goodsDto.setGoods_img2(uploadFileAndResize(uploadFile2));
@@ -190,20 +186,16 @@ public class GoodsController {
 			return "redirect:/goods/adminList.ad";
 		}
 		
-		// 사진 게시판 사진을 올리고 사이즈를 재조정해서 저장하는 메소드 - 사진올리기, 사진 수정에서 사용
+		// 사진 게시판 사진을 올리고 사이즈를 재조정해서 저장하는 메소드
 		private String uploadFileAndResize(MultipartFile multipartFile)throws Exception {
 			// 첨부 파일의 정보 출력
 			System.out.println("파일사이즈:" + multipartFile.getSize());
 			System.out.println("파일의 MIME Type:" + multipartFile.getContentType());
 			// 폴더 위치에 저장 - 이미지 파일인 경우는 사이즈 조정한다. ::
-			// 사진 리스트용 작은 이미지 - 높이로 00px 로 맞춘다.
-			String fileName = 
-			UploadFileUtils.uploadFile(uploadPath, multipartFile,
-				true, 1000, "s_"); // 썸네일
-			// 사진 보기 용 큰 이미지 - 너비를 800px로 맞춘다.
-			UploadFileUtils.makeThumbnail(uploadPath,
-					fileName.substring(fileName.indexOf("_")+1),
-					false, 400, "b_"); //큰 이미지
+			// 사진 리스트용 작은 이미지 
+			String fileName = UploadFileUtils.uploadFile(uploadPath, multipartFile,	true, 1000, "s_"); // 썸네일
+			// 사진 보기 용 큰 이미지 
+			UploadFileUtils.makeThumbnail(uploadPath,fileName.substring(fileName.indexOf("_")+1),false, 400, "b_"); //큰 이미지
 			
 			return fileName;
 		}

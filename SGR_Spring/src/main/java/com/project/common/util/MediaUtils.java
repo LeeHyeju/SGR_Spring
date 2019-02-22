@@ -10,7 +10,6 @@ public class MediaUtils {
 	private static Map<String, MediaType> mediaMap;
 	
 static{
-		
 		mediaMap = new HashMap<String, MediaType>();		
 		mediaMap.put("JPG", MediaType.IMAGE_JPEG);
 		mediaMap.put("GIF", MediaType.IMAGE_GIF);
@@ -18,7 +17,6 @@ static{
 	}
 	
 	public static MediaType getMediaType(String type){
-		
 		return mediaMap.get(type.toUpperCase());
 	}
 }

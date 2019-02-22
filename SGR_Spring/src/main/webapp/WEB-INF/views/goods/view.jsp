@@ -7,6 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품 상세보기</title>
+<style type="text/css">
+	#big{
+		border-radius: 15px;
+	}
+
+span, p{
+		font-family: 'Hanna';
+		font-size: 16px;
+	}	
+</style>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -153,9 +163,10 @@
 						</h5>
 						<div class="action">
 						
-							<button id="#circle1" class="btn btn-info" type="submit">즉시 구매하기</button>
-							<button id="#circle2" class="btn btn-success" type="button">장바구니 담기</button>
-							<button type="submit"   class="btn btn-white" type="button" >Review 작성</button>
+							<button id="#circle1" class="btn btn-info" type="submit">즉시 구매</button>
+							<button id="#circle2" class="btn btn-success" type="button">장바구니</button>
+							<button type="submit"   class="btn btn-white" >Review 작성</button>
+							<button type="button"  class="btn btn-primary" onclick="history.back()">목록</button>
 												
 							<c:if test="${login.mb_id == 'admin'}">
 							<button type="submit" class="btn btn-warning">상품 수정</button>
