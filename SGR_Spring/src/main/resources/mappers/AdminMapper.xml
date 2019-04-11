@@ -112,13 +112,15 @@ UPDATE
 SET 
 			mb_leaveDate  = null,
 			mb_grade = 6 
-WHERE mb_id = #{mb_id}
+WHERE 
+			mb_id = #{mb_id}
 </update>
 
 <!-- 회원 강제 탈퇴 -->
 <update id="memberDrop">
 UPDATE member 
-SET mb_grade = 9, mb_leaveDate = current_date()
+SET mb_grade = 9, 
+      mb_leaveDate = current_date()
 WHERE mb_id = #{mb_id}
 </update>
 </mapper>

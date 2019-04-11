@@ -30,7 +30,8 @@
 			</if>
 		</if>
 	</sql>
-
+	
+	
 <!-- <select id="reviewList" resultType="ReviewDto"> -->
 <!-- 	SELECT * FROM ( -->
 <!-- 		SELECT  -->
