@@ -29,79 +29,7 @@ width: 100px;
 height: 100px;
 }
 </style>
-<script type="text/javascript">
-$(function() {
-	
-	//카테고리 처음 불러오기	(1차가 TOP인데 2차가 안불러 와져서 한번 불러오는것.)
-	cateSelect();
-	
-});
 
-function cateSelect(){
-	
- var	cate_nm =  $("#exampleFormControlSelect1").val();	//현재 카테고리 선택되어 있는 값을 가져옴
-	
- //아작스 시작
- $.ajax({
-		url:"/goods/category.ad",				//자바(서버) 로 보낼 url명
-		type: "POST",					//서버로 보낼때 전송방식
-		data : {							//서버로 보낼 데이터들
-			cateGory1 : cate_nm
-	},
-		dataType : "json", //서버에서 보내는 데이터 타입
-		
- 		//contentType : "application/json; charset=UTF-8" ,//서버로 보내는타입 
-		
-		//ajax 성공했을떄 success 메소드로 원하는 것 실행시킴(이런걸 콜백함수라고 함).
-		//error:function() -- 에러났을때 원하는 것 실행시킴
-		success : function(result) {		
-			console.log("result"+result);		
-	
-			// map(키,값) 형식을 JSON으로 변환 해서 확인함 [필요없음]
-			console.log("success : "+JSON.stringify(result.cateGory2)); 
-				
-			//map(키,값) 형식을 cateGory22에 담음                  [필요없음]
-			var cateGory22 =JSON.stringify(result.cateGory2);			
-			
-			//2차 카테고리 초기화  -1차 카테고리 별로 2차카테고리를 재설정 해줘야 하기 때문. 이거 없으면 2차카테고리가 계속 늘어남
-			$("#catesub_cd").empty();				
-			
-			//2차카테고리 초기화 - 맨 위에 선택하세요가 뜨게끔 설정해주는 것.
-			$("#catesub_cd").append('<option>선택하세요</option>'); 
-			
-	
-			 //콘솔찍어 데이터들 확인
-			console.log("result.cateGory2-name = "+result.cateGory2[0].catesub_nm);
-			console.log("result.cateGory2[0].catesub_cd = "+result.cateGory2[0].catesub_cd);
-			console.log("result = "+result);
-			console.log("MSG = "+result.msg);
-					
-			
-		//	배열 반복문. var = 인덱스(배열 방번호)  in = 변수
-			for(var i in result.cateGory2) {
-				
-			//	ID가 catesub_cd인곳을 찾아서 append 메소드로 해당 html끝부분에 append() 괄호 안 내용을 그대로 추가해줌
-				$("#catesub_cd").append(
-// 				"<option name='catesub_cd' value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
-				"<option  value='"+result.cateGory2[i].catesub_cd+"'>"+result.cateGory2[i].catesub_nm+"</option>"); 
-				
-				$("#catesub_cd option:checked").val();
-				
-				//로그찍어봄
-				console.log(result.cateGory2[i].catesub_nm);
-				console.log(result.cateGory2[i].catesub_cd);
-						
-			}
-	  },
-	  //에러 났을시 success를 안타고 이쪽을 탐.
-	  	error:function(jqXHR){
-	  		alert(jqXHR.status);
-	  		alert(jqXHR.statusText);
-	  	}
-
-	});
-}
-</script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -143,20 +71,10 @@ $(function(){
 <div class="form-group">
   <label class="col-md-4 control-label" >분류명</label>  
   <div style='display:inline; min-width:350px;'>
-	<div style='display:inline;float:left;width:150px'>
-		<select  id="exampleFormControlSelect1" onchange="cateSelect()" class="form-control" name="cate_nm">
-				<!--  반복문으로 1차 카테고리 불러오고 갯수만큼 select 출력-->
-				<c:forEach items="${depthOne}" var="cate1" >
-				<option >${cate1.cate_nm}</option>
-				</c:forEach>
-				
-		</select>
-		</div>
 		<div style='display:inline;float:left;width:180px' >
 				
 				<!-- 이 부분에 1차 선택시마다 2차 카테고리,  append()안에 내용이 들어감.-->
-		<select id="catesub_cd" class="form-control" name="catesub_cd" value="${admin.catesub_cd }">
-		</select>
+		<input id="cate_nm" name="cate_nm" type="text"  class="form-control input-md"   readonly="readonly" value="${admin.catesub_cd}" > 
 		
 <!-- 		<input id="catesub_cd" name="catesub_cd"  value="A013"> -->
 		</div>
